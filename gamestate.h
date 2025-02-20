@@ -13,7 +13,6 @@
 #ifndef GAMESTATE_H
 # define GAMESTATE_H
 # include "MLX42/include/MLX42/MLX42_Int.h"
-# include "libft/libft.h"
 
 typedef struct s_camera
 {

@@ -58,6 +58,7 @@ int
 		|| init_menu_structs(window.mlx, &window.menu) == EXIT_FAILURE
 		|| init_menu_images(window.mlx, &window.menu) == EXIT_FAILURE)
 		error_exit(mlx_errno, 0, "initialisation failed");
+	// draw_textures(&window);
 	link_loop_hooks(&window);
 	mlx_loop(window.mlx);
 	cub3d_terminate(&window);

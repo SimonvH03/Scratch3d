@@ -12,6 +12,8 @@
 
 #ifndef CUB3D_H
 # define CUB3D_H
+# include "MLX42/include/MLX42/MLX42_Int.h"
+# include "libft/libft.h"
 # include "gamestate.h"
 # include "hud.h"
 # include "paths.h"
@@ -23,8 +25,8 @@
 
 // mlx window
 # define WINDOW_TITLE "cub3d"
-# define WIDTH				480
-# define HEIGHT				480
+# define WIDTH				1280
+# define HEIGHT				720
 
 // colours
 # define C_TRANSPARENT		0x00
@@ -92,6 +94,7 @@ float		ft_min_float(float a, float b);
 float		ft_abs_float(float value);
 short		ft_sign_float(float value);
 // modlx
+xpm_t		*modlx_load_xpm42(const char *path);
 void		reset_image(mlx_image_t *image);
 
 // TEST
@@ -100,6 +103,6 @@ void		reset_image(mlx_image_t *image);
 // void		print_minimap(t_minimap *minimap);
 // void		print_content(t_scene *scene);
 // void		print_map(t_scene *scene);
-// void		draw_textures(t_window *window);
+void		draw_textures(t_window *window);
 
 #endif

@@ -85,18 +85,18 @@
 // 	}
 // }
 
-// void
-// 	draw_textures(
-// 		t_window *window)
-// {
-// 	mlx_image_t	*image;
+void
+	draw_textures(
+		t_window *window)
+{
+	mlx_image_t	*image;
 
-// 	image = mlx_texture_to_image(window->mlx, window->scene.north_texture);
-// 	mlx_image_to_window(window->mlx, image, 128, 64);
-// 	image = mlx_texture_to_image(window->mlx, window->scene.east_texture);
-// 	mlx_image_to_window(window->mlx, image, 192, 128);
-// 	image = mlx_texture_to_image(window->mlx, window->scene.south_texture);
-// 	mlx_image_to_window(window->mlx, image, 128, 192);
-// 	image = mlx_texture_to_image(window->mlx, window->scene.west_texture);
-// 	mlx_image_to_window(window->mlx, image, 64, 128);
-// }
+	image = mlx_texture_to_image(window->mlx, window->scene.north_texture);
+	mlx_image_to_window(window->mlx, image, 128, 64);
+	image = mlx_texture_to_image(window->mlx, window->scene.east_texture);
+	mlx_image_to_window(window->mlx, image, 192, 128);
+	image = mlx_texture_to_image(window->mlx, window->scene.south_texture);
+	mlx_image_to_window(window->mlx, image, 128, 192);
+	image = mlx_texture_to_image(window->mlx, window->scene.west_texture);
+	mlx_image_to_window(window->mlx, image, 64, 128);
+}

@@ -1,8 +1,9 @@
 NAME	=	cub3d
 
-CC		=	cc
-CFLAGS	=	-O3
-CFLAGS	+=	-Wall -Werror -Wextra -g
+CC		=	gcc
+CFLAGS	=	-g -O3 -flto
+# CFLAGS	=	-O3
+# CFLAGS	+=	-Wall -Werror -Wextra -g
 MLXFLAGS=	-ldl -lglfw -pthread -lm
 
 LMLXDIR	=	./MLX42
@@ -19,6 +20,7 @@ HEADERS =	./cub3d.h \
 
 SRCDIR	=	./src
 SRC		=	$(SRCDIR)/main.c \
+			$(SRCDIR)/modlx.c \
 			$(SRCDIR)/hud/draw_map_player.c \
 			$(SRCDIR)/hud/draw_minimap_walls.c \
 			$(SRCDIR)/initialise/draw_game_images.c \
@@ -37,8 +39,7 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/render/arithmetic.c \
 			$(SRCDIR)/render/raycast.c \
 			$(SRCDIR)/render/draw_texture_column.c \
-			$(SRCDIR)/render/modlx.c \
-			# $(SRCDIR)/test.c
+			$(SRCDIR)/test.c
 
 OBJDIR	=	./obj
 OBJ		=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)

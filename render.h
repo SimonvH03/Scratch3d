@@ -13,7 +13,6 @@
 #ifndef RENDER_H
 # define RENDER_H
 # include "MLX42/include/MLX42/MLX42_Int.h"
-# include "libft/libft.h"
 
 enum	e_hit_axis
 {

@@ -13,7 +13,6 @@
 #ifndef HUD_H
 # define HUD_H
 # include "MLX42/include/MLX42/MLX42_Int.h"
-# include "libft/libft.h"
 # include "gamestate.h"
 
 // current window view

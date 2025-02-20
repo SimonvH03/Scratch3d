@@ -29,7 +29,7 @@ static void
 	}
 	else if (ft_strnstr(line, ".xpm42", -1) != NULL)
 	{
-		tempx = mlx_load_xpm42(line);
+		tempx = modlx_load_xpm42(line);
 		if (tempx == NULL)
 			error_exit(mlx_errno, 0, "failed to load .xpm42 file from scene");
 		*dest = &tempx->texture;

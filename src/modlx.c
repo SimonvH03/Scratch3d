@@ -10,7 +10,59 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "../cub3d.h"
+
+static void
+	transpose_texture(
+		mlx_texture_t *texture,
+		uint8_t *pixelcopy)
+{
+	int			y;
+	int			x;
+	int			src_idx;
+	int			dst_idx;
+
+	y = 0;
+	while (y < texture->height)
+	{
+		x = 0;
+		while (x < texture->width)
+		{
+			src_idx = (y * texture->width + x) * texture->bytes_per_pixel;
+			dst_idx = (x * texture->height + y) * texture->bytes_per_pixel;
+			ft_memcpy(&texture->pixels[dst_idx], &pixelcopy[src_idx],
+				texture->bytes_per_pixel);
+			x++;
+		}
+		y++;
+	}
+}
+
+xpm_t	*
+	modlx_load_xpm42(
+		const char *path)
+{
+	xpm_t		*xpm;
+	uint8_t		*pixelcopy;
+	size_t		pixeldata_size;
+
+	xpm = mlx_load_xpm42(path);
+	if (!xpm)
+		return (NULL);
+	pixeldata_size = xpm->texture.width * xpm->texture.height
+		* sizeof(uint8_t) * xpm->texture.bytes_per_pixel;
+	pixelcopy = malloc(pixeldata_size);
+	if (!pixelcopy)
+	{
+		free(xpm->texture.pixels);
+		free(xpm);
+		return (NULL);
+	}
+	ft_memcpy(pixelcopy, xpm->texture.pixels, pixeldata_size);
+	transpose_texture(&xpm->texture, pixelcopy);
+	free(pixelcopy);
+	return (xpm);
+}
 
 void
 	reset_image(
