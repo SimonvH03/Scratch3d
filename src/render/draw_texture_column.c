@@ -42,9 +42,9 @@ static void
 	column->step = column->texture->height / (float)column->height;
 	column->y = (column->start - (int)scene->walls->height / 2
 			+ column->height / 2) * column->step;
-
 }
 
+// slightly optimized
 void
 	draw_texture_column(
 		t_scene *scene,
@@ -53,22 +53,46 @@ void
 {
 	t_column		column;
 	uint32_t		screen_y;
-	uint32_t		index;
 	uint32_t		colour;
 	uint8_t			*texumn_start;
-	uint8_t			*texel;
 
 	init_column(scene, ray, &column);
-
-	texumn_start = &column.texture->pixels[
-		(int)(column.x * column.texture->width) * column.texture->height * 4];
+	texumn_start = &column.texture->pixels[(int)(column.x
+			* column.texture->width) * column.texture->height * BPP];
 	screen_y = (uint32_t)column.start;
 	while (screen_y < (uint32_t)column.end)
 	{
+		*((uint32_t *)&scene->walls->pixels[(screen_y * scene->walls->width
+					+ screen_x) * BPP])
+					= *((uint32_t *)&texumn_start[(int)column.y * BPP]);
 		column.y += column.step;
-		texel = &texumn_start[(int)(column.y) * 4];
-		colour = texel[0] << 24 | texel[1] << 16 | texel[2] << 8 | texel[3];
-		mlx_put_pixel(scene->walls, screen_x, screen_y, colour);
 		++screen_y;
 	}
 }
+
+// uses mlx_put_pixel
+// void
+// 	draw_texture_column(
+// 		t_scene *scene,
+// 		t_ray *ray,
+// 		uint32_t screen_x)
+// {
+// 	t_column		column;
+// 	uint32_t		screen_y;
+// 	uint32_t		colour;
+// 	uint8_t			*texumn_start;
+// 	uint8_t			*texel;
+
+// 	init_column(scene, ray, &column);
+// 	texumn_start = &column.texture->pixels[(int)(column.x
+// 			* column.texture->width) * column.texture->height * BPP];
+// 	screen_y = (uint32_t)column.start;
+// 	while (screen_y < (uint32_t)column.end)
+// 	{
+// 		texel = &texumn_start[(int)column.y * BPP];
+// 		colour = texel[0] << 24 | texel[1] << 16 | texel[2] << 8 | texel[3];
+// 		mlx_put_pixel(scene->walls, screen_x, screen_y, colour);
+// 		column.y += column.step;
+// 		++screen_y;
+// 	}
+// }
