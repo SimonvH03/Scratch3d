@@ -54,7 +54,7 @@ static void
 	camera->movement_speed = MOVEMENT_SPEED;
 	camera->rotation_cosin[0] = cos(ROTATION_SPEED);
 	camera->rotation_cosin[1] = sin(ROTATION_SPEED);
-	init_matrix(camera->movement_matrix);
+	init_matrix(g_movement_matrix);
 	camera->sign_rotate = 0;
 }
 

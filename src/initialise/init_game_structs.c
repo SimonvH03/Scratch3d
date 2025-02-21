@@ -17,17 +17,15 @@ static short
 		t_scene *scene,
 		char *argv_scene)
 {
+	char	**content_start;
+
 	scene->player_texture = &mlx_load_xpm42(PLAYER_ICON_PATH)->texture;
 	if (scene->player_texture == NULL)
 		return (EXIT_FAILURE);
 	scene->name = argv_scene;
 	if (get_content(scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	scene->north_texture = NULL;
-	scene->east_texture = NULL;
-	scene->south_texture = NULL;
-	scene->west_texture = NULL;
-	scene->camera.movement_speed = 0;
+	content_start = scene->content;
 	read_elements(scene);
 	if (scene->north_texture == NULL || scene->east_texture == NULL
 		|| scene->south_texture == NULL || scene->west_texture == NULL)
@@ -35,6 +33,7 @@ static short
 	if (read_map(scene) == EXIT_FAILURE || scene->camera.movement_speed == 0)
 		return (EXIT_FAILURE);
 	scene->recast = true;
+	ft_arrclear((void **)content_start);
 	return (EXIT_SUCCESS);
 }
 

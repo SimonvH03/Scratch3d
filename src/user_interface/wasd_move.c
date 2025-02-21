@@ -29,8 +29,8 @@
 // 	float	next_x;
 // 	float	next_y;
 
-// 	cos_sin[0] = camera->movement_matrix[1 + left_right][1 + forward_backward];
-// 	cos_sin[1] = camera->movement_matrix[1 + forward_backward][1 + left_right];
+// 	cos_sin[0] = g_movement_matrix[1 + left_right][1 + forward_backward];
+// 	cos_sin[1] = g_movement_matrix[1 + forward_backward][1 + left_right];
 
 // 	move_dir_x = camera->dir_x * cos_sin[0] + camera->dir_y * -cos_sin[1];
 // 	move_dir_y = camera->dir_x * cos_sin[1] + camera->dir_y * cos_sin[0];
@@ -75,8 +75,8 @@ static void
 	float	move_dir_x;
 	float	move_dir_y;
 
-	cos_sin[0] = camera->movement_matrix[1 + left_right][1 + forward_backward];
-	cos_sin[1] = camera->movement_matrix[1 + forward_backward][1 + left_right];
+	cos_sin[0] = g_movement_matrix[1 + left_right][1 + forward_backward];
+	cos_sin[1] = g_movement_matrix[1 + forward_backward][1 + left_right];
 	move_dir_x = camera->dir_x * cos_sin[0] + camera->dir_y * -cos_sin[1];
 	move_dir_y = camera->dir_x * cos_sin[1] + camera->dir_y * cos_sin[0];
 	if (map[(int)camera->pos_y]

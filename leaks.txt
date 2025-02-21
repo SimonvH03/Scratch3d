@@ -1,0 +1,4 @@
+still reachable: 313,814 bytes in 3,165 blocks
+	- dl_open
+	- mlx_init
+	- mlx_terminate

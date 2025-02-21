@@ -30,8 +30,8 @@ static void
 	camera->movement_speed = MOVEMENT_SPEED * window->mlx->delta_time;
 	if (camera->movement_speed > 0.49)
 		camera->movement_speed = 0.49;
-	camera->rotation_cosin[0] = cosf(ROTATION_SPEED * window->mlx->delta_time);
-	camera->rotation_cosin[1] = sinf(ROTATION_SPEED * window->mlx->delta_time);
+	g_rotation_cosin[0] = cosf(ROTATION_SPEED * window->mlx->delta_time);
+	g_rotation_cosin[1] = sinf(ROTATION_SPEED * window->mlx->delta_time);
 }
 
 static void
@@ -52,6 +52,7 @@ int
 
 	if (argc != 2)
 		return (EXIT_FAILURE);
+	ft_bzero(&window, sizeof(t_window));
 	if (window_init(&window) == EXIT_FAILURE
 		|| init_game_structs(window.mlx, &window, argv[1]) == EXIT_FAILURE
 		|| init_game_images(window.mlx, &window) == EXIT_FAILURE
@@ -104,7 +105,6 @@ void
 		mlx_delete_texture(window->menu.buttons[i].texture);
 		++i;
 	}
-	ft_arrclear((void **)window->scene.content);
 	ft_arrclear((void **)window->scene.map);
 	free((void *)window->minimap.circle_overlay);
 }

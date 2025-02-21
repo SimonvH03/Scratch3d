@@ -63,25 +63,25 @@ void
 	int	element_count;
 
 	element_count = 0;
-	while (*scene->r_content && element_count++ < 6)
+	while (*scene->content && element_count++ < 6)
 	{
-		if (ft_strncmp(*scene->r_content, "NO ", 3) == 0)
-			load_texture(&scene->north_texture, *scene->r_content + 3);
-		else if (ft_strncmp(*scene->r_content, "EA ", 3) == 0)
-			load_texture(&scene->east_texture, *scene->r_content + 3);
-		else if (ft_strncmp(*scene->r_content, "SO ", 3) == 0)
-			load_texture(&scene->south_texture, *scene->r_content + 3);
-		else if (ft_strncmp(*scene->r_content, "WE ", 3) == 0)
-			load_texture(&scene->west_texture, *scene->r_content + 3);
-		else if (ft_strncmp(*scene->r_content, "F ", 2) == 0)
-			load_colour(&scene->floor, *scene->r_content + 2);
-		else if (ft_strncmp(*scene->r_content, "C ", 2) == 0)
-			load_colour(&scene->ceiling, *scene->r_content + 2);
-		else if (*scene->r_content[0] != '\0')
+		if (ft_strncmp(*scene->content, "NO ", 3) == 0)
+			load_texture(&scene->north_texture, *scene->content + 3);
+		else if (ft_strncmp(*scene->content, "EA ", 3) == 0)
+			load_texture(&scene->east_texture, *scene->content + 3);
+		else if (ft_strncmp(*scene->content, "SO ", 3) == 0)
+			load_texture(&scene->south_texture, *scene->content + 3);
+		else if (ft_strncmp(*scene->content, "WE ", 3) == 0)
+			load_texture(&scene->west_texture, *scene->content + 3);
+		else if (ft_strncmp(*scene->content, "F ", 2) == 0)
+			load_colour(&scene->floor_clr, *scene->content + 2);
+		else if (ft_strncmp(*scene->content, "C ", 2) == 0)
+			load_colour(&scene->ceiling_clr, *scene->content + 2);
+		else if (*scene->content[0] != '\0')
 			error_exit(0, EINVAL, "missing or invalid scene.cub elements");
 		else
 			--element_count;
-		++scene->r_content;
+		++scene->content;
 	}
 }
 
@@ -106,11 +106,12 @@ short
 			if (buffer[ft_strlen(buffer) - 1] == '\n')
 				buffer[ft_strlen(buffer) - 1] = '\0';
 			scene->content = ft_arrcat(scene->content, buffer);
+			if (scene->content == NULL)
+				error_exit(0, errno, "get_content() ft_arrcat()");
 		}
 		else
 			free(buffer);
 		buffer = ft_get_next_line(fd);
 	}
-	scene->r_content = scene->content;
 	return (EXIT_SUCCESS);
 }

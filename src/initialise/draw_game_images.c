@@ -25,12 +25,12 @@ void
 		y = 0;
 		while (y < scene->background->height / 2)
 		{
-			mlx_put_pixel(scene->background, x, y, scene->ceiling);
+			mlx_put_pixel(scene->background, x, y, scene->ceiling_clr);
 			++y;
 		}
 		while (y < scene->background->height)
 		{
-			mlx_put_pixel(scene->background, x, y, scene->floor);
+			mlx_put_pixel(scene->background, x, y, scene->floor_clr);
 			++y;
 		}
 		++x;
