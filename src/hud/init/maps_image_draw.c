@@ -1,41 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   game_image_draw.c                                  :+:    :+:            */
+/*   maps_image_draw.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/04 22:26:03 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/22 22:00:40 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/23 19:53:26 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void
-	draw_scene_background(
-		t_scene *scene)
-{
-	uint32_t	y;
-	uint32_t	x;
-
-	x = 0;
-	while (x < scene->background->width)
-	{
-		y = 0;
-		while (y < scene->background->height / 2)
-		{
-			mlx_put_pixel(scene->background, x, y, scene->ceiling_clr);
-			++y;
-		}
-		while (y < scene->background->height)
-		{
-			mlx_put_pixel(scene->background, x, y, scene->floor_clr);
-			++y;
-		}
-		++x;
-	}
-}
 
 // for illustrative purposes, set outer circle pixel colour to C_TRANSLUCENT
 void

@@ -6,13 +6,13 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/22 21:33:58 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/23 19:31:38 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDER_H
 # define RENDER_H
-# include "MLX42_Int.h"
+# include "MLX42/MLX42_Int.h"
 
 enum	e_hit_axis
 {

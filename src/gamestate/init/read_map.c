@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/23 18:08:52 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/23 20:04:50 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int
 	map_size(
-		char **content,
-		t_grid *grid)
+		t_grid *grid,
+		char *const *content)
 {
 	int		x;
 	int		y;
@@ -39,9 +39,9 @@ static int
 static int
 	map_fill_space(
 		t_grid	*grid,
-		const char token,
-		uint32_t x,
-		uint32_t y)
+		const uint32_t y,
+		const uint32_t x,
+		const char token)
 {
 	if (ft_strchr(VALID_MAP_TOKENS, token) == NULL
 		&& ft_isalnum(token) == false)
@@ -50,9 +50,15 @@ static int
 		return (RETURN_FAILURE);
 	}
 	if (token == ' ')
+	{
 		grid->walls[y][x] = -1;
+		grid->sprites[y][x] = 0;
+	}
 	else if (ft_isdigit(token))
+	{
 		grid->walls[y][x] = token - 48;
+		grid->sprites[y][x] = 0;	
+	}
 	else
 	{
 		grid->walls[y][x] = 0;
@@ -64,15 +70,15 @@ static int
 static int
 	map_fill_row(
 		t_grid *grid,
-		int y,
-		char *line)
+		const int y,
+		const char *line)
 {
 	int		x;
 
 	x = 0;
 	while (line[x])
 	{
-		if (map_fill_space(grid, line[x], x, y) != RETURN_SUCCESS)
+		if (map_fill_space(grid, y, x, line[x]) != RETURN_SUCCESS)
 			return (RETURN_FAILURE);
 		++x;
 	}
@@ -87,18 +93,17 @@ static int
 
 int
 	read_map(
-		t_scene *scene,
-		char ***content,
-		t_grid *grid)
+		t_grid *grid,
+		char *const *content)
 {
-	int	y;
+	unsigned int	y;
 
-	if (map_size(*content, grid) != RETURN_SUCCESS)
+	if (map_size(grid, content) != RETURN_SUCCESS)
 		return (RETURN_FAILURE);
 	grid->walls = (int **)ft_calloc(grid->y_max + 1, sizeof(int *));// why y_max +1? (no null termination?)
 	if (grid->walls == NULL)
 		return (RETURN_FAILURE);
-	grid->sprites = (int **)ft_calloc(grid->y_max + 1, sizeof(int *));// why y_max +1? (no null termination?)
+	grid->sprites = (int **)ft_calloc(grid->y_max + 1, sizeof(int *));
 	if (grid->sprites == NULL)
 		return (RETURN_FAILURE);
 	y = 0;
@@ -110,7 +115,7 @@ int
 		grid->sprites[y] = (int *)ft_calloc(grid->x_max, sizeof(int));
 		if (grid->sprites[y] == NULL)
 			return (RETURN_FAILURE);
-		if (map_fill_row(scene, y, (*content)[y]) != RETURN_SUCCESS)
+		if (map_fill_row(grid, y, content[y]) != RETURN_SUCCESS)
 			return (RETURN_FAILURE);
 		++y;
 	}

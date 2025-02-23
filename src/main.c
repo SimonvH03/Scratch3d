@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/23 18:05:58 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/23 19:19:00 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int main(int argc, char **argv)
 	}
 	if (window_init(&window) != RETURN_SUCCESS
 		|| menu_init() != RETURN_SUCCESS
-		|| game_init(argv[1]) != RETURN_SUCCESS
+		|| game_init(&window.scene, argv[1]) != RETURN_SUCCESS
 		|| hud_init() != RETURN_SUCCESS)
 	{
 		error_exit(mlx_errno, errno, "initialisation failed");

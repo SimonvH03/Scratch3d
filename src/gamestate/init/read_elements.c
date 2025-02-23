@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   cub_parse_elements.c                               :+:    :+:            */
+/*   read_elements.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/22 23:21:48 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/23 20:05:32 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void
 	load_texture(
 		mlx_texture_t **dest,
-		char *line)
+		const char *line)
 {
 	xpm_t	*tempx;
 
@@ -41,7 +41,7 @@ static void
 static void
 	load_colour(
 		uint32_t *dest,
-		char *line)
+		const char *line)
 {
 	t_colour_construct	new;
 
@@ -59,7 +59,7 @@ static void
 void
 	read_elements(
 		t_scene *scene,
-		char ***content)
+		char **const *content)
 {
 	int	element_count;
 

@@ -6,15 +6,15 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/22 23:17:19 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/23 20:10:56 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAMESTATE_H
 # define GAMESTATE_H
-# include "MLX42_Int.h"
+# include "MLX42/MLX42_Int.h"
 
-float				g_movement_matrix[3][3];
+extern float		g_movement_matrix[3][3];
 
 // 8B aligned, 10 x 8 (float) + 1 x 4 (short), 4B padding		| 88 Bytes
 typedef struct s_camera
@@ -66,8 +66,8 @@ typedef	struct s_grid
 {
 	int				**walls;
 	int				**sprites;
-	int				y_max;
-	int				x_max;
+	unsigned int	y_max;
+	unsigned int	x_max;
 }	t_grid;
 
 // 8B aligned, 88 (Player) + 48 (Walls) + 24 (grid)		| (160B)

@@ -11,6 +11,9 @@
 		"typeinfo": "c",
 		"numeric": "c",
 		"ostream": "c",
-		"system_error": "c"
+		"system_error": "c",
+		"mlx42_int.h": "c",
+		"lodepng.h": "c",
+		"glad.h": "c"
 	}
 }

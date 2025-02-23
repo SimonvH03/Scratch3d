@@ -6,13 +6,13 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/22 23:17:49 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/23 19:31:38 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HUD_H
 # define HUD_H
-# include "MLX42/include/MLX42/MLX42_Int.h"
+# include "MLX42/MLX42_Int.h"
 # include "gamestate.h"
 
 // current window view

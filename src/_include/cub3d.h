@@ -6,13 +6,13 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/22 23:43:57 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/23 20:05:16 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# include "MLX42_Int.h"
+# include "MLX42/MLX42_Int.h"
 # include "libft.h"
 # include "gamestate.h"
 # include "hud.h"
@@ -82,13 +82,12 @@ void		cub3d_terminate(t_window *window);
 //// PHASE 0: initialising mlx window, game and hud
 int			window_init(t_window *window);
 
-int			game_init(t_scene *scene, char *input_file);
-int			get_content(char ***dest, char *input_file);
-void		read_elements(t_scene *scene, char ***content);
-int			read_map(t_scene *scene, char ***content);
+int			game_init(t_scene *scene, const char *input_file);
+void		read_elements(t_scene *scene, char **const *content);
+int			read_map(t_grid *grid, char *const *content);
+int			init_player(t_player *player, t_grid *grid);
 
-int			init_game_images(mlx_t *mlx, t_window *window);
-void		draw_scene_background(t_scene *scene);
+int			init_game_images(mlx_t *mlx, t_scene *scene);
 void		draw_minimap_circle_overlay(t_minimap *minimap);
 void		draw_map_walls(t_bigmap *map);
 
