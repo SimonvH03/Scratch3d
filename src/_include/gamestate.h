@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   defs.h                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/23 02:15:59 by svan-hoo         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   gamestate.h                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
+/*   Updated: 2025/02/22 23:17:19 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAMESTATE_H
 # define GAMESTATE_H
-# include "MLX42/include/MLX42/MLX42_Int.h"
+# include "MLX42_Int.h"
 
 float				g_movement_matrix[3][3];
 
@@ -31,6 +31,25 @@ typedef struct s_camera
 	short			sign_rotate;
 }	t_camera;
 
+// 8B aligned, 1 x 8 (pointer) + 3 x 8 (uint32), 0B padding		| 24 Bytes
+typedef struct s_weapon
+{
+	char			*name;
+	uint32_t		damage;
+	uint32_t		magazine_size;
+	uint32_t		ammo;
+}	t_weapon;
+
+// 8B aligned, 88 (camera) + 24 (weapon)				| (112B)
+//	+ 2 x 8 (uint32), no padding						| (16B)	| 128 Bytes
+typedef struct s_player
+{
+	t_camera		camera;
+	t_weapon		weapon;
+	uint32_t		health;
+	uint32_t		treasure;
+}	t_player;
+
 // 8B aligned, 5 x 8 (pointer) + 1 x 1 (bool), 7B padding		| 48 Bytes
 typedef	struct s_walls
 {
@@ -42,12 +61,6 @@ typedef	struct s_walls
 	bool			recast;
 }	t_walls;
 
-// swapback arrays for each enemy state? alerted, shooting, dead
-// typedef struct s_sprites
-// {
-
-// }	t_sprites;
-
 // 8B aligned, 2 x 8 (pointer) + 2 x 4 (int), no padding		| 24 Bytes
 typedef	struct s_grid
 {
@@ -57,17 +70,14 @@ typedef	struct s_grid
 	int				x_max;
 }	t_grid;
 
-// 8B aligned, 88 (camera) + 48 (walls) + 24 (grid)		| (160B)
-//	+ 4 x 8 (pointers) + 2 x 8 (uint32_t), no padding	| (48B) | 208 Bytes
+// 8B aligned, 88 (Player) + 48 (Walls) + 24 (grid)		| (160B)
+//	+ 1 x 8 (pointers) + 2 x 8 (uint32_t), no padding	| (24B) | 184 Bytes
 typedef struct s_scene
 {
 	t_walls			walls;
 	t_grid			grid;
-	t_camera		camera;
-	char			*name;
-	char			**content;
+	t_player		player;
 	mlx_image_t		*background;
-	mlx_texture_t	*player_texture;
 	uint32_t		floor_clr;
 	uint32_t		ceiling_clr;
 }	t_scene;

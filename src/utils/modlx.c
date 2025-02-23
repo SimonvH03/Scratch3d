@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   modlx.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/28 22:07:27 by simon             #+#    #+#             */
-/*   Updated: 2024/09/16 17:52:21 by svan-hoo         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   modlx.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/08/28 22:07:27 by simon         #+#    #+#                 */
+/*   Updated: 2025/02/22 22:42:17 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 static void
 	transpose_texture(
@@ -38,6 +38,7 @@ static void
 	}
 }
 
+// loads texture column-major (transposed over y = x)
 xpm_t	*
 	modlx_load_xpm42(
 		const char *path)

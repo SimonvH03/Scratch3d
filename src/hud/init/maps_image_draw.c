@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   draw_game_images.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/18 21:58:23 by svan-hoo         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   game_image_draw.c                                  :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/02/04 22:26:03 by simon         #+#    #+#                 */
+/*   Updated: 2025/02/22 22:00:40 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "cub3d.h"
 
 void
 	draw_scene_background(
@@ -51,13 +51,13 @@ void
 		y = 0;
 		while (y < minimap->side)
 		{
-			if (ft_is_in_circle(x - (float)minimap->radius,
+			if (!ft_is_in_circle(x - (float)minimap->radius,
 					y - (float)minimap->radius,
-					minimap->radius) == false)
+					minimap->radius))
 				mlx_put_pixel(minimap->walls, x, y, C_TRANSPARENT);
-			else if (ft_is_in_circle(x - (float)minimap->radius,
+			else if (!ft_is_in_circle(x - (float)minimap->radius,
 					y - (float)minimap->radius,
-					minimap->radius * 39 / 42) == false)
+					minimap->radius * 39 / 42))
 				mlx_put_pixel(minimap->walls, x, y, C_TRANSLUCENT);
 			else
 				mlx_put_pixel(minimap->walls, x, y, C_WALL);
@@ -70,8 +70,8 @@ void
 }
 
 static uint32_t
-	get_map_pixel_colour(
-		t_map *map,
+	get_bigmap_pixel_colour(
+		t_bigmap *map,
 		float x,
 		float y)
 {
@@ -96,7 +96,7 @@ static uint32_t
 
 void
 	draw_map_walls(
-		t_map *map)
+		t_bigmap *map)
 {
 	uint32_t	y;
 	uint32_t	x;
@@ -108,7 +108,7 @@ void
 		x = 0;
 		while (x < map->walls->width)
 		{
-			colour = get_map_pixel_colour(map, x, y);
+			colour = get_bigmap_pixel_colour(map, x, y);
 			mlx_put_pixel(map->walls, x, y, colour);
 			++x;
 		}

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "cub3d.h"
 
 // ...else if ((CASE) || 1)... against braindead -Werror=maybe-uninitialized
 static void

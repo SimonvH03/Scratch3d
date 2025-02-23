@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   draw_map_player.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/18 22:14:43 by svan-hoo         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   update_bigmap.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/08/27 01:36:33 by simon         #+#    #+#                 */
+/*   Updated: 2025/02/22 23:13:34 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "cub3d.h"
 
 static uint32_t
 	get_player_pixel_colour(
-		t_map *map,
+		t_bigmap *map,
 		float x,
 		float y)
 {
@@ -24,7 +24,7 @@ static uint32_t
 	uint32_t		index;
 	uint8_t			*pixelstart;
 
-	texture = map->r_scene->player_texture;
+	texture = map->r_scene->player_icon;
 	camera = &map->r_scene->camera;
 	x -= map->player->width / (float)2;
 	y -= map->player->height / (float)2;
@@ -45,8 +45,8 @@ static uint32_t
 }
 
 void
-	draw_map_player(
-		t_map *map)
+	draw_bigmap_player(
+		t_bigmap *map)
 {
 	uint32_t	y;
 	uint32_t	x;

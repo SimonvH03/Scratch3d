@@ -4,6 +4,13 @@
 		"gamestate.h": "c",
 		"paths.h": "c",
 		"hud.h": "c",
-		"render.h": "c"
+		"render.h": "c",
+		"unistd.h": "c",
+		"errno.h": "c",
+		"fcntl.h": "c",
+		"typeinfo": "c",
+		"numeric": "c",
+		"ostream": "c",
+		"system_error": "c"
 	}
 }

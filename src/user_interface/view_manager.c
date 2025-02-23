@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   view_manager.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/31 18:33:20 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/18 17:51:08 by svan-hoo         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   view_manager.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
+/*   Updated: 2025/02/22 23:13:34 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "cub3d.h"
 
 void
 	view_manager(
@@ -29,7 +29,7 @@ void
 			if (window->minimap.enabled == true)
 				draw_minimap_walls(&window->minimap);
 			if (window->map.enabled == true)
-				draw_map_player(&window->map);
+				draw_bigmap_player(&window->map);
 			window->scene.recast = false;
 		}
 	}
@@ -38,7 +38,7 @@ void
 void
 	toggle_maps(
 		t_minimap *minimap,
-		t_map *map)
+		t_bigmap *map)
 {
 	minimap->player->enabled = !minimap->player->enabled;
 	minimap->walls->enabled = !minimap->walls->enabled;

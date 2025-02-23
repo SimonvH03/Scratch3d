@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   defs.h                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/23 02:15:59 by svan-hoo         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   render.h                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
+/*   Updated: 2025/02/22 21:33:58 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDER_H
 # define RENDER_H
-# include "MLX42/include/MLX42/MLX42_Int.h"
+# include "MLX42_Int.h"
 
 enum	e_hit_axis
 {
@@ -42,10 +42,10 @@ typedef struct s_ray
 	float			step_y;
 	float			total_x;
 	float			total_y;
+	float			distance;
 	short			sign_x;
 	short			sign_y;
 	bool			hit_type;
-	float			distance;
 }	t_ray;
 
 typedef struct s_colour_construct

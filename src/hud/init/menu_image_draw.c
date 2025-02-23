@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   draw_menu_images.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/17 02:02:42 by svan-hoo         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   menu_image_draw.c                                  :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/02/04 22:26:03 by simon         #+#    #+#                 */
+/*   Updated: 2025/02/22 21:57:09 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "cub3d.h"
 
 static uint32_t
 	get_scaled_pixel_colour(
@@ -55,23 +55,3 @@ void
 		++y;
 	}
 }
-
-// void
-// 	draw_menu_highlight(
-// 		mlx_image_t *image)
-// {
-// 	uint32_t	y;
-// 	uint32_t	x;
-
-// 	y = 0;
-// 	while (y < image->height)
-// 	{
-// 		x = 0;
-// 		while (x < image->width)
-// 		{
-// 			mlx_put_pixel(image, x, y, C_HIGHLIGHT);
-// 			++x;
-// 		}
-// 		++y;
-// 	}
-// }

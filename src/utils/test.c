@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 17:21:01 by simon             #+#    #+#             */
-/*   Updated: 2024/09/16 17:59:08 by svan-hoo         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   test.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/08/27 17:21:01 by simon         #+#    #+#                 */
+/*   Updated: 2025/02/23 18:13:27 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 // void
 // 	print_camera(
@@ -58,22 +58,22 @@
 
 // void
 // 	print_map(
-// 		t_scene *scene)
+// 		t_grid *grid)
 // {
 // 	int	y;
 // 	int	x;
 
-// 	printf("\e[33mmap size: %d * %d\e[0m\n", scene->y_max, scene->x_max);
+// 	printf("\e[33mmap size: %d * %d\e[0m\n", grid->y_max, grid->x_max);
 // 	y = 0;
-// 	while (y < scene->y_max)
+// 	while (y < grid->y_max)
 // 	{
-// 		printf("%p\t", scene->map[y]);
+// 		printf("%p\t", grid->walls[y]);
 // 		x = 0;
-// 		if (scene->map[y])
+// 		if (grid->walls[y])
 // 		{
-// 			while (x < scene->x_max)
+// 			while (x < grid->x_max)
 // 			{
-// 				if (scene->map[y][x] == 0)
+// 				if (grid->walls[y][x] == 0)
 // 					printf("  ");
 // 				else
 // 					printf("\e[34mX \e[0m");
@@ -85,18 +85,18 @@
 // 	}
 // }
 
-void
-	draw_textures(
-		t_window *window)
-{
-	mlx_image_t	*image;
+// void
+// 	draw_textures(
+// 		t_window *window)
+// {
+// 	mlx_image_t	*image;
 
-	image = mlx_texture_to_image(window->mlx, window->scene.north_texture);
-	mlx_image_to_window(window->mlx, image, 128, 64);
-	image = mlx_texture_to_image(window->mlx, window->scene.east_texture);
-	mlx_image_to_window(window->mlx, image, 192, 128);
-	image = mlx_texture_to_image(window->mlx, window->scene.south_texture);
-	mlx_image_to_window(window->mlx, image, 128, 192);
-	image = mlx_texture_to_image(window->mlx, window->scene.west_texture);
-	mlx_image_to_window(window->mlx, image, 64, 128);
-}
+// 	image = mlx_texture_to_image(window->mlx, window->scene.north_texture);
+// 	mlx_image_to_window(window->mlx, image, 128, 64);
+// 	image = mlx_texture_to_image(window->mlx, window->scene.east_texture);
+// 	mlx_image_to_window(window->mlx, image, 192, 128);
+// 	image = mlx_texture_to_image(window->mlx, window->scene.south_texture);
+// 	mlx_image_to_window(window->mlx, image, 128, 192);
+// 	image = mlx_texture_to_image(window->mlx, window->scene.west_texture);
+// 	mlx_image_to_window(window->mlx, image, 64, 128);
+// }

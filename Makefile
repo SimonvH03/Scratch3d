@@ -16,6 +16,7 @@ HEADERS =	./cub3d.h \
 			./gamestate.h \
 			./hud.h \
 			./paths.h \
+			./player.h \
 			./render.h
 
 SRCDIR	=	./src
@@ -64,7 +65,7 @@ $(OBJDIR):
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS)
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -o $@ -c $< -I MLX42/include
+	$(CC) $(CFLAGS) -o $@ -c $< -I MLX42/include libft
 
 $(NAME): $(LIBMLX) $(LIBFT) $(OBJDIR) $(OBJ)
 	$(CC) $(OBJ) $(LIBMLX) $(MLXFLAGS) $(LIBFT) -o $(NAME)
