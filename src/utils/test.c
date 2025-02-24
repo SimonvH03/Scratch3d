@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/27 17:21:01 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/23 18:13:27 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/23 23:07:46 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,19 @@
 // 		minimap->r_scene->x_max, minimap->r_scene->y_max);
 // }
 
-// void
-// 	print_content(
-// 		t_scene *scene)
-// {
-// 	int	i;
+void
+	print_content(
+		char *const *content)
+{
+	int	i;
 
-// 	i = 0;
-// 	while (scene->content[i])
-// 	{
-// 		printf("%s\n", scene->content[i]);
-// 		++i;
-// 	}
-// }
+	i = 0;
+	while (content[i])
+	{
+		printf("%s\n", content[i]);
+		++i;
+	}
+}
 
 // void
 // 	print_map(

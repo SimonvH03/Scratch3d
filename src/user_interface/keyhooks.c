@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   keyhooks.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/09 19:05:56 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/18 17:51:00 by svan-hoo         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   keyhooks.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/02/09 19:05:56 by svan-hoo      #+#    #+#                 */
+/*   Updated: 2025/02/24 01:23:08 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void
 		if (keydata.key == MLX_KEY_DOWN
 			&& window->menu.selection < MENU_B_COUNT - 1)
 			window->menu.selection += 1;
-		up_down_select(&window->menu);
+		select_button(&window->menu);
 	}
 	if ((keydata.key == MLX_KEY_ENTER || keydata.key == MLX_KEY_SPACE)
 		&& keydata.action == MLX_PRESS)

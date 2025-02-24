@@ -1,7 +1,7 @@
 NAME	=	cub3d
 
 CC		=	gcc
-CFLAGS	=	-g -O3 -flto -g
+CFLAGS	=	-g -O3
 # CFLAGS	=	-O3
 # CFLAGS	+=	-Wall -Werror -Wextra -g
 MLXFLAGS=	-ldl -lglfw -pthread -lm
@@ -28,9 +28,15 @@ SRC		=	$(SRCDIR)/TESTmain.c \
 			$(SRCDIR)/gamestate/init/read_elements.c \
 			$(SRCDIR)/gamestate/init/read_map.c \
 			$(SRCDIR)/gamestate/init_window.c \
+			$(SRCDIR)/hud/init_hud.c \
+			$(SRCDIR)/hud/init/init_maps_images.c \
+			$(SRCDIR)/hud/init/init_menu_images.c \
+			$(SRCDIR)/hud/init_menu.c \
+			$(SRCDIR)/user_interface/select_button.c \
+			$(SRCDIR)/utils/arithmetic.c \
 			$(SRCDIR)/utils/image_iteration.c \
 			$(SRCDIR)/utils/modlx.c \
-			$(SRCDIR)/utils/test.c 
+			$(SRCDIR)/utils/test.c
 
 OBJDIR	=	./obj
 OBJ		=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)

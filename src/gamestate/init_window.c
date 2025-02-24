@@ -6,13 +6,13 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/22 23:23:44 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/23 23:24:46 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	window_init(
+int	init_window(
 		t_window *window)
 {
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);

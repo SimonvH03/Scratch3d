@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/23 19:34:58 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/24 01:04:09 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,39 @@ void
 	exit(errno);
 }
 
-// int main(int argc, char **argv)
-// {
-// 	t_window	window;
+static void
+	cub3d_terminate(
+		t_window *window)
+{
+	size_t	i;
 
-// 	ft_bzero(&window, sizeof(t_window));
-// 	if (argc != 2)
-// 	{
-// 		printf("Usage: ./%s <path/to/scene.cub>\n", argv[0]);
-// 		return (EINVAL);
-// 	}
-// 	if (window_init(&window) != RETURN_SUCCESS
-// 		|| menu_init() != RETURN_SUCCESS
-// 		|| game_init(&window.scene, argv[1]) != RETURN_SUCCESS
-// 		|| hud_init() != RETURN_SUCCESS)
-// 	{
-// 		error_exit(mlx_errno, errno, "initialisation failed");
-// 	}
-// 	link_loop_hooks(&window);
-// 	mlx_loop(window.mlx);
-// 	cub3d_terminate(&window);
-// 	return (RETURN_SUCCESS);
-// }
+	mlx_terminate(window->mlx);
+	mlx_delete_texture(window->hud.player_icon);
+	mlx_delete_texture(window->scene.walls.north_texture);
+	mlx_delete_texture(window->scene.walls.east_texture);
+	mlx_delete_texture(window->scene.walls.south_texture);
+	mlx_delete_texture(window->scene.walls.west_texture);
+	mlx_delete_texture(window->menu.background.texture);
+	mlx_delete_texture(window->menu.highlight.texture);
+	i = 0;
+	while (i < MENU_B_COUNT)
+	{
+		mlx_delete_texture(window->menu.buttons[i].texture);
+		++i;
+	}
+	ft_arrclear((void **)window->scene.grid.walls);
+	ft_arrclear((void **)window->scene.grid.sprites);
+	free((void *)window->hud.minimap.circle_overlay);
+}
+
+static void
+	link_loop_hooks(
+		t_window *window)
+{
+	mlx_key_hook(window->mlx, window_keyhook, window);
+	// mlx_loop_hook(window->mlx, update_time_dependant_variables, window);
+	// mlx_loop_hook(window->mlx, view_manager, window);
+}
 
 int main(int argc, char **argv)
 {
@@ -64,13 +75,15 @@ int main(int argc, char **argv)
 		printf("Usage: ./%s <path/to/scene.cub>\n", argv[0]);
 		return (EINVAL);
 	}
-	if (window_init(&window) != RETURN_SUCCESS
-		|| game_init(&window.scene, argv[1]) != RETURN_SUCCESS)
+	if (init_window(&window) != RETURN_SUCCESS
+		|| init_menu(window.mlx, &window.menu) != RETURN_SUCCESS
+		|| init_game(&window.scene, argv[1]) != RETURN_SUCCESS
+		|| init_hud(window.mlx, &window.hud, &window.scene) != RETURN_SUCCESS)
 	{
 		error_exit(mlx_errno, errno, "initialisation failed");
 	}
 	// link_loop_hooks(&window);
-	// mlx_loop(window.mlx);
-	// cub3d_terminate(&window);
+	mlx_loop(window.mlx);
+	cub3d_terminate(&window);
 	return (RETURN_SUCCESS);
 }

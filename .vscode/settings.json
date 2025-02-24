@@ -14,6 +14,7 @@
 		"system_error": "c",
 		"mlx42_int.h": "c",
 		"lodepng.h": "c",
-		"glad.h": "c"
+		"glad.h": "c",
+		"random": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/23 20:12:52 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/23 23:20:01 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,18 @@ static void
 }
 
 static bool
+	norminetteisahorriblewasteoftimethisisnotmorereadable(
+		bool grid_has_starting_position)
+{
+	if (grid_has_starting_position == true)
+	{
+		printf("invalid map: has multiple starting positions\n");
+			return (true);
+	}
+	return (false);
+}
+
+static bool
 	find_starting_position(
 		t_grid *grid,
 		t_camera *camera)
@@ -71,13 +83,12 @@ static bool
 		x = 0;
 		while (x < grid->x_max)
 		{
-			if (ft_strchr("NESW", grid->sprites[y][x]))
+			if (ft_strchr("NESW", grid->sprites[y][x])
+				&& grid->sprites[y][x] != 0)
 			{
-				if (grid_has_starting_position == true)
-				{
-					printf("invalid map: has multiple starting positions\n");
+				if (norminetteisahorriblewasteoftimethisisnotmorereadable(
+						grid_has_starting_position) == true)
 					return (false);
-				}
 				init_camera(camera, y, x, grid->sprites[y][x]);
 				grid_has_starting_position = true;
 			}

@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/23 20:11:20 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/23 23:25:07 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int
 		const char *input_file)
 {
 	char	**content_start;
-	char	**content_progress;
+	char	*const *content_progress;
 
 	if (get_content(&content_start, input_file) != RETURN_SUCCESS)
 		return (RETURN_FAILURE);
@@ -61,11 +61,11 @@ static int
 		error_exit(mlx_errno, EINVAL, "missing scene.cub texture path");
 	if (read_map(&scene->grid, content_progress) != RETURN_SUCCESS)
 		return (RETURN_FAILURE);
-	ft_arrclear((void **)content_progress);
+	ft_arrclear((void **)content_start);
 	return (RETURN_SUCCESS);
 }
 
-int	game_init(
+int	init_game(
 		t_scene *scene,
 		const char *input_file)
 {

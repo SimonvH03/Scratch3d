@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/23 20:05:16 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/24 01:23:08 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,8 @@
 # include <fcntl.h>
 # include <math.h>
 
-typedef struct s_window
-{
-	mlx_t			*mlx;
-	enum e_view		view;
-	t_menu			menu;
-	t_scene			scene;
-	t_hud			hud;
-}	t_window;
-
 // mlx window
-# define WINDOW_TITLE "cub3d"
+# define WINDOW_TITLE		"cub3d"
 # define WIDTH				1280
 # define HEIGHT				720
 
@@ -56,15 +47,16 @@ typedef struct s_window
 
 # define VALID_MAP_TOKENS	" 01NESW"
 
-// typedef void	(mlx_hook)(void *);
-// typedef void	(mlx_key)(struct mlx_key_data, void *);
-// typedef void	(mlx_close)(void *);
-// typedef void	(mlx_mouse)(mouse_key_t, action_t, modifier_key_t, void *);
-// typedef void	(mlx_cursor)(double, double, void *);
-// typedef void	(mlx_resize)(uint32_t, uint32_t, void *);
-// typedef void	(mlx_scroll)(double, double, void *);
+typedef struct s_window
+{
+	mlx_t			*mlx;
+	t_scene			scene;
+	t_menu			menu;
+	t_hud			hud;
+	enum e_view		view;
+}	t_window;
 
-// imagine a strict norm to make things more readable
+// gotta love a strict norm to make things more readable
 typedef	int	(imgiter_func)(
 				mlx_image_t *image,
 				void *param,
@@ -77,31 +69,39 @@ int			image_iteration(
 				void *param);
 
 void		error_exit(mlx_errno_t mlx_errno, int custom_errno, char *message);
-void		cub3d_terminate(t_window *window);
+// void		cub3d_terminate(t_window *window);
 
 //// PHASE 0: initialising mlx window, game and hud
-int			window_init(t_window *window);
+int			init_window(t_window *window);
 
-int			game_init(t_scene *scene, const char *input_file);
-void		read_elements(t_scene *scene, char **const *content);
+int			init_game(t_scene *scene, const char *input_file);
+void		read_elements(t_scene *scene, char *const **content);
 int			read_map(t_grid *grid, char *const *content);
 int			init_player(t_player *player, t_grid *grid);
 
+int			init_menu(mlx_t *mlx, t_menu *menu);
+int			create_menu_images(mlx_t *mlx, t_menu *menu);
+
+int			init_hud(mlx_t *mlx, t_hud *hud, t_scene *scene);
+int			new_images_minimap(mlx_t *mlx, t_minimap *minimap,
+				mlx_texture_t *ohijustlovemakingmycodereadablewiththeholynorm);
+int			new_images_bigmap(mlx_t *mlx, t_bigmap *map, t_camera *camera);
+
+
+
 int			init_game_images(mlx_t *mlx, t_scene *scene);
 void		draw_minimap_circle_overlay(t_minimap *minimap);
-void		draw_map_walls(t_bigmap *map);
+void		draw_bigmap_walls(t_bigmap *map, t_grid *grid);
 
 int			init_menu_structs(mlx_t *mlx, t_menu *menu);
-int			init_menu_images(mlx_t *mlx, t_menu *menu);
 void		draw_scaled_image(t_scalable *scalable);
-// void		draw_menu_highlight(mlx_image_t *image);
 
 // interpretation of user inputs
 void		view_manager(void *param);
 void		window_keyhook(mlx_key_data_t key_data, void *param);
 void		wasd_move(t_window *window, t_camera *camera);
 void		arrowkey_turn(t_window *window, t_camera *camera);
-void		up_down_select(t_menu *menu);
+void		select_button(t_menu *menu);
 void		confirm_selection(t_menu *menu, t_window *window);
 void		toggle_maps(t_minimap *minimap, t_bigmap *map);
 void		toggle_view(t_window *window);
@@ -126,8 +126,8 @@ void		reset_image(mlx_image_t *image);
 // void		print_camera(t_camera *camera);
 // void		print_ray(t_ray *ray);
 // void		print_minimap(t_minimap *minimap);
-// void		print_content(t_scene *scene);
+void		print_content(char *const *content);
 // void		print_bigmap(t_scene *scene);
-void		draw_textures(t_window *window);
+// void		draw_textures(t_window *window);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/23 20:05:32 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/23 23:09:20 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void
 void
 	read_elements(
 		t_scene *scene,
-		char **const *content)
+		char *const **content)
 {
 	int	element_count;
 
@@ -82,6 +82,6 @@ void
 			error_exit(0, EINVAL, "missing or invalid scene.cub elements");
 		else
 			element_count--;
-		*content++;
+		(*content)++;
 	}
 }
