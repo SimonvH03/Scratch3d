@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   draw_minimap_walls.c                               :+:    :+:            */
+/*   update_minimap.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/22 19:48:15 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/22 19:48:18 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/24 04:32:30 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,20 @@ static void
 	}
 }
 
-static uint32_t
-	get_minimap_pixel_colour(
-		t_minimap *minimap,
-		float x,
-		float y)
+static int
+	project_wall_pixel(
+		mlx_image_t *walls,
+		void *param,
+		uint32_t img_x,
+		uint32_t img_y)
 {
-	t_scene		*scene;
-	t_camera	*camera;
-	float		prev_x;
+	const t_minimap		*minimap = param;
+	const t_camera		*camera = minimap->r_camera;
+	const t_grid		*grid = minimap->r_grid;
+	float				prev_x;
+	float				x;
+	float				y;
 
-	scene = minimap->r_scene;
-	camera = &minimap->r_scene->camera;
 	x -= minimap->radius;
 	y -= minimap->radius;
 	prev_x = x;
@@ -56,35 +58,21 @@ static uint32_t
 	y /= minimap->block_size;
 	x += camera->pos_x;
 	y += camera->pos_y;
-	if (x < 0 || x >= scene->x_max
-		|| y < 0 || y >= scene->y_max)
-		return (C_CEILING);
-	if (scene->map[(int)y][(int)x] < 0)
-		return (C_CEILING);
-	if (scene->map[(int)y][(int)x] > 0)
-		return (C_WALL);
-	return (C_FLOOR);
+	if (x < 0 || x >= grid->x_max || y < 0 || y >= grid->y_max)
+		mlx_put_pixel(walls, img_x, img_y, C_CEILING);
+	if (grid->walls[(int)y][(int)x] < 0)
+		mlx_put_pixel(walls, img_x, img_y, C_CEILING);
+	if (grid->walls[(int)y][(int)x] > 0)
+		mlx_put_pixel(walls, img_x, img_y, C_WALL);
+	mlx_put_pixel(walls, img_x, img_y, C_FLOOR);
+	return (RETURN_SUCCESS);
 }
 
 void
 	draw_minimap_walls(
 		t_minimap	*minimap)
 {
-	uint32_t	y;
-	uint32_t	x;
-	uint32_t	colour;
-
-	y = 0;
-	while (y < minimap->walls->height)
-	{
-		x = 0;
-		while (x < minimap->walls->width)
-		{
-			colour = get_minimap_pixel_colour(minimap, x, y);
-			mlx_put_pixel(minimap->walls, x, y, colour);
-			++x;
-		}
-		++y;
-	}
+	reset_image(minimap->walls);
+	image_iteration(minimap->walls, project_wall_pixel, minimap);
 	overlay_border(minimap);
 }

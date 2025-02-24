@@ -21,18 +21,26 @@ HEADERS =	$(INCLUDE)/cub3d.h \
 			$(INCLUDE)/render.h
 
 SRCDIR	=	./src
-SRC		=	$(SRCDIR)/TESTmain.c \
+SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/gamestate/init_game.c \
 			$(SRCDIR)/gamestate/init/init_game_images.c \
 			$(SRCDIR)/gamestate/init_player.c \
 			$(SRCDIR)/gamestate/init/read_elements.c \
 			$(SRCDIR)/gamestate/init/read_map.c \
 			$(SRCDIR)/gamestate/init_window.c \
-			$(SRCDIR)/hud/init_hud.c \
 			$(SRCDIR)/hud/init/init_maps_images.c \
 			$(SRCDIR)/hud/init/init_menu_images.c \
+			$(SRCDIR)/hud/init_hud.c \
 			$(SRCDIR)/hud/init_menu.c \
+			$(SRCDIR)/hud/update_bigmap.c \
+			$(SRCDIR)/hud/update_minimap.c \
+			$(SRCDIR)/render/draw_texture_column.c \
+			$(SRCDIR)/render/raycast.c \
+			$(SRCDIR)/user_interface/arrowkey_turn.c \
+			$(SRCDIR)/user_interface/keyhooks.c \
 			$(SRCDIR)/user_interface/select_button.c \
+			$(SRCDIR)/user_interface/view_manager.c \
+			$(SRCDIR)/user_interface/wasd_move.c \
 			$(SRCDIR)/utils/arithmetic.c \
 			$(SRCDIR)/utils/image_iteration.c \
 			$(SRCDIR)/utils/modlx.c \
@@ -54,7 +62,7 @@ $(OBJDIR):
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -o $@ -c $< -I ./MLX42/include -I ./src/_include -I ./libft
+	$(CC) $(CFLAGS) -o $@ -c $< -I ./MLX42/include -I ./src/_include -I ./libft -I ./
 
 $(NAME): $(LIBMLX) $(LIBFT) $(OBJDIR) $(OBJ)
 	$(CC) $(OBJ) $(LIBMLX) $(MLXFLAGS) $(LIBFT) -o $(NAME)

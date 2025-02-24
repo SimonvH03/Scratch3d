@@ -6,29 +6,11 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/04 22:26:03 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/23 23:31:14 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/24 02:11:18 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static int
-	new_images_scene(
-		mlx_t *mlx,
-		t_scene *scene)
-{
-	scene->background = mlx_new_image(mlx, WIDTH, HEIGHT);
-	if (scene->background == NULL)
-		return (RETURN_FAILURE);
-	scene->walls.image = mlx_new_image(mlx, WIDTH, HEIGHT);
-	if (scene->walls.image == NULL)
-		return (RETURN_FAILURE);
-	if (mlx_image_to_window(mlx, scene->background, 0, 0) < 0)
-		return (RETURN_FAILURE);
-	if (mlx_image_to_window(mlx, scene->walls.image, 0, 0) < 0)
-		return (RETURN_FAILURE);
-	return (RETURN_SUCCESS);
-}
 
 static int
 	draw_scene_background(
@@ -51,7 +33,15 @@ int
 		mlx_t *mlx,
 		t_scene	*scene)
 {
-	if (new_images_scene(mlx, scene) != RETURN_SUCCESS)
+	scene->background = mlx_new_image(mlx, WIDTH, HEIGHT);
+	if (scene->background == NULL)
+		return (RETURN_FAILURE);
+	scene->walls.image = mlx_new_image(mlx, WIDTH, HEIGHT);
+	if (scene->walls.image == NULL)
+		return (RETURN_FAILURE);
+	if (mlx_image_to_window(mlx, scene->background, 0, 0) < 0)
+		return (RETURN_FAILURE);
+	if (mlx_image_to_window(mlx, scene->walls.image, 0, 0) < 0)
 		return (RETURN_FAILURE);
 	image_iteration(scene->background, draw_scene_background, scene);
 	return (RETURN_SUCCESS);

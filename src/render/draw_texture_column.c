@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   draw_texture_column.c                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 01:36:33 by simon             #+#    #+#             */
-/*   Updated: 2024/09/23 01:35:19 by svan-hoo         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   draw_texture_column.c                              :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/08/27 01:36:33 by simon         #+#    #+#                 */
+/*   Updated: 2025/02/24 02:17:42 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// ...else if ((CASE) || 1)... against braindead -Werror=maybe-uninitialized
 static void
 	init_column(
 		t_scene *scene,
 		t_ray *ray,
 		t_column *column)
 {
-	if (ray->hit_type == HORIZONTAL && ray->sign_x > 0)
+	if (ray->hit_type == HORIZONTAL && ray->sign_x >= 0)
 		column->texture = scene->east_texture;
 	else if (ray->hit_type == HORIZONTAL && ray->sign_x < 0)
 		column->texture = scene->west_texture;
-	else if (ray->hit_type == VERTICAL && ray->sign_y > 0)
+	else if (ray->hit_type == VERTICAL && ray->sign_y >= 0)
 		column->texture = scene->south_texture;
-	else if ((ray->hit_type == VERTICAL && ray->sign_y < 0) || 1)
+	else if (ray->hit_type == VERTICAL && ray->sign_y < 0)
 		column->texture = scene->north_texture;
 	if (ray->hit_type == HORIZONTAL)
 		column->x = scene->camera.pos_y + ray->distance * ray->dir_y;

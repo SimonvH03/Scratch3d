@@ -22,13 +22,13 @@ void
 		= menu->buttons[menu->selection].image->instances[0].y;
 }
 
-// void
-// 	confirm_selection(
-// 		t_menu *menu,
-// 		t_window *window)
-// {
-// 	if (menu->selection == MENU_B_START_INDEX)
-// 		toggle_view(window);
-// 	if (menu->selection == MENU_B_QUIT_INDEX)
-// 		mlx_close_window(window->mlx);
-// }
+void
+	confirm_selection(
+		t_menu *menu,
+		t_window *window)
+{
+	if (menu->selection == MENU_B_START_INDEX)
+		toggle_view(window);
+	if (menu->selection == MENU_B_QUIT_INDEX)
+		mlx_close_window(window->mlx);
+}

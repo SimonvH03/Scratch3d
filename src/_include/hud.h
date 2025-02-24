@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/24 01:08:25 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/24 03:04:25 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ typedef struct s_menu
 typedef struct s_minimap
 {
 	mlx_image_t		*walls;
-	mlx_image_t		*player;
+	mlx_image_t		*player_icon;
 	uint8_t			*circle_overlay;
-	int				**r_wall_grid;
+	t_grid			*r_grid;
+	t_camera		*r_camera;
 	uint32_t		side;
 	uint32_t		radius;
 	float			block_size;
@@ -56,8 +57,10 @@ typedef struct s_minimap
 typedef struct s_bigmap
 {
 	mlx_image_t		*walls;
-	mlx_image_t		*player;
-	int				**r_wall_grid;
+	mlx_image_t		*player_icon;
+	mlx_texture_t	*r_player_tex;
+	t_grid			*r_grid;
+	t_camera		*r_camera;
 	uint32_t		x_offset;
 	uint32_t		y_offset;
 	float			block_size;

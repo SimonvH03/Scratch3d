@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/22 23:13:34 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/24 02:37:26 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void
 		arrowkey_turn(window, &window->scene.camera);
 		if (window->scene.recast == true)
 		{
-			draw_raycast(&window->scene);
+			raycast(&window->scene);
 			if (window->minimap.enabled == true)
 				draw_minimap_walls(&window->minimap);
 			if (window->map.enabled == true)
@@ -40,10 +40,10 @@ void
 		t_minimap *minimap,
 		t_bigmap *map)
 {
-	minimap->player->enabled = !minimap->player->enabled;
+	minimap->player_icon->enabled = !minimap->player_icon->enabled;
 	minimap->walls->enabled = !minimap->walls->enabled;
 	minimap->enabled = !minimap->enabled;
-	map->player->enabled = !map->player->enabled;
+	map->player_icon->enabled = !map->player_icon->enabled;
 	map->walls->enabled = !map->walls->enabled;
 	map->enabled = !map->enabled;
 	map->r_scene->recast = true;

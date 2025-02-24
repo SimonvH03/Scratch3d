@@ -6,13 +6,14 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/24 01:23:08 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/24 04:29:15 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 # include "MLX42/MLX42_Int.h"
+# include "MLX42/src/font/font.h"
 # include "libft.h"
 # include "gamestate.h"
 # include "hud.h"
@@ -69,36 +70,32 @@ int			image_iteration(
 				void *param);
 
 void		error_exit(mlx_errno_t mlx_errno, int custom_errno, char *message);
-// void		cub3d_terminate(t_window *window);
+void		cub3d_terminate(t_window *window);
 
-//// PHASE 0: initialising mlx window, game and hud
+//// PHASE 0: initialising mlx window, game, hud and menu
 int			init_window(t_window *window);
 
 int			init_game(t_scene *scene, const char *input_file);
 void		read_elements(t_scene *scene, char *const **content);
 int			read_map(t_grid *grid, char *const *content);
+int			init_game_images(mlx_t *mlx, t_scene *scene);
 int			init_player(t_player *player, t_grid *grid);
-
-int			init_menu(mlx_t *mlx, t_menu *menu);
-int			create_menu_images(mlx_t *mlx, t_menu *menu);
 
 int			init_hud(mlx_t *mlx, t_hud *hud, t_scene *scene);
 int			new_images_minimap(mlx_t *mlx, t_minimap *minimap,
 				mlx_texture_t *ohijustlovemakingmycodereadablewiththeholynorm);
-int			new_images_bigmap(mlx_t *mlx, t_bigmap *map, t_camera *camera);
+int			new_images_bigmap(mlx_t *mlx, t_bigmap *map, t_scene *scene);
 
-
-
-int			init_game_images(mlx_t *mlx, t_scene *scene);
-void		draw_minimap_circle_overlay(t_minimap *minimap);
-void		draw_bigmap_walls(t_bigmap *map, t_grid *grid);
-
-int			init_menu_structs(mlx_t *mlx, t_menu *menu);
+int			init_menu(mlx_t *mlx, t_menu *menu);
+int			create_menu_images(mlx_t *mlx, t_menu *menu);
 void		draw_scaled_image(t_scalable *scalable);
 
-// interpretation of user inputs
+// MLX_HOOKS
+void		frametime_dependant_variables(void	*param);
 void		view_manager(void *param);
 void		window_keyhook(mlx_key_data_t key_data, void *param);
+
+// user inputs
 void		wasd_move(t_window *window, t_camera *camera);
 void		arrowkey_turn(t_window *window, t_camera *camera);
 void		select_button(t_menu *menu);
@@ -106,21 +103,24 @@ void		confirm_selection(t_menu *menu, t_window *window);
 void		toggle_maps(t_minimap *minimap, t_bigmap *map);
 void		toggle_view(t_window *window);
 
-// frame processing
-void		draw_raycast(t_scene *scene);
+// render
+void		raycast(t_scene *scene);
 void		draw_texture_column(t_scene *scene, t_ray *ray, uint32_t x);
+
+// hud
 void		draw_minimap_walls(t_minimap *minimap);
 void		draw_bigmap_player(t_bigmap *map);
+
+// modlx
+xpm_t		*modlx_load_xpm42(const char *path);
+int			modlx_put_string(mlx_image_t *strimage, const char* str);
+void		reset_image(mlx_image_t *image);
 
 // arithmetic
 float		ft_max_float(float a, float b);
 float		ft_min_float(float a, float b);
 float		ft_abs_float(float value);
 short		ft_sign_float(float value);
-
-// modlx
-xpm_t		*modlx_load_xpm42(const char *path);
-void		reset_image(mlx_image_t *image);
 
 // TEST
 // void		print_camera(t_camera *camera);

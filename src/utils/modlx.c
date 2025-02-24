@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/28 22:07:27 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/22 22:42:17 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/24 04:13:43 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,30 @@ xpm_t	*
 	transpose_texture(&xpm->texture, pixelcopy);
 	free(pixelcopy);
 	return (xpm);
+}
+
+// writes new string in image created by mlx_put_string()
+// fails if new string is longer than original
+int
+	modlx_put_string(
+		mlx_image_t *strimage,
+		const char* str)
+{
+	int32_t			imgoffset;
+	const size_t	len = ft_strlen(str);
+	size_t			i;
+
+	if (len * FONT_WIDTH > strimage->width)
+		return (RETURN_FAILURE);
+	imgoffset = 0;
+	i = 0;
+	while(i < len)
+	{
+		mlx_draw_char(strimage, mlx_get_texoffset(str[i]), imgoffset);
+		imgoffset += FONT_WIDTH;
+		i++;
+	}
+	return (RETURN_SUCCESS);
 }
 
 void

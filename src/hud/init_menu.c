@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/22 19:48:30 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/24 01:23:08 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/24 02:12:12 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int
 	return (RETURN_SUCCESS);
 }
 
-int
+static int
 	init_menu_structs(
 		mlx_t *mlx,
 		t_menu *menu)
