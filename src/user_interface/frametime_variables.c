@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/25 22:49:24 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/25 23:41:50 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static void
 	output_fps = fps->no_frames / fps->cum_time;
 	fps->cum_time = 0;
 	fps->no_frames = 0;
-	if (output_fps > 999)
-		output_fps = 999;
+	if (output_fps > 99999)
+		output_fps = 99999;
 	ft_putnbr_ptr(buffer, output_fps);
 	reset_image(fps->image);
 	modlx_put_string(fps->image, buffer);

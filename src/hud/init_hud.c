@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/22 19:48:30 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/25 20:51:06 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/25 23:41:18 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int
 		!= RETURN_SUCCESS)
 		return (RETURN_FAILURE);
 	ft_bzero(&hud->fps, sizeof(t_fps));
-	hud->fps.image = mlx_put_string(mlx, "000",
+	hud->fps.image = mlx_put_string(mlx, "00000",
 		(mlx->width / 2) - (MLX_FONT_WIDTH * 1.5), mlx->height / 42);
 	return (RETURN_SUCCESS);
 }
