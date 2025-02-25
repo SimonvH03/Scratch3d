@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/24 02:29:26 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/25 02:38:37 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	error_exit(mlx_errno_t mlx_errno, int custom_errno, char *message)
 	exit(errno);
 }
 
-void	cub3d_terminate(t_window *window)
+static void	cub3d_terminate(t_window *window)
 {
 	size_t	i;
 
@@ -70,7 +70,7 @@ int main(int argc, char **argv)
 		return (EINVAL);
 	}
 	if (init_window(&window) != RETURN_SUCCESS
-		|| init_game(&window.scene, argv[1]) != RETURN_SUCCESS
+		|| init_game(window.mlx, &window.scene, argv[1]) != RETURN_SUCCESS
 		|| init_hud(window.mlx, &window.hud, &window.scene) != RETURN_SUCCESS
 		|| init_menu(window.mlx, &window.menu) != RETURN_SUCCESS)
 	{

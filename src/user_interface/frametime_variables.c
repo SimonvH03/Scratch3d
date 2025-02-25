@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/24 04:25:05 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/25 02:27:10 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void
 
 void
 	frametime_dependant_variables(
-		void	*param)
+		void *param)
 {
 	t_window	*window;
 	t_camera	*camera;

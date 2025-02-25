@@ -6,19 +6,20 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/28 22:07:27 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/24 04:13:43 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/25 02:24:54 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "MLX42/src/font/font.h"
 
 static void
 	transpose_texture(
 		mlx_texture_t *texture,
 		uint8_t *pixelcopy)
 {
-	int			y;
-	int			x;
+	uint32_t	y;
+	uint32_t	x;
 	int			src_idx;
 	int			dst_idx;
 
@@ -63,6 +64,25 @@ xpm_t	*
 	transpose_texture(&xpm->texture, pixelcopy);
 	free(pixelcopy);
 	return (xpm);
+}
+
+// copieid from mlx library, modified for norm
+static void mlx_draw_char(mlx_image_t* image, int32_t texoffset, int32_t imgoffset)
+{
+	char*		pixelx;
+	uint8_t*	pixeli;
+	uint32_t	y;
+
+	if (texoffset < 0)
+		return;
+	y = 0;
+	while (y < FONT_HEIGHT)
+	{
+		pixelx = &font_atlas.pixels[(y * font_atlas.width + texoffset) * BPP];
+		pixeli = image->pixels + ((y * image->width + imgoffset) * BPP);
+		ft_memcpy(pixeli, pixelx, FONT_WIDTH * BPP);
+		y++;
+	}
 }
 
 // writes new string in image created by mlx_put_string()

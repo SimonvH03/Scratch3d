@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/23 20:04:50 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/25 02:24:13 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int
 		const int y,
 		const char *line)
 {
-	int		x;
+	unsigned int	x;
 
 	x = 0;
 	while (line[x])

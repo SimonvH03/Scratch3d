@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/23 19:31:38 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/25 02:26:22 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct s_column
 typedef struct s_ray
 {
 	float			camera_x;
-	int				pos_x;
-	int				pos_y;
+	unsigned int	pos_x;
+	unsigned int	pos_y;
 	float			dir_x;
 	float			dir_y;
 	float			step_x;

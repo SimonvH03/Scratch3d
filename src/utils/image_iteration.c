@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/28 22:07:27 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/23 18:05:58 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/25 02:26:46 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int
 	uint32_t	y;
 	int			return_value;
 
+	return_value = RETURN_FAILURE;
 	y = 0;
 	while (y < image->height)
 	{

@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/24 01:23:08 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/25 03:02:58 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void
 	if ((keydata.key == MLX_KEY_M || keydata.key == MLX_KEY_TAB)
 		&& keydata.action == MLX_PRESS)
 	{
-		toggle_maps(&window->minimap, &window->map);
+		toggle_maps(window, &window->hud.minimap, &window->hud.bigmap);
 	}
 	if (keydata.key == MLX_KEY_LEFT_CONTROL && keydata.action == MLX_PRESS)
 	{

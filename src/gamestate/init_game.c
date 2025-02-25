@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/23 23:25:07 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/25 02:37:20 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ static int
 	return (RETURN_SUCCESS);
 }
 
-int	init_game(
+int
+	init_game(
+		mlx_t *mlx,
 		t_scene *scene,
 		const char *input_file)
 {
@@ -73,6 +75,7 @@ int	init_game(
 		return (RETURN_FAILURE);
 	if (init_player(&scene->player, &scene->grid) != RETURN_SUCCESS)
 		return (RETURN_FAILURE);
+	init_game_images(mlx, scene);
 	scene->walls.recast = true;
 	return (RETURN_SUCCESS);
 }

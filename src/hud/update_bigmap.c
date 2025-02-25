@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/27 01:36:33 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/24 04:33:14 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/25 03:21:59 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static int
 	y += texture->height / (float)2;
 	if ((x < 0 || x >= texture->width || y < 0 || y >= texture->height))
 		return (RETURN_SUCCESS);
-	*((uint32_t *)&player_icon[(img_y * player_icon->width + img_x) *BPP])
-		= *((uint32_t *)&texture[((int)(y * texture->width) + (int)x) * BPP]);
+	*((uint32_t *)&player_icon->pixels[(img_y * player_icon->width + img_x) * BPP])
+		= *((uint32_t *)&texture->pixels[((int)y * texture->width + (int)x) * BPP]);
 	return (RETURN_SUCCESS);
 }
 

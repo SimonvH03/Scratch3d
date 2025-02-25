@@ -2,8 +2,7 @@ NAME	=	cub3d
 
 CC		=	gcc
 CFLAGS	=	-g -O3
-# CFLAGS	=	-O3
-# CFLAGS	+=	-Wall -Werror -Wextra -g
+CFLAGS	+=	-Wall -Werror -Wextra
 MLXFLAGS=	-ldl -lglfw -pthread -lm
 
 LMLXDIR	=	./MLX42
@@ -37,6 +36,7 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/render/draw_texture_column.c \
 			$(SRCDIR)/render/raycast.c \
 			$(SRCDIR)/user_interface/arrowkey_turn.c \
+			$(SRCDIR)/user_interface/frametime_variables.c \
 			$(SRCDIR)/user_interface/keyhooks.c \
 			$(SRCDIR)/user_interface/select_button.c \
 			$(SRCDIR)/user_interface/view_manager.c \

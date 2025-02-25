@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/24 02:16:25 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/24 02:16:32 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/25 02:39:14 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ static void
 static void
 	cast_ray(
 		t_ray *ray,
-		t_scene *scene)
+		t_grid *grid)
 {
-	while (ray->pos_x && ray->pos_x < scene->x_max
-		&& ray->pos_y && ray->pos_y < scene->y_max)
+	while (ray->pos_x && ray->pos_x < grid->x_max
+		&& ray->pos_y && ray->pos_y < grid->y_max)
 	{
 		if (ray->total_x < ray->total_y)
 		{
@@ -64,7 +64,7 @@ static void
 			ray->pos_y += ray->sign_y;
 			ray->hit_type = VERTICAL;
 		}
-		if (scene->map[ray->pos_y][ray->pos_x] > 0)
+		if (grid->walls[ray->pos_y][ray->pos_x] > 0)
 			break ;
 	}
 	if (ray->hit_type == HORIZONTAL)
@@ -80,14 +80,14 @@ void
 	t_ray		ray;
 	uint32_t	x;
 
-	reset_image(scene->walls);
+	reset_image(scene->walls.image);
 	x = 0;
-	while (x < scene->walls->width)
+	while (x < scene->walls.image->width)
 	{
-		ray.camera_x = 2 * x / (float)scene->walls->width - 1;
-		init_ray(&ray, &scene->camera);
-		cast_ray(&ray, scene);
-		draw_texture_column(scene, &ray, x);
+		ray.camera_x = 2 * x / (float)scene->walls.image->width - 1;
+		init_ray(&ray, &scene->player.camera);
+		cast_ray(&ray, &scene->grid);
+		draw_texture_column(&scene->walls, &scene->player.camera, &ray, x);
 		++x;
 	}
 }

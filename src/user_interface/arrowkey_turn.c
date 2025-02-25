@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   arrowkey_turn.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/06 23:30:28 by simon             #+#    #+#             */
-/*   Updated: 2024/09/16 22:56:15 by svan-hoo         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   arrowkey_turn.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/03/06 23:30:28 by simon         #+#    #+#                 */
+/*   Updated: 2025/02/25 02:57:31 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void
 
 void
 	arrowkey_turn(
-		t_window	*window,
+		t_window *window,
 		t_camera *camera)
 {
 	if (mlx_is_key_down(window->mlx, MLX_KEY_LEFT))
@@ -41,6 +41,6 @@ void
 	if (camera->sign_rotate != 0)
 	{
 		rotate_camera(camera);
-		window->scene.recast = true;
+		window->scene.walls.recast = true;
 	}
 }

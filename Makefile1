@@ -37,6 +37,7 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/render/draw_texture_column.c \
 			$(SRCDIR)/render/raycast.c \
 			$(SRCDIR)/user_interface/arrowkey_turn.c \
+			$(SRCDIR)/user_interface/frametime_variables.c \
 			$(SRCDIR)/user_interface/keyhooks.c \
 			$(SRCDIR)/user_interface/select_button.c \
 			$(SRCDIR)/user_interface/view_manager.c \

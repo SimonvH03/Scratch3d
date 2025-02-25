@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/24 02:37:26 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/25 03:01:21 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,23 @@ void
 	window = param;
 	if (window->view == GAME)
 	{
-		wasd_move(window, &window->scene.camera);
-		arrowkey_turn(window, &window->scene.camera);
-		if (window->scene.recast == true)
+		wasd_move(window, &window->scene.player.camera);
+		arrowkey_turn(window, &window->scene.player.camera);
+		if (window->scene.walls.recast == true)
 		{
 			raycast(&window->scene);
-			if (window->minimap.enabled == true)
-				draw_minimap_walls(&window->minimap);
-			if (window->map.enabled == true)
-				draw_bigmap_player(&window->map);
-			window->scene.recast = false;
+			if (window->hud.minimap.enabled == true)
+				draw_minimap_walls(&window->hud.minimap);
+			if (window->hud.bigmap.enabled == true)
+				draw_bigmap_player(&window->hud.bigmap);
+			window->scene.walls.recast = false;
 		}
 	}
 }
 
 void
 	toggle_maps(
+		t_window *window,
 		t_minimap *minimap,
 		t_bigmap *map)
 {
@@ -46,7 +47,7 @@ void
 	map->player_icon->enabled = !map->player_icon->enabled;
 	map->walls->enabled = !map->walls->enabled;
 	map->enabled = !map->enabled;
-	map->r_scene->recast = true;
+	window->scene.walls.recast = true;
 }
 
 void

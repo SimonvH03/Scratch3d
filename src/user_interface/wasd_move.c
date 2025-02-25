@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   wasd_move.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/09 19:05:56 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/23 02:13:58 by svan-hoo         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   wasd_move.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/02/09 19:05:56 by svan-hoo      #+#    #+#                 */
+/*   Updated: 2025/02/25 02:59:48 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@
 // 	camera->pos_y += move_dir_y * camera->movement_speed;
 // }
 
-// I'm really proud of this one, basically you look up the sin and cosin values
-//	based on which of the 8 directions (9 if you count 0, 0) you want to move
+// looks up the sin and cosin values based on which of the 8 directions
+//	(9 if you count 0, 0) theh player can move
 // each directions has precalculated normalized x and y direction components
 //  based on the unit circle /pythagoras because why bother with cos45 or sin45
 // !this function assumes the camera is not currently outside of the map
@@ -113,7 +113,7 @@ void
 		left_right += 1;
 	if (forward_backward || left_right)
 	{
-		window->scene.recast = true;
-		do_movement(camera, window->scene.map, forward_backward, left_right);
+		window->scene.walls.recast = true;
+		do_movement(camera, window->scene.grid.walls, forward_backward, left_right);
 	}
 }
