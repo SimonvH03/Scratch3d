@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/25 22:50:42 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/26 00:49:24 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void
 	{
 		wasd_move(window, &window->scene.player.camera);
 		arrowkey_turn(window, &window->scene.player.camera);
-		if (window->scene.walls.recast == true)
+		if (window->scene.walls.recast == true || 1)
 		{
 			raycast(&window->scene);
 			if (window->hud.minimap.enabled == true)

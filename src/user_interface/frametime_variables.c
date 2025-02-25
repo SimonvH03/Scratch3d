@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/25 23:41:50 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/26 00:02:36 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void
 	ft_bzero(buffer, 12);
 	fps->cum_time += delta_time;
 	++fps->no_frames;
-	if (fps->cum_time < 0.03)
+	if (fps->cum_time < 0.01)
 		return ;
 	output_fps = fps->no_frames / fps->cum_time;
 	fps->cum_time = 0;
