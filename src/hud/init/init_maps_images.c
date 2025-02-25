@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/04 22:26:03 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/24 04:27:53 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/25 20:47:40 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,13 @@ static int
 		uint32_t x,
 		uint32_t y)
 {
-	const	uint32_t radius = *(uint32_t *)param;
+	const uint32_t	radius = *(uint32_t *)param;
+	const int		xcoord = (int)(x - radius);
+	const int		ycoord = (int)(y - radius);
 
-	if (!ft_is_in_circle(x - radius, y - radius, radius))
+	if (!ft_is_in_circle(xcoord, ycoord, radius))
 		mlx_put_pixel(walls, x, y, C_TRANSPARENT);
-	else if (!ft_is_in_circle(x - radius, y - radius, radius * 39 / 42))
+	else if (!ft_is_in_circle(xcoord, ycoord, radius * 39 / 42))
 		mlx_put_pixel(walls, x, y, C_TRANSLUCENT);
 	else
 		mlx_put_pixel(walls, x, y, C_WALL);
@@ -122,8 +124,6 @@ int
 			(uint32_t)bigmap->block_size, (uint32_t)bigmap->block_size);
 	if (bigmap->player_icon == NULL)
 		return (RETURN_FAILURE);
-	bigmap->x_offset -= bigmap->player_icon->width / 2;
-	bigmap->y_offset -= bigmap->player_icon->height / 2;
 	if (mlx_image_to_window(mlx, bigmap->player_icon,
 			bigmap->x_offset + camera->pos_x * bigmap->block_size,
 			bigmap->y_offset + camera->pos_y * bigmap->block_size) < 0)

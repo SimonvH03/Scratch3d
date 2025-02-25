@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/27 01:36:33 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/25 03:21:59 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/25 22:52:24 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,21 @@ static int
 
 	x = img_x;
 	y = img_y;
-	x -= texture->width / (float)2;
-	y -= texture->height / (float)2;
+	x -= texture->width / 2.0f;
+	y -= texture->height / 2.0f;
 	prev_x = x;
 	x = prev_x * camera->plane_x + y * camera->plane_y;
 	y = prev_x * -camera->plane_y + y * camera->plane_x;
-	x *= (const float)sqrtf(2);
-	y *= (const float)sqrtf(2);
-	x += texture->width / (float)2;
-	y += texture->height / (float)2;
+	x *= 1.414213562f;
+	y *= 1.414213562f;
+	x += texture->width;
+	y += texture->height;
+	x /= 2;
+	y /= 2;
 	if ((x < 0 || x >= texture->width || y < 0 || y >= texture->height))
 		return (RETURN_SUCCESS);
-	*((uint32_t *)&player_icon->pixels[(img_y * player_icon->width + img_x) * BPP])
-		= *((uint32_t *)&texture->pixels[((int)y * texture->width + (int)x) * BPP]);
+	((uint32_t *)player_icon->pixels)[img_y * player_icon->width + img_x]
+		= ((uint32_t *)texture->pixels)[(int)y * texture->width + (int)x];
 	return (RETURN_SUCCESS);
 }
 

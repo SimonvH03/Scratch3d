@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/22 19:48:15 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/25 02:54:27 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/25 18:12:58 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,17 @@ static int
 	float				x;
 	float				y;
 
-	x = img_x - minimap->radius;
-	y = img_y - minimap->radius;
+	x = img_x;
+	x -= minimap->radius;
+	y = img_y;
+	y -= minimap->radius;
 	prev_x = x;
 	x = prev_x * camera->plane_x + y * -camera->plane_y;
 	y = prev_x * camera->plane_y + y * camera->plane_x;
 	x = x / minimap->block_size + camera->pos_x;
 	y = y / minimap->block_size + camera->pos_y;
-	if ((int)x < 0 || (uint32_t)x >= minimap->r_grid->x_max
-		|| (int)y < 0 || (uint32_t)y >= minimap->r_grid->y_max)
+	if (x < 0 || x >= minimap->r_grid->x_max
+		|| y < 0 || y >= minimap->r_grid->y_max)
 		mlx_put_pixel(walls, img_x, img_y, C_CEILING);
 	else if (minimap->r_grid->walls[(int)y][(int)x] < 0)
 		mlx_put_pixel(walls, img_x, img_y, C_CEILING);

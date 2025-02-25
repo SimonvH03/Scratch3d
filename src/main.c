@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/25 02:38:37 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/25 23:29:14 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int main(int argc, char **argv)
 	{
 		error_exit(mlx_errno, errno, "initialisation failed");
 	}
+	draw_textures(&window);
 	link_loop_hooks(&window);
 	mlx_loop(window.mlx);
 	cub3d_terminate(&window);

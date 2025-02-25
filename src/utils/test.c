@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/27 17:21:01 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/23 23:07:46 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/25 23:28:00 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,19 @@
 // 		minimap->r_scene->x_max, minimap->r_scene->y_max);
 // }
 
-void
-	print_content(
-		char *const *content)
-{
-	int	i;
+// void
+// 	print_content(
+// 		char *const *content)
+// {
+// 	int	i;
 
-	i = 0;
-	while (content[i])
-	{
-		printf("%s\n", content[i]);
-		++i;
-	}
-}
+// 	i = 0;
+// 	while (content[i])
+// 	{
+// 		printf("%s\n", content[i]);
+// 		++i;
+// 	}
+// }
 
 // void
 // 	print_map(
@@ -85,18 +85,18 @@ void
 // 	}
 // }
 
-// void
-// 	draw_textures(
-// 		t_window *window)
-// {
-// 	mlx_image_t	*image;
+void
+	draw_textures(
+		t_window *window)
+{
+	mlx_image_t	*image;
 
-// 	image = mlx_texture_to_image(window->mlx, window->scene.north_texture);
-// 	mlx_image_to_window(window->mlx, image, 128, 64);
-// 	image = mlx_texture_to_image(window->mlx, window->scene.east_texture);
-// 	mlx_image_to_window(window->mlx, image, 192, 128);
-// 	image = mlx_texture_to_image(window->mlx, window->scene.south_texture);
-// 	mlx_image_to_window(window->mlx, image, 128, 192);
-// 	image = mlx_texture_to_image(window->mlx, window->scene.west_texture);
-// 	mlx_image_to_window(window->mlx, image, 64, 128);
-// }
+	image = mlx_texture_to_image(window->mlx, window->scene.walls.north_texture);
+	mlx_image_to_window(window->mlx, image, 128, 64);
+	image = mlx_texture_to_image(window->mlx, window->scene.walls.east_texture);
+	mlx_image_to_window(window->mlx, image, 192, 128);
+	image = mlx_texture_to_image(window->mlx, window->scene.walls.south_texture);
+	mlx_image_to_window(window->mlx, image, 128, 192);
+	image = mlx_texture_to_image(window->mlx, window->scene.walls.west_texture);
+	mlx_image_to_window(window->mlx, image, 64, 128);
+}

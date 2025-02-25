@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/24 03:04:25 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/25 20:31:50 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,13 @@ typedef struct s_bigmap
 	bool			enabled;
 }	t_bigmap;
 
+typedef struct s_fps
+{
+	mlx_image_t		*image;
+	double			cum_time;
+	uint32_t		no_frames;
+}	t_fps;
+
 typedef struct s_hud
 {
 	mlx_texture_t	*player_icon;
@@ -74,7 +81,7 @@ typedef struct s_hud
 	mlx_image_t		*ammo;
 	mlx_image_t		*healthbar;
 	mlx_image_t		*treasure;
-	mlx_image_t		*fps;
+	t_fps			fps;
 	t_bigmap		bigmap;
 	t_minimap		minimap;
 }	t_hud;

@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/25 03:01:48 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/25 23:28:16 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ short		ft_sign_float(float value);
 // void		print_camera(t_camera *camera);
 // void		print_ray(t_ray *ray);
 // void		print_minimap(t_minimap *minimap);
-void		print_content(char *const *content);
+// void		print_content(char *const *content);
 // void		print_bigmap(t_scene *scene);
-// void		draw_textures(t_window *window);
+void		draw_textures(t_window *window);
 
 #endif

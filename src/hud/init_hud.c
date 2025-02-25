@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/22 19:48:30 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/25 03:09:13 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/25 20:51:06 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@ static void
 	bigmap->block_size = ft_min_float(
 			mlx->height / (scene->grid.y_max + 2),
 			mlx->width / (scene->grid.x_max + 2));
-	bigmap->x_offset = (mlx->width
-		- (scene->grid.x_max * bigmap->block_size)) / 2;
-	bigmap->y_offset = (mlx->height
-		- (scene->grid.y_max * bigmap->block_size)) / 2;
+	bigmap->x_offset = mlx->width - scene->grid.x_max * bigmap->block_size;
+	bigmap->y_offset = mlx->height - scene->grid.y_max * bigmap->block_size;
+	bigmap->x_offset -= bigmap->r_player_tex->width;
+	bigmap->y_offset -= bigmap->r_player_tex->height;
+	bigmap->x_offset /= 2;
+	bigmap->y_offset /= 2;
 }
 
 int
@@ -69,7 +71,8 @@ int
 	if (new_images_minimap(mlx,	&hud->minimap, hud->player_icon)
 		!= RETURN_SUCCESS)
 		return (RETURN_FAILURE);
-	hud->fps = mlx_put_string(mlx, "000",
+	ft_bzero(&hud->fps, sizeof(t_fps));
+	hud->fps.image = mlx_put_string(mlx, "000",
 		(mlx->width / 2) - (MLX_FONT_WIDTH * 1.5), mlx->height / 42);
 	return (RETURN_SUCCESS);
 }
