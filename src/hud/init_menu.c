@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/22 19:48:30 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/24 02:12:12 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/26 02:04:21 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,14 @@ int
 		return (RETURN_FAILURE);
 	if (create_menu_images(mlx, menu) != RETURN_SUCCESS)
 		return (RETURN_FAILURE);
-	draw_scaled_image(&menu->background);
-	draw_scaled_image(&menu->highlight);
-	draw_scaled_image(&menu->buttons[MENU_B_START_INDEX]);
-	draw_scaled_image(&menu->buttons[MENU_B_QUIT_INDEX]);
+	image_iteration(menu->background.image,
+		sample_scalable, &menu->background);
+	image_iteration(menu->highlight.image,
+		sample_scalable, &menu->highlight);
+	image_iteration(menu->buttons[MENU_B_START_INDEX].image,
+		sample_scalable, &menu->buttons[MENU_B_START_INDEX]);
+	image_iteration(menu->buttons[MENU_B_QUIT_INDEX].image,
+		sample_scalable, &menu->buttons[MENU_B_QUIT_INDEX]);
 	select_button(menu);
 	return (RETURN_SUCCESS);
 }

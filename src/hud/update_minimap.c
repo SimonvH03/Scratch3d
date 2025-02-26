@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/22 19:48:15 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/25 18:12:58 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/26 02:02:46 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void
 }
 
 static int
-	project_wall_pixel(
+	sample_wall(
 		mlx_image_t *walls,
 		void *param,
 		uint32_t img_x,
@@ -74,6 +74,6 @@ void
 		t_minimap	*minimap)
 {
 	reset_image(minimap->walls);
-	image_iteration(minimap->walls, project_wall_pixel, minimap);
+	image_iteration(minimap->walls, sample_wall, minimap);
 	overlay_border(minimap);
 }

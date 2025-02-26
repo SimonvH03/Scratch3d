@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/26 00:47:31 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/26 02:05:22 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ int			new_images_bigmap(mlx_t *mlx, t_bigmap *map, t_scene *scene);
 
 int			init_menu(mlx_t *mlx, t_menu *menu);
 int			create_menu_images(mlx_t *mlx, t_menu *menu);
-void		draw_scaled_image(t_scalable *scalable);
+int			sample_scalable(mlx_image_t *dest, void *param,
+				uint32_t img_x, uint32_t img_y);
 
 // MLX_HOOKS
 void		frametime_dependant_variables(void *param);

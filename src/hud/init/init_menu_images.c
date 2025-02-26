@@ -6,54 +6,29 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/04 22:26:03 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/24 03:40:22 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/26 02:05:06 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static uint32_t
-	get_scaled_pixel_colour(
-		t_scalable *scalable,
-		float x,
-		float y)
+int
+	sample_scalable(
+		mlx_image_t *dest,
+		void *param,
+		uint32_t img_x,
+		uint32_t img_y)
 {
-	mlx_texture_t	*texture;
-	uint32_t		index;
-	uint8_t			*pixelstart;
+	const t_scalable	*scalable = (t_scalable *)param;
+	const mlx_texture_t	*texture = scalable->texture;
+	const float			x = img_x / scalable->scale;
+	const float			y = img_y / scalable->scale;
 
-	texture = scalable->texture;
-	x /= scalable->scale;
-	y /= scalable->scale;
-	if (x < 0 || x >= texture->width
-		|| y < 0 || y >= texture->height)
-		return (0x00000000);
-	index = ((int)y * texture->width + (int)x) * sizeof(uint32_t);
-	pixelstart = &texture->pixels[index];
-	return ((uint32_t)(pixelstart[0] << 24 | pixelstart[1] << 16
-		| pixelstart[2] << 8 | pixelstart[3]));
-}
-
-void
-	draw_scaled_image(
-		t_scalable *scalable)
-{
-	uint32_t	y;
-	uint32_t	x;
-	uint32_t	colour;
-
-	y = 0;
-	while (y < scalable->image->height)
-	{
-		x = 0;
-		while (x < scalable->image->width)
-		{
-			colour = get_scaled_pixel_colour(scalable, x, y);
-			mlx_put_pixel(scalable->image, x, y, colour);
-			++x;
-		}
-		++y;
-	}
+	if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
+		return (RETURN_SUCCESS);
+	((uint32_t *)dest->pixels)[img_y * dest->width + img_x]
+		= ((uint32_t *)texture->pixels)[(int)y * texture->width + (int)x];
+	return (RETURN_SUCCESS);
 }
 
 static int

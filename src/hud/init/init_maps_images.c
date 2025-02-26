@@ -6,61 +6,46 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/04 22:26:03 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/25 20:47:40 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/26 02:03:06 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static int
-	get_bigmap_pixel_colour(
-		t_bigmap *bigmap,
-		t_grid *grid,
-		float x,
-		float y)
+	sample_bigmap(
+		mlx_image_t *walls,
+		void *param,
+		uint32_t img_x,
+		uint32_t img_y)
 {
-	x -= bigmap->walls->width / (float)2;
-	y -= bigmap->walls->height / (float)2;
+	const t_bigmap	*bigmap = (t_bigmap *)param;
+	const t_grid	*grid = bigmap->r_grid;
+	float			x;
+	float			y;
+
+	x = img_x;
+	y = img_y;
+	x -= walls->width / (float)2;
+	y -= walls->height / (float)2;
 	x /= bigmap->block_size;
 	y /= bigmap->block_size;
 	x += grid->x_max / (float)2;
 	y += grid->y_max / (float)2;
-	if (x < 0 || x >= grid->x_max
-		|| y < 0 || y >= grid->y_max)
-		return (C_TRANSLUCENT);
-	if (grid->walls[(int)y][(int)x] < 0)
-		return (C_TRANSLUCENT);
-	if (grid->walls[(int)y][(int)x] > 0)
-		return (C_WALL);
-	return (C_FLOOR);
-}
-
-void
-	draw_bigmap_walls(
-		t_bigmap *bigmap,
-		t_grid *grid)
-{
-	uint32_t	y;
-	uint32_t	x;
-	uint32_t	colour;
-
-	y = 0;
-	while (y < bigmap->walls->height)
-	{
-		x = 0;
-		while (x < bigmap->walls->width)
-		{
-			colour = get_bigmap_pixel_colour(bigmap, grid, x, y);
-			mlx_put_pixel(bigmap->walls, x, y, colour);
-			++x;
-		}
-		++y;
-	}
+	if (x < 0 || x >= grid->x_max || y < 0 || y >= grid->y_max)
+		mlx_put_pixel(walls, img_x, img_y, C_TRANSLUCENT);
+	else if (grid->walls[(int)y][(int)x] < 0)
+		mlx_put_pixel(walls, img_x, img_y, C_TRANSLUCENT);
+	else if (grid->walls[(int)y][(int)x] > 0)
+		mlx_put_pixel(walls, img_x, img_y, C_WALL);
+	else
+		mlx_put_pixel(walls, img_x, img_y, C_FLOOR);
+	return (RETURN_SUCCESS);
 }
 
 // for illustrative purposes, set outer circle pixel colour to C_TRANSLUCENT
 static int
-	project_overlay_pixel(
+	sample_overlay(
 		mlx_image_t *walls,
 		void *param,
 		uint32_t x,
@@ -101,7 +86,7 @@ int
 			minimap->walls->instances[0].y
 			+ minimap->radius - (minimap->player_icon->height / 2)) < 0)
 		return (RETURN_FAILURE);
-	image_iteration(minimap->walls, project_overlay_pixel, &minimap->radius);
+	image_iteration(minimap->walls, sample_overlay, &minimap->radius);
 	ft_memcpy(minimap->circle_overlay, minimap->walls->pixels,
 		minimap->walls->width * minimap->walls->height * sizeof(uint32_t));
 	return (RETURN_SUCCESS);
@@ -130,6 +115,6 @@ int
 		return (RETURN_FAILURE);
 	bigmap->player_icon->enabled = false;
 	bigmap->walls->enabled = false;
-	draw_bigmap_walls(bigmap, &scene->grid);
+	image_iteration(bigmap->walls, sample_bigmap, bigmap);
 	return (RETURN_SUCCESS);
 }
