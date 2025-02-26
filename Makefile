@@ -1,8 +1,8 @@
 NAME	=	cub3d
 
-CC		=	cc
-CFLAGS	=	-O3
-CFLAGS	+=	-Wall -Werror -Wextra -g
+CC		=	gcc
+CFLAGS	=	 -g -O3
+CFLAGS	+=	-Wall -Werror -Wextra
 MLXFLAGS=	-ldl -lglfw -pthread -lm
 
 LMLXDIR	=	./MLX42
@@ -61,9 +61,9 @@ $(LIBFT):
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS)
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -o $@ -c $< -I MLX42/include
+	$(CC) $(CFLAGS) -o $@ -c $< -I MLX42/include -I ./
 
 $(NAME): $(LIBMLX) $(LIBFT) $(OBJDIR) $(OBJ)
 	$(CC) $(OBJ) $(LIBMLX) $(MLXFLAGS) $(LIBFT) -o $(NAME)

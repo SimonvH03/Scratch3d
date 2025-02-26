@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init_game_images.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/04 22:26:03 by simon             #+#    #+#             */
-/*   Updated: 2024/09/18 22:16:43 by svan-hoo         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   init_game_images.c                                 :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/02/04 22:26:03 by simon         #+#    #+#                 */
+/*   Updated: 2025/02/26 00:59:25 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ short
 	draw_scene_background(&window->scene);
 	draw_minimap_circle_overlay(&window->minimap);
 	draw_map_walls(&window->map);
-	window->fps = mlx_put_string(mlx, "0000", WIDTH / 2 - 50, 100);
+	ft_bzero(&window->fps, sizeof(t_fps));
+	window->fps.image = mlx_put_string(mlx, "00000", WIDTH / 2 - 25, 100);
 	return (EXIT_SUCCESS);
 }

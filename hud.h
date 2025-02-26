@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   defs.h                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/23 02:15:59 by svan-hoo         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   hud.h                                              :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
+/*   Updated: 2025/02/26 00:55:41 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,13 @@ typedef struct s_menu
 	uint32_t		buttons_y_margin;
 }	t_menu;
 
+typedef struct s_fps
+{
+	mlx_image_t		*image;
+	double			cum_time;
+	uint32_t		no_frames;
+}	t_fps;
+
 typedef struct s_window
 {
 	mlx_t			*mlx;
@@ -73,7 +80,7 @@ typedef struct s_window
 	t_minimap		minimap;
 	t_map			map;
 	t_menu			menu;
-	mlx_image_t		*fps;
+	t_fps			fps;
 }	t_window;
 
 #endif

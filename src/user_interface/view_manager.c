@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   view_manager.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/31 18:33:20 by svan-hoo          #+#    #+#             */
-/*   Updated: 2024/09/18 17:51:08 by svan-hoo         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   view_manager.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
+/*   Updated: 2025/02/26 01:02:13 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void
 	{
 		wasd_move(window, &window->scene.camera);
 		arrowkey_turn(window, &window->scene.camera);
-		if (window->scene.recast == true)
+		if (window->scene.recast == true || 1)
 		{
 			draw_raycast(&window->scene);
 			if (window->minimap.enabled == true)

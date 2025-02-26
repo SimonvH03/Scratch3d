@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: svan-hoo <svan-hoo@student.codam.nl>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 23:06:35 by simon             #+#    #+#             */
-/*   Updated: 2024/09/17 03:28:56 by svan-hoo         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   cub3d.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
+/*   Updated: 2025/02/26 01:01:31 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 
 // mlx window
 # define WINDOW_TITLE "cub3d"
-# define WIDTH				480
-# define HEIGHT				480
+# define WIDTH				1280
+# define HEIGHT				720
 
 // colours
 # define C_TRANSPARENT		0x00
@@ -92,6 +92,7 @@ float		ft_min_float(float a, float b);
 float		ft_abs_float(float value);
 short		ft_sign_float(float value);
 // modlx
+int			modlx_put_string(mlx_image_t *strimage, const char* str);
 void		reset_image(mlx_image_t *image);
 
 // TEST
