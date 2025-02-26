@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/26 00:49:24 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/26 19:19:42 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void
 		{
 			raycast(&window->scene);
 			if (window->hud.minimap.enabled == true)
-				draw_minimap_walls(&window->hud.minimap);
+				update_minimap(&window->hud.minimap);
 			if (window->hud.bigmap.enabled == true)
-				draw_bigmap_player(&window->hud.bigmap);
+				update_bigmap(&window->hud.bigmap);
 			window->scene.walls.recast = false;
 		}
 	}

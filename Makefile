@@ -2,7 +2,7 @@ NAME	=	cub3d
 
 CC		=	gcc
 CFLAGS	=	-g -O3
-CFLAGS	+=	-Wall -Werror -Wextra
+# CFLAGS	+=	-Wall -Werror -Wextra
 MLXFLAGS=	-ldl -lglfw -pthread -lm
 
 LMLXDIR	=	./MLX42

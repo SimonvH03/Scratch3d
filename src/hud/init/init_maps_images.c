@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/04 22:26:03 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/26 02:03:06 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/26 18:59:55 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int
 	sample_bigmap(
-		mlx_image_t *walls,
+		mlx_image_t *dest,
 		void *param,
 		uint32_t img_x,
 		uint32_t img_y)
@@ -26,27 +26,27 @@ static int
 
 	x = img_x;
 	y = img_y;
-	x -= walls->width / (float)2;
-	y -= walls->height / (float)2;
+	x -= dest->width / (float)2;
+	y -= dest->height / (float)2;
 	x /= bigmap->block_size;
 	y /= bigmap->block_size;
 	x += grid->x_max / (float)2;
 	y += grid->y_max / (float)2;
 	if (x < 0 || x >= grid->x_max || y < 0 || y >= grid->y_max)
-		mlx_put_pixel(walls, img_x, img_y, C_TRANSLUCENT);
+		((uint32_t *)dest->pixels)[img_y * dest->width + img_x] = C_TRANSLUCENT;
 	else if (grid->walls[(int)y][(int)x] < 0)
-		mlx_put_pixel(walls, img_x, img_y, C_TRANSLUCENT);
+		((uint32_t *)dest->pixels)[img_y * dest->width + img_x] = C_TRANSLUCENT;
 	else if (grid->walls[(int)y][(int)x] > 0)
-		mlx_put_pixel(walls, img_x, img_y, C_WALL);
+		((uint32_t *)dest->pixels)[img_y * dest->width + img_x] = C_WALL;
 	else
-		mlx_put_pixel(walls, img_x, img_y, C_FLOOR);
+		((uint32_t *)dest->pixels)[img_y * dest->width + img_x] = C_FLOOR;
 	return (RETURN_SUCCESS);
 }
 
 // for illustrative purposes, set outer circle pixel colour to C_TRANSLUCENT
 static int
 	sample_overlay(
-		mlx_image_t *walls,
+		mlx_image_t *dest,
 		void *param,
 		uint32_t x,
 		uint32_t y)
@@ -56,11 +56,11 @@ static int
 	const int		ycoord = (int)(y - radius);
 
 	if (!ft_is_in_circle(xcoord, ycoord, radius))
-		mlx_put_pixel(walls, x, y, C_TRANSPARENT);
+		((uint32_t *)dest->pixels)[y * dest->width + x] = C_TRANSPARENT;
 	else if (!ft_is_in_circle(xcoord, ycoord, radius * 39 / 42))
-		mlx_put_pixel(walls, x, y, C_TRANSLUCENT);
+		((uint32_t *)dest->pixels)[y * dest->width + x] = C_TRANSLUCENT;
 	else
-		mlx_put_pixel(walls, x, y, C_WALL);
+		((uint32_t *)dest->pixels)[y * dest->width + x] = C_WALL;
 	return (RETURN_SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/04 22:26:03 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/26 02:05:06 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/26 18:35:01 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int
 }
 
 int
-	create_menu_images(
+	new_images_menu(
 		mlx_t *mlx,
 		t_menu *menu)
 {

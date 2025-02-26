@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/25 23:55:29 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/26 19:52:58 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,7 @@ static void	cub3d_terminate(t_window *window)
 	mlx_delete_texture(window->menu.highlight.texture);
 	i = 0;
 	while (i < MENU_B_COUNT)
-	{
-		mlx_delete_texture(window->menu.buttons[i].texture);
-		++i;
-	}
+		mlx_delete_texture(window->menu.buttons[i++].texture);
 	ft_arrclear((void **)window->scene.grid.walls);
 	ft_arrclear((void **)window->scene.grid.sprites);
 	free((void *)window->hud.minimap.circle_overlay);
@@ -66,7 +63,7 @@ int main(int argc, char **argv)
 	ft_bzero(&window, sizeof(t_window));
 	if (argc != 2)
 	{
-		printf("Usage: ./%s <path/to/scene.cub>\n", argv[0]);
+		printf("Usage:\n%s <path/to/scene.cub>\n", argv[0]);
 		return (EINVAL);
 	}
 	if (init_window(&window) != RETURN_SUCCESS

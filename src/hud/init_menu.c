@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/22 19:48:30 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/26 02:04:21 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/26 18:35:01 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int
 {
 	if (init_menu_structs(mlx, menu) != RETURN_SUCCESS)
 		return (RETURN_FAILURE);
-	if (create_menu_images(mlx, menu) != RETURN_SUCCESS)
+	if (new_images_menu(mlx, menu) != RETURN_SUCCESS)
 		return (RETURN_FAILURE);
 	image_iteration(menu->background.image,
 		sample_scalable, &menu->background);

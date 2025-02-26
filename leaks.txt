@@ -23,25 +23,25 @@ minimap seems very intensive, almost half as much as rendering textures...
 			mlx_render_images
 			mlx_loop
 			main
--	15.12%	cub3d			cub3d					[.] draw_texture_column
+-	15.12%	cub3d			cub3d				[.] draw_texture_column
 	14.26% draw_texture_column
 	0.73% raycast
--	11.25%	cub3d			cub3d					[.] reset_image
+-	11.25%	cub3d			cub3d				[.] reset_image
 	11.21% reset_image
 	0x3f80000000000000
--	6.50%	cub3d			cub3d					[.] sample_wall
+-	6.50%	cub3d			cub3d				[.] sample_wall
 	4.81% sample_wall
 	+ 0.86% mlx_put_pixel
 	+ 0.66% mlx_draw_pixel
--	4.63%	cub3d			cub3d					[.] mlx_put_pixel
+-	4.63%	cub3d			cub3d				[.] mlx_put_pixel
 	3.38% sample_wall
 + 0.55% mlx_put_pixel
 + 0.51% mlx_draw_pixel
-+	3.39%	cub3d			cub3d					[.] mlx_draw_pixel
-+	1.51%	cub3d			cub3d					[.] unfilterScanline
-+	1.41%	cub3d			cub3d					[.] lodepng_memcpy
-+	1.30%	cub3d			cub3d					[.] image_iteration
-+	1.12%	cub3d			cub3d					[.] lodepng_memset
-+	0.93%	cub3d			cub3d					[.] update_adler32
-+	0.83%	cub3d			cub3d					[.] draw_minimap_walls
-+	0.69%	cub3d			cub3d					[.] raycast
++	3.39%	cub3d			cub3d				[.] mlx_draw_pixel
++	1.51%	cub3d			cub3d				[.] unfilterScanline
++	1.41%	cub3d			cub3d				[.] lodepng_memcpy
++	1.30%	cub3d			cub3d				[.] image_iteration
++	1.12%	cub3d			cub3d				[.] lodepng_memset
++	0.93%	cub3d			cub3d				[.] update_adler32
++	0.83%	cub3d			cub3d				[.] draw_minimap_walls
++	0.69%	cub3d			cub3d				[.] raycast

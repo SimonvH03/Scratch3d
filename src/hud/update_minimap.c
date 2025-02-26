@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/22 19:48:15 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/26 02:02:46 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/26 19:19:36 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,17 @@ static void
 	overlay_border(
 		t_minimap *minimap)
 {
-	uint32_t	pixel_count;
-	uint8_t		*src;
-	uint8_t		*dst;
-	uint32_t	limit;
+	uint32_t		pixel_count;
+	const uint32_t	limit = minimap->side * minimap->side;
+	uint8_t			*src;
+	uint8_t			*dst;
 
-	pixel_count = 0;
 	src = minimap->circle_overlay;
 	dst = minimap->walls->pixels;
-	limit = minimap->side * minimap->side;
+	pixel_count = 0;
 	while (pixel_count < limit)
 	{
-		if (src[3] % C_TRANSLUCENT == 0)
+		if (src[3] % 0x42 == 0)
 			dst[3] = src[3];
 		++pixel_count;
 		src += sizeof(uint32_t);
@@ -59,21 +58,20 @@ static int
 	y = y / minimap->block_size + camera->pos_y;
 	if (x < 0 || x >= minimap->r_grid->x_max
 		|| y < 0 || y >= minimap->r_grid->y_max)
-		mlx_put_pixel(walls, img_x, img_y, C_CEILING);
+		((uint32_t *)walls->pixels)[img_y * walls->width + img_x] = C_CEILING;
 	else if (minimap->r_grid->walls[(int)y][(int)x] < 0)
-		mlx_put_pixel(walls, img_x, img_y, C_CEILING);
+		((uint32_t *)walls->pixels)[img_y * walls->width + img_x] = C_CEILING;
 	else if (minimap->r_grid->walls[(int)y][(int)x] > 0)
-		mlx_put_pixel(walls, img_x, img_y, C_WALL);
+		((uint32_t *)walls->pixels)[img_y * walls->width + img_x] = C_WALL;
 	else
-		mlx_put_pixel(walls, img_x, img_y, C_FLOOR);
+		((uint32_t *)walls->pixels)[img_y * walls->width + img_x] = C_FLOOR;
 	return (RETURN_SUCCESS);
 }
 
 void
-	draw_minimap_walls(
+	update_minimap(
 		t_minimap	*minimap)
 {
-	reset_image(minimap->walls);
 	image_iteration(minimap->walls, sample_wall, minimap);
 	overlay_border(minimap);
 }

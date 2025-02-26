@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/26 02:05:22 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/26 19:19:42 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,23 @@
 # define WIDTH				1280
 # define HEIGHT				720
 
+// // colours
+// # define C_TRANSPARENT		0x00
+// # define C_TRANSLUCENT		0x42
+// # define C_CEILING			0x000000BB
+// # define C_FLOOR			0x42424280
+// # define C_WALL				0xBF6629FF
+// # define C_ERROR			0x00FF80FF
+// # define C_test				0x12345678
+
 // colours
-# define C_TRANSPARENT		0x00
-# define C_TRANSLUCENT		0x42
-# define C_CEILING			0x000000BB
-# define C_FLOOR			0x42424280
-# define C_WALL				0xBF6629FF
-# define C_ERROR			0x00FF80FF
+# define C_TRANSPARENT		0x00000000
+# define C_TRANSLUCENT		0x42000000
+# define C_CEILING			0xBB000000
+# define C_FLOOR			0x80424242
+# define C_WALL				0xFF2966BF
+# define C_ERROR			0xFF80FF00
+# define C_test				0x78563412
 
 // player defaults
 # define STARTING_HEALTH	100
@@ -60,10 +70,8 @@ typedef struct s_window
 
 // gotta love a strict norm to make things more readable
 typedef	int	(imgiter_func)(
-				mlx_image_t *image,
-				void *param,
-				uint32_t x,
-				uint32_t y);
+				mlx_image_t *image, void *param,
+				uint32_t x, uint32_t y);
 
 int			image_iteration(
 				mlx_image_t *image,
@@ -87,7 +95,7 @@ int			new_images_minimap(mlx_t *mlx, t_minimap *minimap,
 int			new_images_bigmap(mlx_t *mlx, t_bigmap *map, t_scene *scene);
 
 int			init_menu(mlx_t *mlx, t_menu *menu);
-int			create_menu_images(mlx_t *mlx, t_menu *menu);
+int			new_images_menu(mlx_t *mlx, t_menu *menu);
 int			sample_scalable(mlx_image_t *dest, void *param,
 				uint32_t img_x, uint32_t img_y);
 
@@ -110,8 +118,8 @@ void		draw_texture_column(t_walls *walls, t_camera *camera,
 				t_ray *ray, uint32_t x);
 
 // hud
-void		draw_minimap_walls(t_minimap *minimap);
-void		draw_bigmap_player(t_bigmap *map);
+void		update_minimap(t_minimap *minimap);
+void		update_bigmap(t_bigmap *map);
 
 // modlx
 xpm_t		*modlx_load_xpm42(const char *path);

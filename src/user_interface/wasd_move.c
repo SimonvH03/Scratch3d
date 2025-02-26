@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/25 02:59:48 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/26 19:23:34 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // static void
 // 	do_movement(
 // 		t_camera *camera,
-// 		t_scene *scene,
+// 		int	**map,
 // 		short forward_backward,
 // 		short left_right)
 // {
@@ -46,12 +46,12 @@
 
 // 	if ((int)(next_x + hitbox_x) < 0 || (int)(next_x + hitbox_x) > scene->x_max
 // 		|| (int)camera->pos_y < 0 || (int)camera->pos_y > scene->y_max
-// 		|| scene->map[(int)camera->pos_y][(int)(next_x + hitbox_x)])
+// 		|| map[(int)camera->pos_y][(int)(next_x + hitbox_x)])
 // 		move_dir_x = wall_dist_x - hitbox_x;
 
 // 	if ((int)(next_y + hitbox_y) < 0 || (int)(next_y + hitbox_y) > scene->y_max
 // 		|| (int)camera->pos_x < 0 || (int)camera->pos_x > scene->x_max
-// 		|| scene->map[(int)(next_y + hitbox_y)][(int)camera->pos_x])
+// 		|| map[(int)(next_y + hitbox_y)][(int)camera->pos_x])
 // 		move_dir_y = wall_dist_y - hitbox_y;
 
 // 	camera->pos_x += move_dir_x * camera->movement_speed;
