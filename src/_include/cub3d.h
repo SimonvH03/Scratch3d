@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/26 19:19:42 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/28 00:00:22 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ void		toggle_view(t_window *window);
 
 // render
 void		raycast(t_scene *scene);
-void		draw_texture_column(t_walls *walls, t_camera *camera,
-				t_ray *ray, uint32_t x);
+void		draw_texture_column(t_ray *ray, t_walls *walls,
+				t_camera *camera, uint32_t x);
 
 // hud
 void		update_minimap(t_minimap *minimap);

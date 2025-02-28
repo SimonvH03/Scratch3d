@@ -16,7 +16,12 @@
 		"lodepng.h": "c",
 		"glad.h": "c",
 		"random": "c",
-		"font.h": "c"
+		"font.h": "c",
+		"cstdint": "c",
+		"array": "c",
+		"string_view": "c",
+		"initializer_list": "c",
+		"functional": "cpp"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/27 01:36:33 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/26 18:59:40 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/28 01:16:12 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,15 @@ static void
 }
 
 // optimized by removing mlx_put_pixel, and storing wall textures column-major
-// 0.0005f offset only functions to remove pixel 'jitter' from the center line
+// 0.0005f offset only functions to remove pixel 'jitter' from the center row
 //  where otherwise exactly halfway on all textures the y would be consistently
 //	miscalculated half of the time because of floating point inaccuracy
 // setting higher causes jitter elsewhere, lower doesn't resolve jitter
 void
 	draw_texture_column(
+		t_ray *ray,
 		t_walls *walls,
 		t_camera *camera,
-		t_ray *ray,
 		uint32_t screen_x)
 {
 	t_column		column;
@@ -70,7 +70,7 @@ void
 			+ screen_y * walls->image->width]
 			= texumn_start[(int)(column.y + 0.0005f)];
 		column.y += column.step;
-		++screen_y;
+		screen_y++;
 	}
 }
 

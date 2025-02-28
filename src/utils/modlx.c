@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/28 22:07:27 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/25 02:24:54 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/27 19:14:30 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,14 +113,11 @@ void
 	reset_image(
 		mlx_image_t *image)
 {
-	uint8_t		*dst;
-	uint8_t		*dst_limit;
+	uint32_t		*dst;
+	uint32_t	*dst_limit;
 
-	dst = image->pixels;
-	dst_limit = dst + image->height * image->width * sizeof(uint32_t);
+	dst = (uint32_t *)image->pixels;
+	dst_limit = dst + image->height * image->width;
 	while (dst < dst_limit)
-	{
-		dst[3] = 0x00;
-		dst += sizeof(uint32_t);
-	}
+		*dst++ = 0;
 }

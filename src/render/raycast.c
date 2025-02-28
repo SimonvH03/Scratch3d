@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/24 02:16:25 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/26 19:53:12 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/27 23:59:53 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void
 		ray.camera_x = 2 * x / (float)scene->walls.image->width - 1;
 		init_ray(&ray, &scene->player.camera);
 		cast_ray(&ray, &scene->grid);
-		draw_texture_column(&scene->walls, &scene->player.camera, &ray, x);
+		draw_texture_column(&ray, &scene->walls, &scene->player.camera, x);
 		++x;
 	}
 }
