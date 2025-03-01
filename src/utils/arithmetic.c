@@ -6,17 +6,21 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:51:01 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/26 00:05:52 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/01 02:16:01 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+float	nearest_power_of_2(float value)
+{
+	if (value <= 0)
+		return (0);
+	return (powf(2.0f, roundf(log2f(value))));
+}
+
 // return highest value
-float
-	ft_max_float(
-		float a,
-		float b)
+float	ft_max_float(float a, float b)
 {
 	if (a < b)
 		return (b);
@@ -25,10 +29,7 @@ float
 }
 
 // return lowest value
-float
-	ft_min_float(
-		float a,
-		float b)
+float	ft_min_float(float a, float b)
 {
 	if (a < b)
 		return (a);
@@ -37,9 +38,7 @@ float
 }
 
 // return absolute value
-float
-	ft_abs_float(
-		float value)
+float	ft_abs_float(float value)
 {
 	if (value < 0)
 		return (-value);
@@ -47,9 +46,7 @@ float
 }
 
 // return polarity of value
-short
-	ft_sign_float(
-		float value)
+short	ft_sign_float(float value)
 {
 	if (value < 0)
 		return (-1);

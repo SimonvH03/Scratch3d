@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/25 20:31:50 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/01 01:18:26 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ enum	e_view
 	MAP
 };
 
+// static scale and rotation, not sampled per frame
 typedef struct s_scalable
 {
 	mlx_image_t		*image;
@@ -43,11 +44,11 @@ typedef struct s_menu
 
 typedef struct s_minimap
 {
-	mlx_image_t		*walls;
-	mlx_image_t		*player_icon;
-	uint8_t			*circle_overlay;
-	t_grid			*r_grid;
 	t_camera		*r_camera;
+	t_grid			*r_grid;
+	mlx_image_t		*walls;
+	uint8_t			*circle_overlay;
+	t_scalable		player_icon;
 	uint32_t		side;
 	uint32_t		radius;
 	float			block_size;
@@ -56,11 +57,11 @@ typedef struct s_minimap
 
 typedef struct s_bigmap
 {
-	mlx_image_t		*walls;
-	mlx_image_t		*player_icon;
-	mlx_texture_t	*r_player_tex;
-	t_grid			*r_grid;
 	t_camera		*r_camera;
+	t_grid			*r_grid;
+	mlx_image_t		*walls;
+	mlx_image_t		*player;
+	t_scalable		player_icon_src;
 	uint32_t		x_offset;
 	uint32_t		y_offset;
 	float			block_size;
@@ -76,11 +77,11 @@ typedef struct s_fps
 
 typedef struct s_hud
 {
-	mlx_texture_t	*player_icon;
 	mlx_image_t		*weapon;
 	mlx_image_t		*ammo;
 	mlx_image_t		*healthbar;
 	mlx_image_t		*treasure;
+	mlx_texture_t	*player_icon;
 	t_fps			fps;
 	t_bigmap		bigmap;
 	t_minimap		minimap;

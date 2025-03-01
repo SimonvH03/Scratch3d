@@ -27,8 +27,9 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/gamestate/init/read_elements.c \
 			$(SRCDIR)/gamestate/init/read_map.c \
 			$(SRCDIR)/gamestate/init_window.c \
-			$(SRCDIR)/hud/init/init_maps_images.c \
-			$(SRCDIR)/hud/init/init_menu_images.c \
+			$(SRCDIR)/hud/init/new_images_bigmap.c \
+			$(SRCDIR)/hud/init/new_images_menu.c \
+			$(SRCDIR)/hud/init/new_images_minimap.c \
 			$(SRCDIR)/hud/init_hud.c \
 			$(SRCDIR)/hud/init_menu.c \
 			$(SRCDIR)/hud/update_bigmap.c \

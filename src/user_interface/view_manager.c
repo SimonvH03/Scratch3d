@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/26 19:19:42 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/01 01:51:33 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ void
 	toggle_maps(
 		t_window *window,
 		t_minimap *minimap,
-		t_bigmap *map)
+		t_bigmap *bigmap)
 {
-	minimap->player_icon->enabled = !minimap->player_icon->enabled;
+	minimap->player_icon.image->enabled = !minimap->player_icon.image->enabled;
 	minimap->walls->enabled = !minimap->walls->enabled;
 	minimap->enabled = !minimap->enabled;
-	map->player_icon->enabled = !map->player_icon->enabled;
-	map->walls->enabled = !map->walls->enabled;
-	map->enabled = !map->enabled;
+	bigmap->player->enabled = !bigmap->player->enabled;
+	bigmap->walls->enabled = !bigmap->walls->enabled;
+	bigmap->enabled = !bigmap->enabled;
 	window->scene.walls.recast = true;
 }
 

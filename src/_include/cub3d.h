@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/28 00:00:22 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/01 02:16:14 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,22 @@
 
 // mlx window
 # define WINDOW_TITLE		"cub3d"
-# define WIDTH				1280
-# define HEIGHT				720
+# define WIDTH				1360
+# define HEIGHT				960
 
-// // colours
-// # define C_TRANSPARENT		0x00
-// # define C_TRANSLUCENT		0x42
-// # define C_CEILING			0x000000BB
-// # define C_FLOOR			0x42424280
-// # define C_WALL				0xBF6629FF
-// # define C_ERROR			0x00FF80FF
-// # define C_test				0x12345678
-
-// colours
+// UI colours 0xAaBbGgRr
 # define C_TRANSPARENT		0x00000000
 # define C_TRANSLUCENT		0x42000000
 # define C_CEILING			0xBB000000
 # define C_FLOOR			0x80424242
 # define C_WALL				0xFF2966BF
 # define C_ERROR			0xFF80FF00
-# define C_test				0x78563412
 
 // player defaults
 # define STARTING_HEALTH	100
 # define MOVEMENT_SPEED		6
 # define ROTATION_SPEED		3
-# define COLLISION_HITBOX	0.3
+# define COLLISION_HITBOX	0.2
 
 // ratio of wall height / width
 # define CAMERA_PLANE		1
@@ -90,14 +80,12 @@ int			init_game_images(mlx_t *mlx, t_scene *scene);
 int			init_player(t_player *player, t_grid *grid);
 
 int			init_hud(mlx_t *mlx, t_hud *hud, t_scene *scene);
-int			new_images_minimap(mlx_t *mlx, t_minimap *minimap,
-				mlx_texture_t *ohijustlovemakingmycodereadablewiththeholynorm);
+int			new_images_minimap(mlx_t *mlx, t_minimap *minimap);
 int			new_images_bigmap(mlx_t *mlx, t_bigmap *map, t_scene *scene);
 
 int			init_menu(mlx_t *mlx, t_menu *menu);
 int			new_images_menu(mlx_t *mlx, t_menu *menu);
-int			sample_scalable(mlx_image_t *dest, void *param,
-				uint32_t img_x, uint32_t img_y);
+int			new_scaled_image(mlx_t *mlx, t_scalable *dest);
 
 // MLX_HOOKS
 void		frametime_dependant_variables(void *param);
@@ -127,6 +115,7 @@ int			modlx_put_string(mlx_image_t *strimage, const char* str);
 void		reset_image(mlx_image_t *image);
 
 // arithmetic
+float		nearest_power_of_2(float value);
 float		ft_max_float(float a, float b);
 float		ft_min_float(float a, float b);
 float		ft_abs_float(float value);

@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/27 01:36:33 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/26 19:19:42 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/01 02:05:24 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,26 @@ static int
 		uint32_t img_y)
 {
 	const t_camera		*camera = ((t_bigmap *)param)->r_camera;
-	const mlx_texture_t	*texture = ((t_bigmap *)param)->r_player_tex;
+	const mlx_image_t	*image = ((t_bigmap *)param)->player_icon_src.image;
 	float				prev_x;
 	float				x;
 	float				y;
 
-	x = img_x - (texture->width / 2.0f);
-	y = img_y - (texture->height / 2.0f);
+	x = img_x;
+	y = img_y;
+	x -= (float)(image->width / 2);
+	y -= (float)(image->height / 2);
 	prev_x = x;
 	x = prev_x * camera->plane_x + y * camera->plane_y;
 	y = prev_x * -camera->plane_y + y * camera->plane_x;
-	x *= 1.414213562f;
-	y *= 1.414213562f;
-	x += texture->width;
-	y += texture->height;
-	x /= 2;
-	y /= 2;
-	if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
+	x += (float)(image->width / 2);
+	y += (float)(image->height / 2);
+	if (x < 0 || x >= image->width || y < 0 || y >= image->height)
 		((uint32_t *)player_icon->pixels)[img_y * player_icon->width + img_x]
 			= C_TRANSPARENT;
 	else
 		((uint32_t *)player_icon->pixels)[img_y * player_icon->width + img_x]
-			= ((uint32_t *)texture->pixels)[(int)y * texture->width + (int)x];
+			= ((uint32_t *)image->pixels)[(int)y * image->width + (int)x];
 	return (RETURN_SUCCESS);
 }
 
@@ -49,9 +47,9 @@ void
 	update_bigmap(
 		t_bigmap *bigmap)
 {
-	image_iteration(bigmap->player_icon, sample_player, bigmap);
-	bigmap->player_icon->instances[0].x = bigmap->x_offset
+	image_iteration(bigmap->player, sample_player, bigmap);
+	bigmap->player->instances[0].x = bigmap->x_offset
 		+ bigmap->r_camera->pos_x * bigmap->block_size;
-	bigmap->player_icon->instances[0].y = bigmap->y_offset
+	bigmap->player->instances[0].y = bigmap->y_offset
 		+ bigmap->r_camera->pos_y * bigmap->block_size;
 }

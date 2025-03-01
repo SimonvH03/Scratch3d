@@ -6,13 +6,13 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/04 22:26:03 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/26 18:35:01 by simon         ########   odam.nl         */
+/*   Updated: 2025/02/28 23:34:14 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int
+static int
 	sample_scalable(
 		mlx_image_t *dest,
 		void *param,
@@ -31,7 +31,7 @@ int
 	return (RETURN_SUCCESS);
 }
 
-static int
+int
 	new_scaled_image(
 		mlx_t *mlx,
 		t_scalable *dest)
@@ -41,6 +41,7 @@ static int
 			dest->texture->height * dest->scale);
 	if (dest->image == NULL)
 		return (RETURN_FAILURE);
+	image_iteration(dest->image, sample_scalable, dest);
 	return (RETURN_SUCCESS);
 }
 
