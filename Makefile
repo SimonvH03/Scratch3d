@@ -42,7 +42,9 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/user_interface/select_button.c \
 			$(SRCDIR)/user_interface/view_manager.c \
 			$(SRCDIR)/user_interface/wasd_move.c \
-			$(SRCDIR)/utils/arithmetic.c \
+			$(SRCDIR)/user_interface/weapon_animation.c \
+			$(SRCDIR)/utils/arithmetic_float.c \
+			$(SRCDIR)/utils/arithmetic_int.c \
 			$(SRCDIR)/utils/image_iteration.c \
 			$(SRCDIR)/utils/modlx.c \
 			$(SRCDIR)/utils/test.c

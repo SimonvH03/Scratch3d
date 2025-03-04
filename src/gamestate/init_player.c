@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/23 23:20:01 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/05 00:21:27 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,19 @@ static bool
 }
 
 int
+	init_weapon(
+		t_weapon *weapon)
+{
+	ft_bzero(weapon, sizeof(t_weapon));
+	weapon->ammo = G1_MAG_CAPACITY;
+	weapon->total_ammo = weapon->ammo * G1_SPARE_MAGS;
+	weapon->damage = G1_DAMAGE;
+	weapon->frame_time_goal = (float)(1 / G1_FRAME_RATE);
+	init_frame_textures();
+	return (RETURN_SUCCESS);
+}
+
+int
 	init_player(
 		t_player *player,
 		t_grid *grid)
@@ -107,8 +120,8 @@ int
 	init_movement_matrix();
 	player->health = STARTING_HEALTH;
 	player->treasure = 0;
-	// if (init_weapon() != RETURN_SUCCESS)
-	// 	return (RETURN_FAILURE);
+	if (init_weapon() != RETURN_SUCCESS)
+		return (RETURN_FAILURE);
 	if (find_starting_position(grid, &player->camera) != true)
 		return (RETURN_FAILURE);
 	return (RETURN_SUCCESS);

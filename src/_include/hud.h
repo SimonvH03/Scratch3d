@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/01 01:18:26 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/04 23:53:16 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,6 @@ enum	e_view
 	GAME,
 	MAP
 };
-
-// static scale and rotation, not sampled per frame
-typedef struct s_scalable
-{
-	mlx_image_t		*image;
-	mlx_texture_t	*texture;
-	float			scale;
-}	t_scalable;
 
 typedef struct s_menu
 {

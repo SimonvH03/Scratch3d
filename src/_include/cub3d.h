@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/04 22:00:30 by svan-hoo      ########   odam.nl         */
+/*   Updated: 2025/03/05 00:17:00 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 // mlx window
 # define WINDOW_TITLE		"cub3d"
-# define WIDTH				2560
-# define HEIGHT				1440
+# define WIDTH				1280
+# define HEIGHT				720
 
 // UI colours 0xAaBbGgRr
 # define C_TRANSPARENT		0x00000000
@@ -35,6 +35,12 @@
 # define C_FLOOR			0x80424242
 # define C_WALL				0xFF2966BF
 # define C_ERROR			0xFF80FF00
+
+// weapons? this should obviously go in the .cub file but I don't like parsing
+# define G1_MAG_CAPACITY	9
+# define G1_SPARE_MAGS		10
+# define G1_DAMAGE			12
+# define G1_FRAME_RATE		24
 
 // player defaults
 # define STARTING_HEALTH	100

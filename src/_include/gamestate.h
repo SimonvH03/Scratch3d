@@ -6,13 +6,20 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/04 21:22:01 by svan-hoo      ########   odam.nl         */
+/*   Updated: 2025/03/04 23:54:12 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAMESTATE_H
 # define GAMESTATE_H
 # include "MLX42/MLX42_Int.h"
+
+typedef struct s_scalable
+{
+	mlx_image_t		*image;
+	mlx_texture_t	*texture;
+	float			scale;
+}	t_scalable;
 
 extern float		g_movement_matrix[3][3];
 
