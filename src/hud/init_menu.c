@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   init_menu.c                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: simon <simon@student.codam.nl>               +#+                     */
+/*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/22 19:48:30 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/28 22:39:15 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/04 21:35:49 by svan-hoo      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 

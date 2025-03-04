@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/27 01:36:33 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/28 01:16:12 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/04 17:43:53 by svan-hoo      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void
 	{
 		((uint32_t *)walls->image->pixels)[screen_x
 			+ screen_y * walls->image->width]
-			= texumn_start[(int)(column.y + 0.0005f)];
+			= texumn_start[(int)(column.y)];
 		column.y += column.step;
 		screen_y++;
 	}

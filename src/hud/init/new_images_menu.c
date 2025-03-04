@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   init_menu_images.c                                 :+:    :+:            */
+/*   new_images_menu.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/04 22:26:03 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/28 23:34:14 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/04 21:59:16 by svan-hoo      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int
+int
 	sample_scalable(
 		mlx_image_t *dest,
 		void *param,

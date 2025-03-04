@@ -1,6 +1,6 @@
 NAME	=	cub3d
 
-CC		=	gcc
+CC		=	cc
 CFLAGS	=	-g -O3
 # CFLAGS	+=	-Wall -Werror -Wextra
 MLXFLAGS=	-ldl -lglfw -pthread -lm

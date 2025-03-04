@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/23 20:10:56 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/04 21:22:01 by svan-hoo      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 extern float		g_movement_matrix[3][3];
 
-// 8B aligned, 10 x 8 (float) + 1 x 4 (short), 4B padding		| 88 Bytes
+// 4B aligned, 10 x 4 (float) + 1 x 2 (short), 2B padding		| 44 Bytes
 typedef struct s_camera
 {
 	float			pos_y;
@@ -31,17 +31,22 @@ typedef struct s_camera
 	short			sign_rotate;
 }	t_camera;
 
-// 8B aligned, 1 x 8 (pointer) + 3 x 8 (uint32), 0B padding		| 24 Bytes
 typedef struct s_weapon
 {
-	char			*name;
+	mlx_texture_t	**fire;
+	mlx_texture_t	**reload;
+	t_scalable		current_frame;
 	uint32_t		damage;
-	uint32_t		magazine_size;
+	uint32_t		mag_capacity;
+	uint32_t		total_ammo;
 	uint32_t		ammo;
+	unsigned int	frame_index;
+	float			frame_time;
+	float			frame_time_goal;
+	bool			is_firing;
+	bool			is_reloading;
 }	t_weapon;
 
-// 8B aligned, 88 (camera) + 24 (weapon)				| (112B)
-//	+ 2 x 8 (uint32), no padding						| (16B)	| 128 Bytes
 typedef struct s_player
 {
 	t_camera		camera;
@@ -70,8 +75,6 @@ typedef	struct s_grid
 	unsigned int	x_max;
 }	t_grid;
 
-// 8B aligned, 88 (Player) + 48 (Walls) + 24 (grid)		| (160B)
-//	+ 1 x 8 (pointers) + 2 x 8 (uint32_t), no padding	| (24B) | 184 Bytes
 typedef struct s_scene
 {
 	t_walls			walls;

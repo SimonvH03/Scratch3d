@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/01 02:16:14 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/04 22:00:30 by svan-hoo      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 // mlx window
 # define WINDOW_TITLE		"cub3d"
-# define WIDTH				1360
-# define HEIGHT				960
+# define WIDTH				2560
+# define HEIGHT				1440
 
 // UI colours 0xAaBbGgRr
 # define C_TRANSPARENT		0x00000000
@@ -86,6 +86,7 @@ int			new_images_bigmap(mlx_t *mlx, t_bigmap *map, t_scene *scene);
 int			init_menu(mlx_t *mlx, t_menu *menu);
 int			new_images_menu(mlx_t *mlx, t_menu *menu);
 int			new_scaled_image(mlx_t *mlx, t_scalable *dest);
+int			sample_scalable(mlx_image_t *dest, void *param, uint32_t img_x, uint32_t img_y);
 
 // MLX_HOOKS
 void		frametime_dependant_variables(void *param);
@@ -120,6 +121,10 @@ float		ft_max_float(float a, float b);
 float		ft_min_float(float a, float b);
 float		ft_abs_float(float value);
 short		ft_sign_float(float value);
+int			ft_max_int(int a, int b);
+int			ft_min_int(int a, int b);
+int			ft_abs_int(int value);
+short		ft_sign_int(int value);
 
 // TEST
 // void		print_camera(t_camera *camera);

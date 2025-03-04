@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/24 02:16:25 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/27 23:59:53 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/04 17:40:34 by svan-hoo      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ static void
 	ray->dir_y = camera->dir_y + camera->plane_y * 0.5 * ray->camera_x;
 	ray->step_x = ft_abs_float(1 / ray->dir_x);
 	if (ray->step_x == INFINITY)
-		ray->step_x = UINT32_MAX;
+		ray->step_x = (float)UINT32_MAX;
 	ray->step_y = ft_abs_float(1 / ray->dir_y);
 	if (ray->step_y == INFINITY)
-		ray->step_y = UINT32_MAX;
+		ray->step_y = (float)UINT32_MAX;
 	ray->sign_x = ft_sign_float(ray->dir_x);
 	ray->sign_y = ft_sign_float(ray->dir_y);
 	if (ray->sign_x > 0)
