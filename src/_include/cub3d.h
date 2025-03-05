@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/05 18:12:03 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/06 00:01:24 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 // mlx window
 # define WINDOW_TITLE		"cub3d"
-# define WIDTH				1280
+# define WIDTH				1600
 # define HEIGHT				720
 
 // UI colours 0xAaBbGgRr
@@ -36,12 +36,12 @@
 # define C_WALL				0xFF2966BF
 # define C_ERROR			0xFF80FF00
 
-// weapons? this should obviously go in the .cub file but I don't like parsing
-# define G1_MAG_CAPACITY	9
-# define G1_SPARE_MAGS		10
-# define G1_DAMAGE			12
-# define G1_FRAME_RATE		24
-# define G1_TEXTURES_PATH	"./data/textures/g1_fri"
+// ratio of wall height / width
+# define CAMERA_PLANE		1
+
+# define MLX_FONT_WIDTH		10
+
+# define VALID_MAP_TOKENS	" 01NESW"
 
 // player defaults
 # define STARTING_HEALTH	100
@@ -49,12 +49,12 @@
 # define ROTATION_SPEED		3
 # define COLLISION_HITBOX	0.2
 
-// ratio of wall height / width
-# define CAMERA_PLANE		1
-
-# define MLX_FONT_WIDTH		10
-
-# define VALID_MAP_TOKENS	" 01NESW"
+// weapons? this should obviously go in the .cub file but I don't like parsing
+# define G1_MAG_CAPACITY	9
+# define G1_SPARE_MAGS		4
+# define G1_DAMAGE			12
+# define G1_FRAME_RATE		16
+# define G1_TEXTURES_PATH	"./data/textures/g1_fri/"
 
 typedef struct s_window
 {
@@ -85,6 +85,7 @@ void		read_elements(t_scene *scene, char *const **content);
 int			read_map(t_grid *grid, char *const *content);
 int			init_game_images(mlx_t *mlx, t_scene *scene);
 int			init_player(t_player *player, t_grid *grid);
+int			init_weapon(mlx_t *mlx, t_weapon *weapon);
 
 int			init_hud(mlx_t *mlx, t_hud *hud, t_scene *scene);
 int			new_images_minimap(mlx_t *mlx, t_minimap *minimap);
@@ -103,6 +104,7 @@ void		window_keyhook(mlx_key_data_t key_data, void *param);
 // user inputs
 void		wasd_move(t_window *window, t_camera *camera);
 void		arrowkey_turn(t_window *window, t_camera *camera);
+void		weapon_animation(mlx_t *mlx, t_weapon *weapon);
 void		select_button(t_menu *menu);
 void		confirm_selection(t_menu *menu, t_window *window);
 void		toggle_maps(t_window *window, t_minimap *minimap, t_bigmap *map);

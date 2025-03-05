@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/05 00:03:46 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/05 23:58:42 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void
 	{
 		wasd_move(window, &window->scene.player.camera);
 		arrowkey_turn(window, &window->scene.player.camera);
-		if (window->scene.walls.recast == true || 1)
+		weapon_animation(window->mlx, &window->scene.player.weapon);
+		if (window->scene.walls.recast == true || 1)// 1 for consistent frametime
 		{
 			raycast(&window->scene);
 			if (window->hud.minimap.enabled == true)

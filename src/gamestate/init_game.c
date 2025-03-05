@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/05 18:31:31 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/05 22:40:36 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ int
 		return (RETURN_FAILURE);
 	if (init_player(&scene->player, &scene->grid) != RETURN_SUCCESS)
 		return (RETURN_FAILURE);
-	if (init_weapon(mlx, &scene->player.weapon) != RETURN_SUCCESS)
-		return (RETURN_FAILURE);
 	if (init_game_images(mlx, scene) != RETURN_SUCCESS)
+		return (RETURN_FAILURE);
+	if (init_weapon(mlx, &scene->player.weapon) != RETURN_SUCCESS)
 		return (RETURN_FAILURE);
 	scene->walls.recast = true;
 	return (RETURN_SUCCESS);

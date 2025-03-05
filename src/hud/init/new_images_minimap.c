@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/04 22:26:03 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/01 02:19:54 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/05 23:15:05 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ int
 	if (minimap->walls == NULL)
 		return (RETURN_FAILURE);
 	if (mlx_image_to_window(mlx, minimap->walls,
-			mlx->width - (minimap->side * 1.2),
-			mlx->height - (minimap->side * 1.2)) < 0)
+			(minimap->side * 0.2), mlx->height - (minimap->side * 1.2)) < 0)
 		return (RETURN_FAILURE);
 	if (init_minimap_player_icon(mlx, &minimap->player_icon, minimap)
 		!= RETURN_SUCCESS)

@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/05 17:19:36 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/05 23:59:05 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static void	update_fire_animation(t_weapon *weapon)
 	else
 	{
 		weapon->is_firing = false;
+		weapon->frame_index = -1;
+		weapon->scalable.texture = weapon->rest;
 	}
 }
 
@@ -52,8 +54,10 @@ static void	update_reload_animation(t_weapon *weapon)
 	else
 	{
 		weapon->is_reloading = false;
-		weapon->ammo = ft_max_int(weapon->mag_capacity, weapon->total_ammo);
+		weapon->ammo = ft_min_int(weapon->mag_capacity, weapon->total_ammo);
 		weapon->total_ammo -= weapon->ammo;
+		weapon->frame_index = -1;
+		weapon->scalable.texture = weapon->rest;
 	}
 }
 
@@ -72,7 +76,7 @@ void
 		if (weapon->frame_time < weapon->frame_time_goal)
 			return ;
 		weapon->frame_time = 0;
-		weapon->frame_index++;//not using frame 0, may be removed from both arrays if resting frame is saved
+		weapon->frame_index++;
 		if (weapon->is_firing)
 			update_fire_animation(weapon);
 		if (weapon->is_reloading)
