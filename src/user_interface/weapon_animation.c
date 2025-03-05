@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/04 23:51:49 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/05 17:19:36 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	update_fire_animation(t_weapon *weapon)
 {
 	if (weapon->fire[weapon->frame_index] != NULL)
 	{
-		weapon->current_frame.texture = weapon->fire[weapon->frame_index];
+		weapon->scalable.texture = weapon->fire[weapon->frame_index];
 	}
 	else
 	{
@@ -47,7 +47,7 @@ static void	update_reload_animation(t_weapon *weapon)
 {
 	if (weapon->reload[weapon->frame_index] != NULL)
 	{
-		weapon->current_frame.texture = weapon->reload[weapon->frame_index];
+		weapon->scalable.texture = weapon->reload[weapon->frame_index];
 	}
 	else
 	{
@@ -77,7 +77,7 @@ void
 			update_fire_animation(weapon);
 		if (weapon->is_reloading)
 			update_reload_animation(weapon);
-		image_iteration(weapon->current_frame.image,
-			sample_scalable, &weapon->current_frame);
+		image_iteration(weapon->scalable.image,
+			sample_scalable, &weapon->scalable);
 	}
 }

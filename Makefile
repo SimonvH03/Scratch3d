@@ -24,6 +24,7 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/gamestate/init_game.c \
 			$(SRCDIR)/gamestate/init/init_game_images.c \
 			$(SRCDIR)/gamestate/init_player.c \
+			$(SRCDIR)/gamestate/init_weapon.c \
 			$(SRCDIR)/gamestate/init/read_elements.c \
 			$(SRCDIR)/gamestate/init/read_map.c \
 			$(SRCDIR)/gamestate/init_window.c \

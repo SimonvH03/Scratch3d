@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/04 23:54:12 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/05 18:32:34 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ typedef struct s_camera
 
 typedef struct s_weapon
 {
+	mlx_texture_t	*rest;
 	mlx_texture_t	**fire;
 	mlx_texture_t	**reload;
-	t_scalable		current_frame;
+	t_scalable		scalable;
 	uint32_t		damage;
 	uint32_t		mag_capacity;
 	uint32_t		total_ammo;

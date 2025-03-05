@@ -6,133 +6,88 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/05 00:25:08 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/05 18:32:04 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-
-static void
-    init_weapon_state(
-        t_scene *scene)
-{
-	int i = 0;
-	while (i < 34)
-	{
-		scene->weapon.textures[i] = NULL;
-		i++;
-	}
-
-	scene->weapon.current_frame = 0;
-	scene->weapon.enabled = true;
-	scene->weapon.scale = 1.0;
-	scene->weapon.is_animating = false;
-	scene->weapon.is_reloading = false;
-	scene->weapon.frame_time = 0.0f;
-	scene->weapon.frame_delay = 0.05f;
-	scene->weapon.ammo_count = MAX_AMMO;
-}
-
-static char *
-	create_texture_path(
-		int index)
+static int
+	load_texture(
+		mlx_texture_t **dest,
+		const char *directory,
+		const char *filename)
 {
 	char	*texture_path;
-	char	*temp;
-	char	*number;
+	char	*temp_free;
+	xpm_t	*temp_xpm;
 
-	number = ft_itoa(index + 1);
-	if (!number)
-		return (NULL);
-	if (ft_strlen(number) == 1)
-		texture_path = ft_strjoin("scenes/textures/g1/0", number);
-	else
-		texture_path = ft_strjoin("scenes/textures/g1/", number);
-	free(number);
-	if (!texture_path)
-		return (NULL);
-	temp = texture_path;
+	texture_path = ft_strjoin(directory, filename);
+	if (texture_path == NULL)
+		return (RETURN_ERROR);
+	temp_free = texture_path;
 	texture_path = ft_strjoin(texture_path, ".xpm42");
-	free(temp);
-	return (texture_path);
-}
-
-static short
-	load_single_texture(
-		t_scene *scene,
-		int index)
-{
-	char	*texture_path;
-	xpm_t   *weapon_xpm;
-
-	texture_path = create_texture_path(index);
-	if (!texture_path)
-		return (EXIT_FAILURE);
-	weapon_xpm = mlx_load_xpm42(texture_path);
+	free(temp_free);
+	if (texture_path == NULL)
+		return (RETURN_ERROR);
+	temp_xpm = mlx_load_xpm42(texture_path);
 	free(texture_path);
-	if (!weapon_xpm)
-		return (EXIT_FAILURE);
-	scene->weapon.textures[index] = &weapon_xpm->texture;
-	return (EXIT_SUCCESS);
-}
-
-static short
-	load_weapon_textures(
-		t_scene *scene)
-{
-	int	 i;
-
-	i = 0;
-	while (i < 34)
-	{
-		if (load_single_texture(scene, i) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
-		i++;
-	}
-	scene->weapon.texture = scene->weapon.textures[0];
-	return (EXIT_SUCCESS);
-}
-
-static short
-	create_weapon_image(
-		mlx_t *mlx,
-		t_scene *scene)
-{
-	scene->weapon.image = mlx_new_image(mlx, WIDTH, HEIGHT);
-	if (!scene->weapon.image)
-		return (EXIT_FAILURE);
-	scene->weapon.x_pos = 0;
-	scene->weapon.y_pos = 0;
-
-	if (mlx_image_to_window(mlx, scene->weapon.image,
-		scene->weapon.x_pos, scene->weapon.y_pos) < 0)
-		return (EXIT_FAILURE);
-
-	return (EXIT_SUCCESS);
-}
-
-short
-	init_weapon(
-		mlx_t *mlx,
-		t_scene *scene)
-{
-	init_weapon_state(scene);
-	if (load_weapon_textures(scene) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (create_weapon_image(mlx, scene) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	if (temp_xpm == NULL)
+		return (RETURN_ERROR);
+	*dest = &temp_xpm->texture;
+	return (RETURN_SUCCESS);
 }
 
 static int
-	init_frame_textures()
+	load_animation_textures(
+		t_weapon *weapon,
+		mlx_texture_t ***dest,
+		const char *animation_id)
 {
+	char			*filename;
+	char			*temp_free;
+	mlx_texture_t	**temp_dest;
+	unsigned int	i;
+	int				return_value;
+
+	i = 0;
+	while (true)
+	{
+		filename = ft_itoa(i);
+		if (filename == NULL)
+			return (RETURN_ERROR);
+		temp_free = filename;
+		filename = ft_strjoin(animation_id, filename);
+		free(temp_free);
+		return_value = load_texture(temp_dest, G1_TEXTURES_PATH, filename);
+		free(filename);
+		if (return_value != RETURN_SUCCESS)
+			return (RETURN_ERROR);
+		if (temp_dest == NULL)
+			return (RETURN_SUCCESS);
+		*dest = ft_arrcat((char **)*dest, (char *)temp_dest);
+		if (dest == NULL)
+			return (RETURN_ERROR);
+	}
+}
+
+static int
+	load_weapon_textures(
+		t_weapon *weapon)
+{
+	if (load_texture(&weapon->rest, G1_TEXTURES_PATH, "0") != RETURN_SUCCESS)
+		return (RETURN_ERROR);
+	if (load_animation_textures(weapon, &weapon->fire, "f") != RETURN_SUCCESS)
+		return (RETURN_ERROR);
+	if (load_animation_textures(weapon, &weapon->reload, "r")
+		!= RETURN_SUCCESS)
+		return (RETURN_ERROR);
 	return (RETURN_SUCCESS);
 }
 
 int
 	init_weapon(
+		mlx_t *mlx,
 		t_weapon *weapon)
 {
 	ft_bzero(weapon, sizeof(t_weapon));
@@ -140,7 +95,15 @@ int
 	weapon->total_ammo = weapon->ammo * G1_SPARE_MAGS;
 	weapon->damage = G1_DAMAGE;
 	weapon->frame_time_goal = (float)(1 / G1_FRAME_RATE);
-	if (init_frame_textures() != RETURN_SUCCESS)
+	if (load_weapon_textures(weapon) != RETURN_SUCCESS)
 		return (RETURN_FAILURE);
+	weapon->scalable.image = mlx_new_image(mlx, mlx->width, mlx->height);
+	if (weapon->scalable.image == NULL)
+		return (EXIT_FAILURE);
+	if (mlx_image_to_window(mlx, weapon->scalable.image, 0, 0) < 0);
+		return (EXIT_FAILURE);
+	weapon->scalable.scale = ft_max_float(
+		weapon->scalable.image->width / weapon->scalable.texture->width,
+		weapon->scalable.image->height / weapon->scalable.texture->height);
 	return (RETURN_SUCCESS);
 }

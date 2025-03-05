@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/05 00:17:00 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/05 18:12:03 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define G1_SPARE_MAGS		10
 # define G1_DAMAGE			12
 # define G1_FRAME_RATE		24
+# define G1_TEXTURES_PATH	"./data/textures/g1_fri"
 
 // player defaults
 # define STARTING_HEALTH	100
