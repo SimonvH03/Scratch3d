@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/24 02:16:25 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/04 17:40:34 by svan-hoo      ########   odam.nl         */
+/*   Updated: 2025/03/11 02:27:57 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,35 @@ static void
 	else
 		ray->total_y = (camera->pos_y - ray->pos_y) * ray->step_y;
 	ray->distance = 0;
+	ray->has_door = false;
+}
+
+static int
+	evaluate_position(
+		t_ray *ray,
+		t_grid *grid,
+		int pos_y,
+		int pos_x)
+{
+	float		door_fraction;
+	float		side_fraction;
+	const int	cell_identifier = grid->walls[pos_y][pos_x];
+
+	if (cell_identifier == 0)
+		return (true);
+	if (ft_isdigit(cell_identifier))
+		return (false);
+	if (cell_identifier == 'D')
+	{
+		door_fraction = grid->doors[pos_y][pos_x];
+		side_fraction = 0;
+		if (side_fraction < door_fraction)
+			ray->has_door = false;
+		else
+			ray->has_door = true;
+		return (ray->has_door);
+	}
+	return (false);
 }
 
 // assuming the camera is not inside a wall;
@@ -64,7 +93,7 @@ static void
 			ray->pos_y += ray->sign_y;
 			ray->hit_type = VERTICAL;
 		}
-		if (grid->walls[ray->pos_y][ray->pos_x] > 0)
+		if (evaluate_position(ray, grid, ray->pos_y, ray->pos_x) == false)
 			break ;
 	}
 	if (ray->hit_type == HORIZONTAL)

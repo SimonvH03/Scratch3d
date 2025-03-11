@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/26 00:04:38 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/11 02:27:40 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_ray
 	short			sign_x;
 	short			sign_y;
 	bool			hit_type;
+	bool			has_door;
 }	t_ray;
 
 typedef struct s_colour_construct

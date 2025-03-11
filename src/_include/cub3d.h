@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/06 00:01:24 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/10 18:43:28 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 // mlx window
 # define WINDOW_TITLE		"cub3d"
-# define WIDTH				1600
+# define WIDTH				1280
 # define HEIGHT				720
 
 // UI colours 0xAaBbGgRr

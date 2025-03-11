@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/26 19:23:34 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/10 18:52:53 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@
 // }
 
 // looks up the sin and cosin values based on which of the 8 directions
-//	(9 if you count 0, 0) theh player can move
+//	(9 if you count 0, 0) the player can move
 // each directions has precalculated normalized x and y direction components
 //  based on the unit circle /pythagoras because why bother with cos45 or sin45
 // !this function assumes the camera is not currently outside of the map

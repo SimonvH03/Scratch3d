@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/26 19:52:58 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/11 02:02:08 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void	cub3d_terminate(t_window *window)
 		mlx_delete_texture(window->menu.buttons[i++].texture);
 	ft_arrclear((void **)window->scene.grid.walls);
 	ft_arrclear((void **)window->scene.grid.sprites);
+	ft_arrclear((void **)window->scene.grid.doors);
 	free((void *)window->hud.minimap.circle_overlay);
 }
 

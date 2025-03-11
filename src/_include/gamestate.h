@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/05 18:32:34 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/11 02:02:26 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef	struct s_grid
 {
 	int				**walls;
 	int				**sprites;
+	float			**doors;
 	unsigned int	y_max;
 	unsigned int	x_max;
 }	t_grid;

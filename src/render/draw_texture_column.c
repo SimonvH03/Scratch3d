@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/27 01:36:33 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/04 17:43:53 by svan-hoo      ########   odam.nl         */
+/*   Updated: 2025/03/11 02:26:59 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ void
 	uint32_t		*texumn_start;
 
 	init_column(walls, camera, ray, &column);
-	texumn_start = &((uint32_t *)column.texture->pixels)[(int)
-			(column.x * column.texture->width) * column.texture->height];
+	texumn_start = &((uint32_t *)column.texture->pixels)[column.texture->height
+			* (int)(column.x * column.texture->width)];
 	screen_y = (uint32_t)column.start;
 	while (screen_y < (uint32_t)column.end)
 	{
 		((uint32_t *)walls->image->pixels)[screen_x
 			+ screen_y * walls->image->width]
-			= texumn_start[(int)(column.y)];
+			= texumn_start[(int)(column.y + 0.0005f)];
 		column.y += column.step;
 		screen_y++;
 	}

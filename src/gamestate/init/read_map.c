@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/25 02:24:13 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/11 02:25:16 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int
 	else if (ft_isdigit(token))
 	{
 		grid->walls[y][x] = token - 48;
-		grid->sprites[y][x] = 0;	
+		grid->sprites[y][x] = 0;
 	}
 	else
 	{
@@ -106,6 +106,9 @@ int
 	grid->sprites = (int **)ft_calloc(grid->y_max + 1, sizeof(int *));
 	if (grid->sprites == NULL)
 		return (RETURN_FAILURE);
+	grid->doors = (float **)ft_calloc(grid->y_max + 1, sizeof(float *));
+	if (grid->doors == NULL)
+		return (RETURN_FAILURE);
 	y = 0;
 	while (y < grid->y_max)
 	{
@@ -114,6 +117,9 @@ int
 			return (RETURN_FAILURE);
 		grid->sprites[y] = (int *)ft_calloc(grid->x_max, sizeof(int));
 		if (grid->sprites[y] == NULL)
+			return (RETURN_FAILURE);
+		grid->doors[y] = (float *)ft_calloc(grid->x_max, sizeof(float));
+		if (grid->doors[y] == NULL)
 			return (RETURN_FAILURE);
 		if (map_fill_row(grid, y, content[y]) != RETURN_SUCCESS)
 			return (RETURN_FAILURE);
