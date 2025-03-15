@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/02/23 23:09:20 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/13 16:50:25 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,5 @@ void
 			element_count--;
 		(*content)++;
 	}
+	load_texture(&scene->walls.door_texture, DOOR_TEXTURE_PATH);
 }

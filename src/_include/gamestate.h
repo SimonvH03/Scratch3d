@@ -6,13 +6,17 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/11 02:02:26 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/15 23:08:14 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAMESTATE_H
 # define GAMESTATE_H
 # include "MLX42/MLX42_Int.h"
+
+# define WS_IDLE		0
+# define WS_FIRING		1
+# define WS_RELOADING	2
 
 typedef struct s_scalable
 {
@@ -51,8 +55,7 @@ typedef struct s_weapon
 	unsigned int	frame_index;
 	float			frame_time;
 	float			frame_time_goal;
-	bool			is_firing;
-	bool			is_reloading;
+	unsigned int	state;
 }	t_weapon;
 
 typedef struct s_player
@@ -71,6 +74,7 @@ typedef	struct s_walls
 	mlx_texture_t	*east_texture;
 	mlx_texture_t	*south_texture;
 	mlx_texture_t	*west_texture;
+	mlx_texture_t	*door_texture;
 	bool			recast;
 }	t_walls;
 

@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/05 23:59:27 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/13 16:53:39 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static int
 
 static int
 	load_animation_textures(
-		t_weapon *weapon,
 		mlx_texture_t ***dest,
 		const char *animation_id)
 {
@@ -78,9 +77,9 @@ static int
 {
 	if (load_texture(&weapon->rest, G1_TEXTURES_PATH, "0") != RETURN_SUCCESS)
 		return (RETURN_ERROR);
-	if (load_animation_textures(weapon, &weapon->fire, "f") != RETURN_SUCCESS)
+	if (load_animation_textures(&weapon->fire, "f") != RETURN_SUCCESS)
 		return (RETURN_ERROR);
-	if (load_animation_textures(weapon, &weapon->reload, "r")
+	if (load_animation_textures(&weapon->reload, "r")
 		!= RETURN_SUCCESS)
 		return (RETURN_ERROR);
 	return (RETURN_SUCCESS);

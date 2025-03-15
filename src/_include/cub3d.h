@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/10 18:43:28 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/15 23:22:29 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 
 # define MLX_FONT_WIDTH		10
 
-# define VALID_MAP_TOKENS	" 01NESW"
+# define STANDARD_TOKENS		" 01NESW"
 
 // player defaults
 # define STARTING_HEALTH	100
@@ -102,8 +102,8 @@ void		view_manager(void *param);
 void		window_keyhook(mlx_key_data_t key_data, void *param);
 
 // user inputs
-void		wasd_move(t_window *window, t_camera *camera);
-void		arrowkey_turn(t_window *window, t_camera *camera);
+void		wasd_move(mlx_t *mlx, t_scene *scene, t_camera *camera);
+void		arrowkey_turn(mlx_t *mlx, t_scene *scene, t_camera *camera);
 void		weapon_animation(mlx_t *mlx, t_weapon *weapon);
 void		select_button(t_menu *menu);
 void		confirm_selection(t_menu *menu, t_window *window);
@@ -112,8 +112,7 @@ void		toggle_view(t_window *window);
 
 // render
 void		raycast(t_scene *scene);
-void		draw_texture_column(t_ray *ray, t_walls *walls,
-				t_camera *camera, uint32_t x);
+void		draw_texture_column(t_ray *ray, t_walls *walls, uint32_t x);
 
 // hud
 void		update_minimap(t_minimap *minimap);

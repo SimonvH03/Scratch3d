@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/05 18:30:37 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/15 21:19:48 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,28 +55,15 @@ static void
 	camera->sign_rotate = 0;
 }
 
-static bool
-	norminetteisahorriblewasteoftimethisisnotmorereadable(
-		bool grid_has_starting_position)
-{
-	if (grid_has_starting_position == true)
-	{
-		printf("invalid map: has multiple starting positions\n");
-			return (true);
-	}
-	return (false);
-}
-
-static bool
+static void
 	find_starting_position(
 		t_grid *grid,
-		t_camera *camera)
+		t_camera *camera,
+		bool *found_starting_position)
 {
-	bool			grid_has_starting_position;
 	unsigned int	y;
 	unsigned int	x;
 
-	grid_has_starting_position = false;
 	y = 0;
 	while (y < grid->y_max)
 	{
@@ -86,17 +73,17 @@ static bool
 			if (ft_strchr("NESW", grid->sprites[y][x])
 				&& grid->sprites[y][x] != 0)
 			{
-				if (norminetteisahorriblewasteoftimethisisnotmorereadable(
-						grid_has_starting_position) == true)
-					return (false);
+				if (*found_starting_position == true)
+					error_exit(mlx_errno, EINVAL, "multiple player positions");
 				init_camera(camera, y, x, grid->sprites[y][x]);
-				grid_has_starting_position = true;
+				*found_starting_position = true;
 			}
 			x++;
 		}
 		y++;
 	}
-	return (grid_has_starting_position);
+	if (*found_starting_position == false)
+		error_exit(mlx_errno, EINVAL, "missing player position");
 }
 
 int
@@ -104,10 +91,12 @@ int
 		t_player *player,
 		t_grid *grid)
 {
+	bool	found_starting_position;
+
 	init_movement_matrix();
+	found_starting_position = false;
+	find_starting_position(grid, &player->camera, &found_starting_position);
 	player->health = STARTING_HEALTH;
 	player->treasure = 0;
-	if (find_starting_position(grid, &player->camera) != true)
-		return (RETURN_FAILURE);
 	return (RETURN_SUCCESS);
 }

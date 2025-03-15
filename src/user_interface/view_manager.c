@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/10 18:46:28 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/15 23:23:25 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@ void
 	update_fps_image(window->mlx->loop_time, &window->hud.fps);
 	if (window->view == GAME)
 	{
-		wasd_move(window, &window->scene.player.camera);
-		arrowkey_turn(window, &window->scene.player.camera);
+		wasd_move(window->mlx, &window->scene, &window->scene.player.camera);
+		arrowkey_turn(window->mlx, &window->scene, &window->scene.player.camera);
 		weapon_animation(window->mlx, &window->scene.player.weapon);
+		door_animation(window->mlx, &window->scene);
 		if (window->scene.walls.recast == true || 1)// 1 for consistent frametime
 		{
 			raycast(&window->scene);

@@ -6,13 +6,12 @@
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/24 02:16:25 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/11 02:27:57 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/15 21:38:16 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// camera plane * 0.5 for perfect cubes
 static void
 	init_ray(
 		t_ray *ray,
@@ -38,6 +37,8 @@ static void
 		ray->total_y = ((ray->pos_y + 1 - camera->pos_y) * ray->step_y);
 	else
 		ray->total_y = (camera->pos_y - ray->pos_y) * ray->step_y;
+	ray->start_x = camera->pos_x;
+	ray->start_y = camera->pos_y;
 	ray->distance = 0;
 	ray->has_door = false;
 }
@@ -49,23 +50,28 @@ static int
 		int pos_y,
 		int pos_x)
 {
-	float		door_fraction;
-	float		side_fraction;
 	const int	cell_identifier = grid->walls[pos_y][pos_x];
+	int			facing_cell;
 
 	if (cell_identifier == 0)
 		return (true);
 	if (ft_isdigit(cell_identifier))
 		return (false);
-	if (cell_identifier == 'D')
+	if (cell_identifier == 'd' || cell_identifier == 'D')
 	{
-		door_fraction = grid->doors[pos_y][pos_x];
-		side_fraction = 0;
-		if (side_fraction < door_fraction)
-			ray->has_door = false;
+		if (ray->hit_type == HORIZONTAL)
+			facing_cell = grid->walls[pos_y][pos_x - ray->sign_x];
 		else
-			ray->has_door = true;
-		return (ray->has_door);
+			facing_cell = grid->walls[pos_y - ray->sign_y][pos_x];
+		if (facing_cell == 'd' || facing_cell == 'D')
+			return (true);
+		ray->door_state = grid->doors[pos_y][pos_x];
+		if (cell_identifier == 'd')
+			ray->fraction = 1 - ray->fraction;
+		ray->has_door = (ray->fraction < ray->door_state);
+		if (ray->has_door)
+			ray->fraction += 1 - ray->door_state;
+		return (!ray->has_door);
 	}
 	return (false);
 }
@@ -86,13 +92,16 @@ static void
 			ray->total_x += ray->step_x;
 			ray->pos_x += ray->sign_x;
 			ray->hit_type = HORIZONTAL;
+			ray->fraction = ray->start_y + (ray->total_x - ray->step_x) * ray->dir_y;
 		}
 		else
 		{
 			ray->total_y += ray->step_y;
 			ray->pos_y += ray->sign_y;
 			ray->hit_type = VERTICAL;
+			ray->fraction = ray->start_x + (ray->total_y - ray->step_y) * ray->dir_x;
 		}
+		ray->fraction -= (int)ray->fraction;
 		if (evaluate_position(ray, grid, ray->pos_y, ray->pos_x) == false)
 			break ;
 	}
@@ -116,7 +125,7 @@ void
 		ray.camera_x = 2 * x / (float)scene->walls.image->width - 1;
 		init_ray(&ray, &scene->player.camera);
 		cast_ray(&ray, &scene->grid);
-		draw_texture_column(&ray, &scene->walls, &scene->player.camera, x);
+		draw_texture_column(&ray, &scene->walls, x);
 		++x;
 	}
 }

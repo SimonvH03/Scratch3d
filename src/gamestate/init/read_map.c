@@ -6,20 +6,20 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/11 02:25:16 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/15 23:09:27 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int
+static void
 	map_size(
 		t_grid *grid,
 		char *const *content)
 {
-	int		x;
-	int		y;
-	int		max_x;
+	int	x;
+	int	y;
+	int	max_x;
 
 	x = 0;
 	y = 0;
@@ -33,7 +33,6 @@ static int
 	}
 	grid->x_max = max_x;
 	grid->y_max = y;
-	return (RETURN_SUCCESS);
 }
 
 static int
@@ -41,29 +40,25 @@ static int
 		t_grid	*grid,
 		const uint32_t y,
 		const uint32_t x,
-		const char token)
+		const int token)
 {
-	if (ft_strchr(VALID_MAP_TOKENS, token) == NULL
+	if (ft_strchr(STANDARD_TOKENS, token) == NULL
 		&& ft_isalnum(token) == false)
 	{
 		printf("invalid map: only letters, digits and spaces allowed\n");
 		return (RETURN_FAILURE);
 	}
 	if (token == ' ')
-	{
 		grid->walls[y][x] = -1;
-		grid->sprites[y][x] = 0;
-	}
 	else if (ft_isdigit(token))
-	{
 		grid->walls[y][x] = token - 48;
-		grid->sprites[y][x] = 0;
-	}
-	else
+	else if (token == 'd' || token == 'D')
 	{
-		grid->walls[y][x] = 0;
-		grid->sprites[y][x] = token;
+		grid->walls[y][x] = token;
+		grid->doors[y][x] = 1.0f;
 	}
+	else if (ft_isalpha(token))
+		grid->sprites[y][x] = token;
 	return (RETURN_SUCCESS);
 }
 
@@ -78,7 +73,7 @@ static int
 	x = 0;
 	while (line[x])
 	{
-		if (map_fill_space(grid, y, x, line[x]) != RETURN_SUCCESS)
+		if (map_fill_space(grid, y, x, (int)line[x]) != RETURN_SUCCESS)
 			return (RETURN_FAILURE);
 		++x;
 	}
@@ -98,8 +93,7 @@ int
 {
 	unsigned int	y;
 
-	if (map_size(grid, content) != RETURN_SUCCESS)
-		return (RETURN_FAILURE);
+	map_size(grid, content);
 	grid->walls = (int **)ft_calloc(grid->y_max + 1, sizeof(int *));// why y_max +1? (no null termination?)
 	if (grid->walls == NULL)
 		return (RETURN_FAILURE);

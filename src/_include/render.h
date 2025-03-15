@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/11 02:27:40 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/15 20:33:16 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,11 @@ typedef struct s_ray
 	float			step_y;
 	float			total_x;
 	float			total_y;
+	float			start_x;
+	float			start_y;
+	float			fraction;
 	float			distance;
+	float			door_state;
 	short			sign_x;
 	short			sign_y;
 	bool			hit_type;

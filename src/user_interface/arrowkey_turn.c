@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/06 23:30:28 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/25 02:57:31 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/15 23:22:59 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,17 @@ static void
 
 void
 	arrowkey_turn(
-		t_window *window,
+		mlx_t *mlx,
+		t_scene *scene,
 		t_camera *camera)
 {
-	if (mlx_is_key_down(window->mlx, MLX_KEY_LEFT))
+	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 		camera->sign_rotate = 1;
-	if (mlx_is_key_down(window->mlx, MLX_KEY_RIGHT))
+	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		camera->sign_rotate = -1;
 	if (camera->sign_rotate != 0)
 	{
 		rotate_camera(camera);
-		window->scene.walls.recast = true;
+		scene->walls.recast = true;
 	}
 }

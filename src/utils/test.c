@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/27 17:21:01 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/25 23:28:00 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/13 17:26:05 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 // 	print_ray(
 // 		t_ray *ray)
 // {
-// 	printf("\e[33mRAY INIT\e[0m\t[%-10d, %-10d]\ndir  -->\t[%-10f, 
+// 	printf("\e[33mRAY INIT\e[0m\t[%-10d, %-10d]\ndir  -->\t[%-10f,
 //	 %-10f]\nstep <->\t[%-10f, %-10f]\ntotal<->\t[%-10f, %-10f]\n",
 // 		ray->pos_y, ray->pos_x, ray->dir_y, ray->dir_x, ray->step_y,
 //		ray->step_x, ray->total_y, ray->total_x);
@@ -99,4 +99,6 @@ void
 	mlx_image_to_window(window->mlx, image, 128, 192);
 	image = mlx_texture_to_image(window->mlx, window->scene.walls.west_texture);
 	mlx_image_to_window(window->mlx, image, 64, 128);
+	image = mlx_texture_to_image(window->mlx, window->scene.walls.door_texture);
+	mlx_image_to_window(window->mlx, image, 128, 128);
 }

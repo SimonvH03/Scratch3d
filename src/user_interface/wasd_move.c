@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/10 18:52:53 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/15 23:25:35 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@
 // !this function assumes the camera is not currently outside of the map
 // !this function was pretty readable. but norminette. see better version above
 static void
-	do_movement(
+	move_camera(
 		t_camera *camera,
 		int	**map,
 		short forward_backward,
@@ -95,7 +95,8 @@ static void
 
 void
 	wasd_move(
-		t_window *window,
+		mlx_t *mlx,
+		t_scene *scene,
 		t_camera *camera)
 {
 	short	forward_backward;
@@ -103,17 +104,17 @@ void
 
 	forward_backward = 0;
 	left_right = 0;
-	if (mlx_is_key_down(window->mlx, MLX_KEY_W))
+	if (mlx_is_key_down(mlx, MLX_KEY_W))
 		forward_backward += 1;
-	if (mlx_is_key_down(window->mlx, MLX_KEY_S))
+	if (mlx_is_key_down(mlx, MLX_KEY_S))
 		forward_backward -= 1;
-	if (mlx_is_key_down(window->mlx, MLX_KEY_A))
+	if (mlx_is_key_down(mlx, MLX_KEY_A))
 		left_right -= 1;
-	if (mlx_is_key_down(window->mlx, MLX_KEY_D))
+	if (mlx_is_key_down(mlx, MLX_KEY_D))
 		left_right += 1;
 	if (forward_backward || left_right)
 	{
-		window->scene.walls.recast = true;
-		do_movement(camera, window->scene.grid.walls, forward_backward, left_right);
+		move_camera(camera, scene->grid.walls, forward_backward, left_right);
+		scene->walls.recast = true;
 	}
 }
