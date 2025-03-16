@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/15 23:05:27 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/16 05:57:31 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ static void
 	if (keydata.key == MLX_KEY_LEFT_CONTROL && keydata.action == MLX_PRESS)
 	{
 		toggle_view(window);
+	}
+	if (keydata.key == MLX_KEY_E && keydata.action == MLX_PRESS)
+	{
+		door_interaction(&window->scene.grid, &window->scene.player.camera);
 	}
 }
 
@@ -63,11 +67,11 @@ void
 	{
 		mlx_close_window(window->mlx);
 	}
-	if (window->view == GAME)
+	if (window->view == wv_game)
 	{
 		game_keys(keydata, window);
 	}
-	else if (window->view == MENU)
+	else if (window->view == wv_menu)
 	{
 		menu_keys(keydata, window);
 	}

@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/15 21:19:28 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/16 05:18:41 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static int
 
 	fd = open(input_file, O_RDONLY);
 	if (fd == -1)
-		return (RETURN_FAILURE);
+		return (RETURN_ERROR);
 	buffer = ft_get_next_line(fd);
 	if (buffer == NULL)
-		return (RETURN_FAILURE);
+		return (RETURN_ERROR);
 	*dest = NULL;
 	while (buffer != NULL)
 	{
@@ -62,6 +62,8 @@ static int
 	if (read_map(&scene->grid, content_progress) != RETURN_SUCCESS)
 		return (RETURN_FAILURE);
 	ft_arrclear((void **)content_start);
+	if (interpret_map(&scene->grid) != RETURN_SUCCESS)
+		return (RETURN_FAILURE);
 	return (RETURN_SUCCESS);
 }
 

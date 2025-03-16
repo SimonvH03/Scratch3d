@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/15 23:22:29 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/16 05:59:07 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,13 @@
 
 # define MLX_FONT_WIDTH		10
 
-# define STANDARD_TOKENS		" 01NESW"
+# define STANDARD_TOKENS	" 01NESW"
 
 // player defaults
 # define STARTING_HEALTH	100
 # define MOVEMENT_SPEED		6
 # define ROTATION_SPEED		3
+# define DOOR_SHIFT_SPEED	1
 # define COLLISION_HITBOX	0.2
 
 // weapons? this should obviously go in the .cub file but I don't like parsing
@@ -58,11 +59,11 @@
 
 typedef struct s_window
 {
-	mlx_t			*mlx;
-	t_scene			scene;
-	t_menu			menu;
-	t_hud			hud;
-	enum e_view		view;
+	mlx_t				*mlx;
+	t_scene				scene;
+	t_menu				menu;
+	t_hud				hud;
+	enum e_window_view	view;
 }	t_window;
 
 // gotta love a strict norm to make things more readable
@@ -83,6 +84,7 @@ int			init_window(t_window *window);
 int			init_game(mlx_t *mlx, t_scene *scene, const char *input_file);
 void		read_elements(t_scene *scene, char *const **content);
 int			read_map(t_grid *grid, char *const *content);
+int			interpret_map(t_grid *grid);
 int			init_game_images(mlx_t *mlx, t_scene *scene);
 int			init_player(t_player *player, t_grid *grid);
 int			init_weapon(mlx_t *mlx, t_weapon *weapon);
@@ -105,10 +107,15 @@ void		window_keyhook(mlx_key_data_t key_data, void *param);
 void		wasd_move(mlx_t *mlx, t_scene *scene, t_camera *camera);
 void		arrowkey_turn(mlx_t *mlx, t_scene *scene, t_camera *camera);
 void		weapon_animation(mlx_t *mlx, t_weapon *weapon);
+void		door_interaction(t_grid *grid, t_camera *camera);
+void		update_doors(t_doors *doors);
 void		select_button(t_menu *menu);
 void		confirm_selection(t_menu *menu, t_window *window);
 void		toggle_maps(t_window *window, t_minimap *minimap, t_bigmap *map);
 void		toggle_view(t_window *window);
+
+// tilemap
+t_door		*get_door_at(t_doors *doors, unsigned int y, unsigned int x);
 
 // render
 void		raycast(t_scene *scene);

@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/15 20:33:16 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/16 04:42:34 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 enum	e_hit_axis
 {
-	HORIZONTAL,
-	VERTICAL
+	ha_horizontal,
+	ha_vertical
 };
 
 typedef struct s_column
@@ -46,7 +46,7 @@ typedef struct s_ray
 	float			start_y;
 	float			fraction;
 	float			distance;
-	float			door_state;
+	float			door_position;
 	short			sign_x;
 	short			sign_y;
 	bool			hit_type;

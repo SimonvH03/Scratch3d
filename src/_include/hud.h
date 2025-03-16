@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/04 23:53:16 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/16 02:31:41 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 # include "MLX42/MLX42_Int.h"
 # include "gamestate.h"
 
-// current window view
-enum	e_view
+enum	e_window_view
 {
-	MENU,
-	GAME,
-	MAP
+	wv_menu,
+	wv_game
 };
 
 typedef struct s_menu

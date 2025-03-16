@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/15 21:19:48 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/16 05:36:57 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,14 @@ static void
 		x = 0;
 		while (x < grid->x_max)
 		{
-			if (ft_strchr("NESW", grid->sprites[y][x])
-				&& grid->sprites[y][x] != 0)
+			if (ft_strchr("NESW", grid->tilemap[y][x])
+				&& grid->tilemap[y][x] != 0)
 			{
 				if (*found_starting_position == true)
 					error_exit(mlx_errno, EINVAL, "multiple player positions");
-				init_camera(camera, y, x, grid->sprites[y][x]);
+				init_camera(camera, y, x, grid->tilemap[y][x]);
 				*found_starting_position = true;
+				grid->tilemap[y][x] = 0;
 			}
 			x++;
 		}

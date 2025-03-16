@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/04 22:26:03 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/01 02:17:53 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/16 04:02:14 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static int
 	y += grid->y_max / (float)2;
 	if (x < 0 || x >= grid->x_max || y < 0 || y >= grid->y_max)
 		((uint32_t *)dest->pixels)[img_y * dest->width + img_x] = C_TRANSLUCENT;
-	else if (grid->walls[(int)y][(int)x] < 0)
+	else if (grid->tilemap[(int)y][(int)x] < 0)
 		((uint32_t *)dest->pixels)[img_y * dest->width + img_x] = C_TRANSLUCENT;
-	else if (grid->walls[(int)y][(int)x] > 0)
+	else if (grid->tilemap[(int)y][(int)x] > 0)
 		((uint32_t *)dest->pixels)[img_y * dest->width + img_x] = C_WALL;
 	else
 		((uint32_t *)dest->pixels)[img_y * dest->width + img_x] = C_FLOOR;

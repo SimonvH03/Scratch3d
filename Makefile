@@ -21,23 +21,26 @@ HEADERS =	$(INCLUDE)/cub3d.h \
 
 SRCDIR	=	./src
 SRC		=	$(SRCDIR)/main.c \
+			$(SRCDIR)/gamestate/get_door_at.c \
 			$(SRCDIR)/gamestate/init_game.c \
 			$(SRCDIR)/gamestate/init/init_game_images.c \
+			$(SRCDIR)/gamestate/init/interpret_map.c \
 			$(SRCDIR)/gamestate/init_player.c \
-			$(SRCDIR)/gamestate/init_weapon.c \
 			$(SRCDIR)/gamestate/init/read_elements.c \
 			$(SRCDIR)/gamestate/init/read_map.c \
+			$(SRCDIR)/gamestate/init_weapon.c \
 			$(SRCDIR)/gamestate/init_window.c \
+			$(SRCDIR)/hud/init_hud.c \
+			$(SRCDIR)/hud/init_menu.c \
 			$(SRCDIR)/hud/init/new_images_bigmap.c \
 			$(SRCDIR)/hud/init/new_images_menu.c \
 			$(SRCDIR)/hud/init/new_images_minimap.c \
-			$(SRCDIR)/hud/init_hud.c \
-			$(SRCDIR)/hud/init_menu.c \
 			$(SRCDIR)/hud/update_bigmap.c \
 			$(SRCDIR)/hud/update_minimap.c \
 			$(SRCDIR)/render/draw_texture_column.c \
 			$(SRCDIR)/render/raycast.c \
 			$(SRCDIR)/user_interface/arrowkey_turn.c \
+			$(SRCDIR)/user_interface/door_interaction.c \
 			$(SRCDIR)/user_interface/frametime_variables.c \
 			$(SRCDIR)/user_interface/keyhooks.c \
 			$(SRCDIR)/user_interface/select_button.c \

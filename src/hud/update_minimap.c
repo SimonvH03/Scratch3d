@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/22 19:48:15 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/26 19:19:36 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/16 04:02:14 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ static int
 	if (x < 0 || x >= minimap->r_grid->x_max
 		|| y < 0 || y >= minimap->r_grid->y_max)
 		((uint32_t *)walls->pixels)[img_y * walls->width + img_x] = C_CEILING;
-	else if (minimap->r_grid->walls[(int)y][(int)x] < 0)
+	else if (minimap->r_grid->tilemap[(int)y][(int)x] < 0)
 		((uint32_t *)walls->pixels)[img_y * walls->width + img_x] = C_CEILING;
-	else if (minimap->r_grid->walls[(int)y][(int)x] > 0)
+	else if (minimap->r_grid->tilemap[(int)y][(int)x] > 0)
 		((uint32_t *)walls->pixels)[img_y * walls->width + img_x] = C_WALL;
 	else
 		((uint32_t *)walls->pixels)[img_y * walls->width + img_x] = C_FLOOR;

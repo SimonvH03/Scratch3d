@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/15 23:25:35 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/16 04:02:14 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void
 		left_right += 1;
 	if (forward_backward || left_right)
 	{
-		move_camera(camera, scene->grid.walls, forward_backward, left_right);
+		move_camera(camera, scene->grid.tilemap, forward_backward, left_right);
 		scene->walls.recast = true;
 	}
 }

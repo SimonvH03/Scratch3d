@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/15 23:23:25 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/16 05:57:58 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void
 
 	window = param;
 	update_fps_image(window->mlx->loop_time, &window->hud.fps);
-	if (window->view == GAME)
+	if (window->view == wv_game)
 	{
 		wasd_move(window->mlx, &window->scene, &window->scene.player.camera);
 		arrowkey_turn(window->mlx, &window->scene, &window->scene.player.camera);
 		weapon_animation(window->mlx, &window->scene.player.weapon);
-		door_animation(window->mlx, &window->scene);
+		update_doors(&window->scene.grid.doors);
 		if (window->scene.walls.recast == true || 1)// 1 for consistent frametime
 		{
 			raycast(&window->scene);
@@ -82,10 +82,10 @@ void
 {
 	size_t	i;
 
-	if (window->view == MENU)
-		window->view = GAME;
-	else if (window->view == GAME)
-		window->view = MENU;
+	if (window->view == wv_menu)
+		window->view = wv_game;
+	else if (window->view == wv_game)
+		window->view = wv_menu;
 	window->menu.background.image->enabled
 		= !window->menu.background.image->enabled;
 	window->menu.highlight.image->enabled

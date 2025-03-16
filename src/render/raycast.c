@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/24 02:16:25 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/15 21:38:16 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/16 05:41:56 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,19 @@ static void
 	ray->has_door = false;
 }
 
+static void
+	calculate_fraction(
+		t_ray *ray)
+{
+	if (ray->hit_type == ha_horizontal)
+		ray->fraction = ray->start_y
+			+ (ray->total_x - ray->step_x) * ray->dir_y;
+	else
+		ray->fraction = ray->start_x
+			+ (ray->total_y - ray->step_y) * ray->dir_x;
+	ray->fraction -= (int)ray->fraction;
+}
+
 static int
 	evaluate_position(
 		t_ray *ray,
@@ -50,27 +63,28 @@ static int
 		int pos_y,
 		int pos_x)
 {
-	const int	cell_identifier = grid->walls[pos_y][pos_x];
+	const int	cell_identifier = grid->tilemap[pos_y][pos_x] & TYPE_MASK;
 	int			facing_cell;
 
 	if (cell_identifier == 0)
 		return (true);
+	calculate_fraction(ray);
 	if (ft_isdigit(cell_identifier))
 		return (false);
 	if (cell_identifier == 'd' || cell_identifier == 'D')
 	{
-		if (ray->hit_type == HORIZONTAL)
-			facing_cell = grid->walls[pos_y][pos_x - ray->sign_x];
+		if (ray->hit_type == ha_horizontal)
+			facing_cell = grid->tilemap[pos_y][pos_x - ray->sign_x] & TYPE_MASK;
 		else
-			facing_cell = grid->walls[pos_y - ray->sign_y][pos_x];
+			facing_cell = grid->tilemap[pos_y - ray->sign_y][pos_x] & TYPE_MASK;
 		if (facing_cell == 'd' || facing_cell == 'D')
 			return (true);
-		ray->door_state = grid->doors[pos_y][pos_x];
+		ray->door_position = get_door_at(&grid->doors, pos_y, pos_x)->position;
 		if (cell_identifier == 'd')
 			ray->fraction = 1 - ray->fraction;
-		ray->has_door = (ray->fraction < ray->door_state);
+		ray->has_door = (ray->fraction < ray->door_position);
 		if (ray->has_door)
-			ray->fraction += 1 - ray->door_state;
+			ray->fraction += 1 - ray->door_position;
 		return (!ray->has_door);
 	}
 	return (false);
@@ -91,21 +105,18 @@ static void
 		{
 			ray->total_x += ray->step_x;
 			ray->pos_x += ray->sign_x;
-			ray->hit_type = HORIZONTAL;
-			ray->fraction = ray->start_y + (ray->total_x - ray->step_x) * ray->dir_y;
+			ray->hit_type = ha_horizontal;
 		}
 		else
 		{
 			ray->total_y += ray->step_y;
 			ray->pos_y += ray->sign_y;
-			ray->hit_type = VERTICAL;
-			ray->fraction = ray->start_x + (ray->total_y - ray->step_y) * ray->dir_x;
+			ray->hit_type = ha_vertical;
 		}
-		ray->fraction -= (int)ray->fraction;
 		if (evaluate_position(ray, grid, ray->pos_y, ray->pos_x) == false)
 			break ;
 	}
-	if (ray->hit_type == HORIZONTAL)
+	if (ray->hit_type == ha_horizontal)
 		ray->distance = ray->total_x - ray->step_x;
 	else
 		ray->distance = ray->total_y - ray->step_y;
