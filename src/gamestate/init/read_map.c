@@ -6,14 +6,14 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/16 05:35:08 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/17 00:11:09 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static void
-	map_size(
+	tilemap_size(
 		t_grid *grid,
 		char *const *content)
 {
@@ -35,8 +35,35 @@ static void
 	grid->y_max = y;
 }
 
+static void
+	set_tilemap_cell(
+		t_grid *grid,
+		int16_t *dest,
+		int	token)
+{
+	if (!ft_isalnum(token))
+		error_exit(0, EINVAL,
+			"invalid map: only letters, digits and spaces allowed\n");
+	if (token == ' ')
+		*dest = -1;
+	else if (ft_isdigit(token))
+	{
+		if (token == '0')
+			*dest = set_cell(false, 0, token);
+		else
+			*dest = set_cell(true, (token - '0'), token);
+	}
+	else
+	{
+		if (is_door(token))
+			*dest = set_cell(true, grid->doors.count++, token);
+		else
+			*dest = set_cell(true, 0, token);
+	}
+}
+
 static int
-	map_fill_row(
+	tilemap_fill_row(
 		t_grid *grid,
 		const int y,
 		const char *line)
@@ -46,46 +73,35 @@ static int
 	x = 0;
 	while (line[x])
 	{
-		grid->tilemap[y][x] = -1;
-		if (!ft_isalnum(line[x]) && line[x] != ' ')
-		{
-			printf("invalid map: only letters, digits and spaces allowed\n");
-			return (RETURN_ERROR);
-		}
-		if (line[x] == ' ')
-			grid->tilemap[y][x] = -1;
-		if (ft_isdigit(line[x]))
-			grid->tilemap[y][x] = line[x] - '0';
-		else
-			grid->tilemap[y][x] = line[x];
+		set_tilemap_cell(grid, &grid->tilemap[y][x], line[x]);
 		++x;
 	}
 	while (x < grid->x_max)
 	{
-		grid->tilemap[y][x] = -1;
+		set_tilemap_cell(grid, &grid->tilemap[y][x], -1);
 		++x;
 	}
 	return (RETURN_SUCCESS);
 }
 
 int
-	read_map(
+	read_tilemap(
 		t_grid *grid,
 		char *const *content)
 {
 	unsigned int	y;
 
-	map_size(grid, content);
-	grid->tilemap = (int **)ft_calloc(grid->y_max + 1, sizeof(int *));// why y_max +1? (no null termination?)
+	tilemap_size(grid, content);
+	grid->tilemap = (int16_t **)ft_calloc(grid->y_max + 1, sizeof(int16_t *));// why y_max +1? (no null termination?)
 	if (grid->tilemap == NULL)
 		return (RETURN_ERROR);
 	y = 0;
 	while (y < grid->y_max)
 	{
-		grid->tilemap[y] = (int *)ft_calloc(grid->x_max, sizeof(int));
+		grid->tilemap[y] = (int16_t *)ft_calloc(grid->x_max, sizeof(int16_t));
 		if (grid->tilemap[y] == NULL)
 			return (RETURN_ERROR);
-		if (map_fill_row(grid, y, content[y]) != RETURN_SUCCESS)
+		if (tilemap_fill_row(grid, y, content[y]) != RETURN_SUCCESS)
 			return (RETURN_FAILURE);
 		++y;
 	}

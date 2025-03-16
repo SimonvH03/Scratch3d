@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/24 02:16:25 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/16 05:41:56 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/17 00:02:29 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,38 +56,38 @@ static void
 	ray->fraction -= (int)ray->fraction;
 }
 
-static int
-	evaluate_position(
+static bool
+	hit_position(
 		t_ray *ray,
 		t_grid *grid,
 		int pos_y,
 		int pos_x)
 {
-	const int	cell_identifier = grid->tilemap[pos_y][pos_x] & TYPE_MASK;
+	const int	cell = grid->tilemap[pos_y][pos_x];
 	int			facing_cell;
 
-	if (cell_identifier == 0)
-		return (true);
-	calculate_fraction(ray);
-	if (ft_isdigit(cell_identifier))
+	if (is_solid(cell) == false)
 		return (false);
-	if (cell_identifier == 'd' || cell_identifier == 'D')
+	calculate_fraction(ray);
+	if (ft_isdigit(get_type(cell)))
+		return (true);
+	if (is_door(get_type(cell)) && is_solid(cell))
 	{
 		if (ray->hit_type == ha_horizontal)
-			facing_cell = grid->tilemap[pos_y][pos_x - ray->sign_x] & TYPE_MASK;
+			facing_cell = grid->tilemap[pos_y][pos_x - ray->sign_x];
 		else
-			facing_cell = grid->tilemap[pos_y - ray->sign_y][pos_x] & TYPE_MASK;
-		if (facing_cell == 'd' || facing_cell == 'D')
-			return (true);
+			facing_cell = grid->tilemap[pos_y - ray->sign_y][pos_x];
+		if (is_door(get_type(facing_cell)))
+			return (false);
 		ray->door_position = get_door_at(&grid->doors, pos_y, pos_x)->position;
-		if (cell_identifier == 'd')
+		if (get_type(cell) == 'd')
 			ray->fraction = 1 - ray->fraction;
 		ray->has_door = (ray->fraction < ray->door_position);
 		if (ray->has_door)
 			ray->fraction += 1 - ray->door_position;
-		return (!ray->has_door);
+		return (ray->has_door);
 	}
-	return (false);
+	return (true);
 }
 
 // assuming the camera is not inside a wall;
@@ -113,7 +113,7 @@ static void
 			ray->pos_y += ray->sign_y;
 			ray->hit_type = ha_vertical;
 		}
-		if (evaluate_position(ray, grid, ray->pos_y, ray->pos_x) == false)
+		if (hit_position(ray, grid, ray->pos_y, ray->pos_x) == true)
 			break ;
 	}
 	if (ray->hit_type == ha_horizontal)

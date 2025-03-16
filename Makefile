@@ -21,13 +21,12 @@ HEADERS =	$(INCLUDE)/cub3d.h \
 
 SRCDIR	=	./src
 SRC		=	$(SRCDIR)/main.c \
-			$(SRCDIR)/gamestate/get_door_at.c \
 			$(SRCDIR)/gamestate/init_game.c \
 			$(SRCDIR)/gamestate/init/init_game_images.c \
-			$(SRCDIR)/gamestate/init/interpret_map.c \
-			$(SRCDIR)/gamestate/init_player.c \
 			$(SRCDIR)/gamestate/init/read_elements.c \
 			$(SRCDIR)/gamestate/init/read_map.c \
+			$(SRCDIR)/gamestate/init_doors.c \
+			$(SRCDIR)/gamestate/init_player.c \
 			$(SRCDIR)/gamestate/init_weapon.c \
 			$(SRCDIR)/gamestate/init_window.c \
 			$(SRCDIR)/hud/init_hud.c \
@@ -40,9 +39,10 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/render/draw_texture_column.c \
 			$(SRCDIR)/render/raycast.c \
 			$(SRCDIR)/user_interface/arrowkey_turn.c \
-			$(SRCDIR)/user_interface/door_interaction.c \
 			$(SRCDIR)/user_interface/frametime_variables.c \
+			$(SRCDIR)/user_interface/generic_interaction.c \
 			$(SRCDIR)/user_interface/keyhooks.c \
+			$(SRCDIR)/user_interface/operate_door.c \
 			$(SRCDIR)/user_interface/select_button.c \
 			$(SRCDIR)/user_interface/view_manager.c \
 			$(SRCDIR)/user_interface/wasd_move.c \
@@ -51,7 +51,8 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/utils/arithmetic_int.c \
 			$(SRCDIR)/utils/image_iteration.c \
 			$(SRCDIR)/utils/modlx.c \
-			$(SRCDIR)/utils/test.c
+			$(SRCDIR)/utils/test.c \
+			$(SRCDIR)/utils/tilemap_cell.c
 
 OBJDIR	=	./obj
 OBJ		=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)

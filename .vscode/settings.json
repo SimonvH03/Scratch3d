@@ -7,6 +7,10 @@
 		"random": "c",
 		"ostream": "c",
 		"streambuf": "c",
-		"system_error": "c"
+		"system_error": "c",
+		"bit": "c",
+		"unordered_map": "c",
+		"algorithm": "c",
+		"limits": "c"
 	}
 }

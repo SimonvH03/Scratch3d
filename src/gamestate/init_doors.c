@@ -1,46 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   interpret_map.c                                    :+:    :+:            */
+/*   init_doors.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/16 05:53:18 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/17 00:52:56 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static void
-	count_and_flag_doors(
-		t_grid *grid)
-{
-	unsigned int	y;
-	unsigned int	x;
-	int				*cell;
-
-	y = 0;
-	while (y < grid->y_max)
-	{
-		x = 0;
-		while (x < grid->x_max)
-		{
-			cell = &grid->tilemap[y][x];
-			if (*cell == 'd' || *cell == 'D')
-				*cell = (grid->doors.count++ << ID_SHIFT) | *cell;
-			x++;
-		}
-		y++;
-	}
-}
-
-static void
 	init_door(
 		t_door *dest,
+		t_grid *grid,
 		unsigned int pos_y,
 		unsigned int pos_x)
 {
+	dest->cell = &grid->tilemap[pos_y][pos_x];
 	dest->position = 1.0f;
 	dest->state = ds_closed;
 	dest->pos_y = pos_y;
@@ -55,7 +34,7 @@ static void
 	unsigned int	y;
 	unsigned int	x;
 	unsigned int	door;
-	int				cell;
+	char			type;
 
 	y = 0;
 	door = 0;
@@ -64,11 +43,11 @@ static void
 		x = 0;
 		while (x < grid->x_max)
 		{
-			cell = (grid->tilemap[y][x] & TYPE_MASK);
-			if (cell == 'd' || cell == 'D')
+			type = get_type(grid->tilemap[y][x]);
+			if (type == 'd' || type == 'D')
 			{
-				printf("D%d (%d, %d)\n", door, y, x);
-				init_door(&list[door++], y, x);
+				// printf("%coor at (%d, %d)\n", type, y, x);
+				init_door(&list[door++], grid, y, x);
 			}
 			x++;
 		}
@@ -77,10 +56,9 @@ static void
 }
 
 int
-	interpret_map(
+	init_doors(
 		t_grid *grid)
 {
-	count_and_flag_doors(grid);
 	if (!grid->doors.count)
 		return (RETURN_SUCCESS);
 	grid->doors.list = (t_door *)malloc(grid->doors.count * sizeof(t_door));

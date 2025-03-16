@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/16 05:59:07 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/17 00:54:20 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@
 # define C_TRANSLUCENT		0x42000000
 # define C_CEILING			0xBB000000
 # define C_FLOOR			0x80424242
-# define C_WALL				0xFF2966BF
+# define C_WALL				0xFF2A66C0
+# define C_DOOR				0xFF153360
 # define C_ERROR			0xFF80FF00
 
 // ratio of wall height / width
@@ -48,6 +49,7 @@
 # define MOVEMENT_SPEED		6
 # define ROTATION_SPEED		3
 # define DOOR_SHIFT_SPEED	1
+# define INTERACTION_RANGE	2
 # define COLLISION_HITBOX	0.2
 
 // weapons? this should obviously go in the .cub file but I don't like parsing
@@ -83,8 +85,8 @@ int			init_window(t_window *window);
 
 int			init_game(mlx_t *mlx, t_scene *scene, const char *input_file);
 void		read_elements(t_scene *scene, char *const **content);
-int			read_map(t_grid *grid, char *const *content);
-int			interpret_map(t_grid *grid);
+int			read_tilemap(t_grid *grid, char *const *content);
+int			init_doors(t_grid *grid);
 int			init_game_images(mlx_t *mlx, t_scene *scene);
 int			init_player(t_player *player, t_grid *grid);
 int			init_weapon(mlx_t *mlx, t_weapon *weapon);
@@ -107,7 +109,8 @@ void		window_keyhook(mlx_key_data_t key_data, void *param);
 void		wasd_move(mlx_t *mlx, t_scene *scene, t_camera *camera);
 void		arrowkey_turn(mlx_t *mlx, t_scene *scene, t_camera *camera);
 void		weapon_animation(mlx_t *mlx, t_weapon *weapon);
-void		door_interaction(t_grid *grid, t_camera *camera);
+void		generic_interaction(t_grid *grid, t_camera *camera);
+void		operate_door(t_doors *doors, t_camera *camera, unsigned int index);
 void		update_doors(t_doors *doors);
 void		select_button(t_menu *menu);
 void		confirm_selection(t_menu *menu, t_window *window);
@@ -140,6 +143,13 @@ int			ft_max_int(int a, int b);
 int			ft_min_int(int a, int b);
 int			ft_abs_int(int value);
 short		ft_sign_int(int value);
+
+// tilemap_cell
+int16_t		set_cell(const bool solid, const int id, const char type);
+bool		is_solid(const int cell);
+bool		is_door(const char type);
+char		get_type(const int cell);
+int			get_id(const int cell);
 
 // TEST
 // void		print_camera(t_camera *camera);

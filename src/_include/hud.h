@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/16 02:31:41 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/16 17:43:34 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ typedef struct s_fps
 
 typedef struct s_hud
 {
-	mlx_image_t		*weapon;
 	mlx_image_t		*ammo;
 	mlx_image_t		*healthbar;
 	mlx_image_t		*treasure;

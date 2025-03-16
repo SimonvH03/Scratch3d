@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/16 05:36:57 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/16 23:52:54 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static void
 {
 	unsigned int	y;
 	unsigned int	x;
+	uint16_t		cell;
 
 	y = 0;
 	while (y < grid->y_max)
@@ -70,21 +71,21 @@ static void
 		x = 0;
 		while (x < grid->x_max)
 		{
-			if (ft_strchr("NESW", grid->tilemap[y][x])
-				&& grid->tilemap[y][x] != 0)
+			cell = grid->tilemap[y][x];
+			if (ft_strchr("NESW", get_type(cell)) && get_type(cell) != 0)
 			{
 				if (*found_starting_position == true)
-					error_exit(mlx_errno, EINVAL, "multiple player positions");
-				init_camera(camera, y, x, grid->tilemap[y][x]);
+					error_exit(mlx_errno, EINVAL,
+						"invalid map: multiple player positions");
+				init_camera(camera, y, x, get_type(cell));
 				*found_starting_position = true;
-				grid->tilemap[y][x] = 0;
+				grid->tilemap[y][x] = set_cell(false, 0, '0');
 			}
 			x++;
 		}
 		y++;
 	}
-	if (*found_starting_position == false)
-		error_exit(mlx_errno, EINVAL, "missing player position");
+
 }
 
 int
@@ -97,6 +98,8 @@ int
 	init_movement_matrix();
 	found_starting_position = false;
 	find_starting_position(grid, &player->camera, &found_starting_position);
+	if (found_starting_position == false)
+		error_exit(mlx_errno, EINVAL, "invalid map: missing player position");
 	player->health = STARTING_HEALTH;
 	player->treasure = 0;
 	return (RETURN_SUCCESS);

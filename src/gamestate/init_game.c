@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/16 05:18:41 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/16 20:20:43 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ static int
 	if (scene->walls.north_texture == NULL || scene->walls.east_texture == NULL
 		|| scene->walls.south_texture == NULL || scene->walls.west_texture == NULL)
 		error_exit(mlx_errno, EINVAL, "missing scene.cub texture path");
-	if (read_map(&scene->grid, content_progress) != RETURN_SUCCESS)
+	if (read_tilemap(&scene->grid, content_progress) != RETURN_SUCCESS)
 		return (RETURN_FAILURE);
 	ft_arrclear((void **)content_start);
-	if (interpret_map(&scene->grid) != RETURN_SUCCESS)
+	if (init_doors(&scene->grid) != RETURN_SUCCESS)
 		return (RETURN_FAILURE);
 	return (RETURN_SUCCESS);
 }

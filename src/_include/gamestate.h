@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/16 05:26:24 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/17 00:51:20 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 # define GAMESTATE_H
 # include "MLX42/MLX42_Int.h"
 
-# define TYPE_MASK		0xFF
-# define ID_MASK		0xFF00
+# define SOLID_MASK		0x8000
+# define SOLID_SHIFT	15
+# define ID_MASK		0x7F00
 # define ID_SHIFT		8
+# define TYPE_MASK		0xFF
 
 enum	e_weapon_state
 {
@@ -95,10 +97,11 @@ typedef struct s_walls
 
 typedef struct s_door
 {
-	enum e_door_state	state;
+	int16_t				*cell;
+	float				position;
 	unsigned int		pos_y;
 	unsigned int		pos_x;
-	float				position;
+	enum e_door_state	state;
 }	t_door;
 
 typedef struct s_doors
@@ -111,7 +114,7 @@ typedef struct s_doors
 // 8B aligned, 2 x 8 (pointer) + 2 x 4 (int), no padding		| 24 Bytes
 typedef struct s_grid
 {
-	int				**tilemap;
+	int16_t			**tilemap;
 	t_doors			doors;
 	unsigned int	y_max;
 	unsigned int	x_max;

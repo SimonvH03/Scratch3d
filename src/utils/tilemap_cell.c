@@ -1,16 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_door_at.c                                      :+:    :+:            */
+/*   tilemap_cell.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/16 05:06:31 by simon         ########   odam.nl         */
+/*   Created: 2024/02/23 18:51:01 by svan-hoo      #+#    #+#                 */
+/*   Updated: 2025/03/17 00:19:41 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int16_t
+	set_cell(
+		const bool solid,
+		const int id,
+		const char type)
+{
+	return ((solid << SOLID_SHIFT)
+		| ((id & 0x7F) << ID_SHIFT)
+		| (type & TYPE_MASK));
+}
 
 t_door	*
 	get_door_at(
@@ -30,4 +41,28 @@ t_door	*
 		index++;
 	}
 	return (NULL);
+}
+
+bool
+	is_solid(const int cell)
+{
+	return ((bool)(cell & SOLID_MASK));
+}
+
+char
+	get_type(const int cell)
+{
+	return ((char)(cell & TYPE_MASK));
+}
+
+int
+	get_id(const int cell)
+{
+	return ((int)((cell & ID_MASK) >> ID_SHIFT));
+}
+
+bool
+	is_door(const char type)
+{
+	return ((bool)(type == 'd' || type == 'D'));
 }

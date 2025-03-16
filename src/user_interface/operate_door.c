@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   door_interaction.c                                 :+:    :+:            */
+/*   operate_door.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/16 05:57:26 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/17 00:55:08 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ static void
 		t_door *door,
 		float shift)
 {
-	door->position += shift;
-	if (door->position >= 1.0f)
+	door->position -= shift;
+	if (door->position <= 0.0f)
 	{
-		door->position = 1.0f;
+		door->position = 0.0f;
 		door->state = ds_open;
+		*door->cell &= ~SOLID_MASK;
 	}
 }
 
@@ -30,10 +31,10 @@ static void
 		t_door *door,
 		float shift)
 {
-	door->position -= shift;
-	if (door->position <= 0.0f)
+	door->position += shift;
+	if (door->position >= 1.0f)
 	{
-		door->position = 0.0f;
+		door->position = 1.0f;
 		door->state = ds_closed;
 	}
 }
@@ -57,14 +58,15 @@ void
 	}
 }
 
-static void
+void
 	operate_door(
 		t_doors *doors,
 		t_camera *camera,
 		unsigned int index)
 {
-	t_door		*door = &doors->list[index];
+	t_door		*door;
 
+	door = &doors->list[index];
 	if (door->state == ds_closed || door->state == ds_closing)
 	{
 		door->state = ds_opening;
@@ -75,22 +77,6 @@ static void
 			&& door->pos_x == (unsigned int)camera->pos_x)
 			return ;
 		door->state = ds_closing;
+		*door->cell |= SOLID_MASK;
 	}
-}
-
-void
-	door_interaction(
-		t_grid *grid,
-		t_camera *camera)
-{
-	int		interaction_cell;
-
-	interaction_cell = grid->tilemap
-	[(int)(float)(camera->pos_y + camera->dir_y)]
-	[(int)(float)(camera->pos_x + camera->dir_x)];
-	if (!((interaction_cell & TYPE_MASK) == 'd'
-		|| (interaction_cell & TYPE_MASK) == 'D'))
-		return ;
-	operate_door(&grid->doors, camera,
-		(interaction_cell & ID_MASK) >> ID_SHIFT);
 }

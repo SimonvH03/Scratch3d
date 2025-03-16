@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/16 05:57:31 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/16 18:00:04 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void
 	}
 	if (keydata.key == MLX_KEY_E && keydata.action == MLX_PRESS)
 	{
-		door_interaction(&window->scene.grid, &window->scene.player.camera);
+		generic_interaction(&window->scene.grid, &window->scene.player.camera);
 	}
 }
 
