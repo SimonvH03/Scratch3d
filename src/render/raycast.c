@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/24 02:16:25 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/17 00:02:29 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/18 03:55:42 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,72 @@ static void
 	ray->start_x = camera->pos_x;
 	ray->start_y = camera->pos_y;
 	ray->distance = 0;
-	ray->has_door = false;
+	ray->hits_door = false;
 }
 
 static void
-	calculate_fraction(
+	calculate_partial(
 		t_ray *ray)
 {
 	if (ray->hit_type == ha_horizontal)
-		ray->fraction = ray->start_y
+		ray->partial = ray->start_y
 			+ (ray->total_x - ray->step_x) * ray->dir_y;
 	else
-		ray->fraction = ray->start_x
+		ray->partial = ray->start_x
 			+ (ray->total_y - ray->step_y) * ray->dir_x;
-	ray->fraction -= (int)ray->fraction;
+	ray->partial -= (int)ray->partial;
+}
+
+static void
+	door_half_step(
+		t_ray *ray,
+		t_doors *doors,
+		int16_t	cell)
+{
+	float old_partial = ray->partial;
+	float new_partial = ray->partial;
+	float new_total_x = ray->total_x;
+	float new_total_y = ray->total_y;
+
+	if (ray->hit_type == ha_horizontal)
+		old_partial = ray->start_y
+			+ (ray->total_x - ray->step_x) * ray->dir_y;
+	else
+		old_partial = ray->start_x
+			+ (ray->total_y - ray->step_y) * ray->dir_x;
+
+
+	if (ray->hit_type == ha_horizontal)
+		new_total_x += ray->step_x * 0.5;
+	else
+		new_total_y += ray->step_y * 0.5;
+
+	if (ray->hit_type == ha_horizontal)
+		new_partial = ray->start_y
+			+ (new_total_x - ray->step_x) * ray->dir_y;
+	else
+		new_partial = ray->start_x
+			+ (new_total_y - ray->step_y) * ray->dir_x;
+	if ((int)new_partial != (int)old_partial)
+	{
+		ray->hits_door = false;
+		return ;
+	}
+	else
+	{
+		new_partial -= (int)new_partial;
+		ray->partial = new_partial;
+		ray->door_position = doors->list[get_id(cell)].position;
+		if (get_type(cell) == 'd')
+			ray->partial = 1 - ray->partial;
+		ray->hits_door = (ray->partial < ray->door_position);
+		if (ray->hits_door)
+		{
+			ray->partial += 1 - ray->door_position;
+			ray->total_x = new_total_x;
+			ray->total_y = new_total_y;
+		}
+	}
 }
 
 static bool
@@ -63,29 +115,44 @@ static bool
 		int pos_y,
 		int pos_x)
 {
-	const int	cell = grid->tilemap[pos_y][pos_x];
-	int			facing_cell;
+	const int16_t	cell = grid->tilemap[pos_y][pos_x];
+	int16_t				facing_cell;
+	// int16_t				side_cell0;
+	// int16_t				side_cell1;
 
 	if (is_solid(cell) == false)
 		return (false);
-	calculate_fraction(ray);
+	calculate_partial(ray);
 	if (ft_isdigit(get_type(cell)))
 		return (true);
-	if (is_door(get_type(cell)) && is_solid(cell))
+	if (is_transparent(get_type(cell)))
 	{
 		if (ray->hit_type == ha_horizontal)
 			facing_cell = grid->tilemap[pos_y][pos_x - ray->sign_x];
 		else
 			facing_cell = grid->tilemap[pos_y - ray->sign_y][pos_x];
-		if (is_door(get_type(facing_cell)))
+		if (is_transparent(get_type(facing_cell)))
 			return (false);
-		ray->door_position = get_door_at(&grid->doors, pos_y, pos_x)->position;
-		if (get_type(cell) == 'd')
-			ray->fraction = 1 - ray->fraction;
-		ray->has_door = (ray->fraction < ray->door_position);
-		if (ray->has_door)
-			ray->fraction += 1 - ray->door_position;
-		return (ray->has_door);
+	}
+	if (is_door(get_type(cell)))
+	{
+		// if (ray->hit_type == ha_horizontal)
+		// {
+		// 	side_cell0 = grid->tilemap[pos_y - 1][pos_x];
+		// 	side_cell1 = grid->tilemap[pos_y + 1][pos_x];
+		// 	if (!is_solid(side_cell0) && !is_solid(side_cell1))
+		// 		ray->hit_type = ha_vertical;
+		// }
+		// else
+		// {
+		// 	side_cell0 = grid->tilemap[pos_y][pos_x - 1];
+		// 	side_cell1 = grid->tilemap[pos_y][pos_x + 1];
+		// 	if (!is_solid(side_cell0) && !is_solid(side_cell1))
+		// 		ray->hit_type = ha_horizontal;
+		// }
+		calculate_partial(ray);
+		door_half_step(ray, &grid->doors, cell);
+		return (ray->hits_door);
 	}
 	return (true);
 }
@@ -98,8 +165,7 @@ static void
 		t_ray *ray,
 		t_grid *grid)
 {
-	while (ray->pos_x && ray->pos_x < grid->x_max
-		&& ray->pos_y && ray->pos_y < grid->y_max)
+	while (true)
 	{
 		if (ray->total_x < ray->total_y)
 		{

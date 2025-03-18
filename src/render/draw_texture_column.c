@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/27 01:36:33 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/16 02:31:11 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/18 00:13:25 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void
 		t_walls *walls,
 		t_ray *ray)
 {
-	if (ray->has_door)
+	if (ray->hits_door)
 		column->texture = walls->door_texture;
 	else if (ray->hit_type == ha_horizontal && ray->sign_x >= 0)
 		column->texture = walls->east_texture;
@@ -65,10 +65,10 @@ void
 
 	select_texture(&column, walls, ray);
 	vertical_boundaries(&column, walls, ray);
-	if (ray->fraction >= 1 || ray->fraction < 0)
+	if (ray->partial >= 1 || ray->partial < 0)
 		return ;
 	texumn_start = &((uint32_t *)column.texture->pixels)[column.texture->height
-			* (int)(ray->fraction * column.texture->width)];
+			* (int)(ray->partial * column.texture->width)];
 	screen_y = (uint32_t)column.start;
 	while (screen_y < (uint32_t)column.end)
 	{

@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/13 16:53:39 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/18 00:07:11 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int
 	if (mlx_image_to_window(mlx, weapon->scalable.image,
 		0, mlx->height - weapon->scalable.image->height) < 0)
 		return (EXIT_FAILURE);
+	weapon->scalable.image->enabled = false;//BAD
 	image_iteration(weapon->scalable.image, sample_scalable, &weapon->scalable);
 	return (RETURN_SUCCESS);
 }

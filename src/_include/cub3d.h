@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/17 00:54:20 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/17 17:45:09 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,10 +146,11 @@ short		ft_sign_int(int value);
 
 // tilemap_cell
 int16_t		set_cell(const bool solid, const int id, const char type);
-bool		is_solid(const int cell);
+char		get_type(const int16_t cell);
+int			get_id(const int16_t cell);
+bool		is_solid(const int16_t cell);
 bool		is_door(const char type);
-char		get_type(const int cell);
-int			get_id(const int cell);
+bool		is_transparent(const char type);
 
 // TEST
 // void		print_camera(t_camera *camera);

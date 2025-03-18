@@ -1,19 +1,19 @@
-NO ./scenes/textures/flag_nazi.xpm42
+NO ./scenes/textures/flag_usa.xpm42
 SO ./scenes/textures/flag_soviet.xpm42
 WE ./scenes/textures/flag_ss.xpm42
-EA ./scenes/textures/flag_usa.xpm42
+EA ./scenes/textures/flag_nazi.xpm42
 
 F 124,96,124
 C 100,32,32
 
 111111111111111
-100000000000001
+1D00000000000d1
 100000000000001
 10011Dd11001001
 10000000000D001
 100000000001001
 100100000001001
-1001000N000d001
+1001000S000d001
 100D00000001001
 100d00000000001
 100100000000001

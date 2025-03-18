@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:51:01 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/17 00:19:41 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/17 17:45:09 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,19 @@ t_door	*
 }
 
 bool
-	is_solid(const int cell)
+	is_solid(const int16_t cell)
 {
 	return ((bool)(cell & SOLID_MASK));
 }
 
 char
-	get_type(const int cell)
+	get_type(const int16_t cell)
 {
 	return ((char)(cell & TYPE_MASK));
 }
 
 int
-	get_id(const int cell)
+	get_id(const int16_t cell)
 {
 	return ((int)((cell & ID_MASK) >> ID_SHIFT));
 }
@@ -65,4 +65,11 @@ bool
 	is_door(const char type)
 {
 	return ((bool)(type == 'd' || type == 'D'));
+}
+
+bool
+	is_transparent(const char type)
+{
+	// return ((bool)(type == 'g' || type == 'G'));
+	return (is_door(type));
 }
