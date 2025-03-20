@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/17 17:45:09 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/20 02:26:15 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ t_door		*get_door_at(t_doors *doors, unsigned int y, unsigned int x);
 
 // render
 void		raycast(t_scene *scene);
+void		cast_ray(t_ray *ray, t_grid *grid);
 void		draw_texture_column(t_ray *ray, t_walls *walls, uint32_t x);
 
 // hud
@@ -139,6 +140,8 @@ float		ft_max_float(float a, float b);
 float		ft_min_float(float a, float b);
 float		ft_abs_float(float value);
 short		ft_sign_float(float value);
+
+int			ft_clamp(int a, int lower_bound, int upper_bound);
 int			ft_max_int(int a, int b);
 int			ft_min_int(int a, int b);
 int			ft_abs_int(int value);

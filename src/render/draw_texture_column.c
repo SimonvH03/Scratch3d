@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/27 01:36:33 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/18 00:13:25 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/20 00:21:49 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ static void
 {
 	if (ray->hits_door)
 		column->texture = walls->door_texture;
-	else if (ray->hit_type == ha_horizontal && ray->sign_x >= 0)
-		column->texture = walls->east_texture;
-	else if (ray->hit_type == ha_horizontal && ray->sign_x < 0)
-		column->texture = walls->west_texture;
-	else if (ray->hit_type == ha_vertical && ray->sign_y >= 0)
+	else if (ray->hit_type == ha_horizontal && ray->sign_y >= 0)
 		column->texture = walls->south_texture;
-	else if (ray->hit_type == ha_vertical && ray->sign_y < 0)
+	else if (ray->hit_type == ha_horizontal && ray->sign_y < 0)
 		column->texture = walls->north_texture;
+	else if (ray->hit_type == ha_vertical && ray->sign_x >= 0)
+		column->texture = walls->east_texture;
+	else if (ray->hit_type == ha_vertical && ray->sign_x < 0)
+		column->texture = walls->west_texture;
 }
 
 static void

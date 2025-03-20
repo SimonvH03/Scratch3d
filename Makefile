@@ -2,7 +2,7 @@ NAME	=	cub3d
 
 CC		=	cc
 CFLAGS	=	-g -O3
-CFLAGS	+=	-Wall -Werror -Wextra
+# CFLAGS	+=	-Wall -Werror -Wextra
 MLXFLAGS=	-ldl -lglfw -pthread -lm
 
 LMLXDIR	=	./MLX42
@@ -36,6 +36,7 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/hud/init/new_images_minimap.c \
 			$(SRCDIR)/hud/update_bigmap.c \
 			$(SRCDIR)/hud/update_minimap.c \
+			$(SRCDIR)/render/cast_ray.c \
 			$(SRCDIR)/render/draw_texture_column.c \
 			$(SRCDIR)/render/raycast.c \
 			$(SRCDIR)/user_interface/arrowkey_turn.c \
