@@ -6,11 +6,13 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/16 05:07:41 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/26 22:32:55 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+t_list	*g_texture_allocations;
 
 void	error_exit(mlx_errno_t mlx_errno, int custom_errno, char *message)
 {
@@ -32,17 +34,11 @@ static void	cub3d_terminate(t_window *window)
 	size_t	i;
 
 	mlx_terminate(window->mlx);
-	mlx_delete_texture(window->hud.player_icon);
-	mlx_delete_texture(window->scene.walls.north_texture);
-	mlx_delete_texture(window->scene.walls.east_texture);
-	mlx_delete_texture(window->scene.walls.south_texture);
-	mlx_delete_texture(window->scene.walls.west_texture);
-	mlx_delete_texture(window->menu.background.texture);
-	mlx_delete_texture(window->menu.highlight.texture);
-	i = 0;
-	while (i < MENU_B_COUNT)
-		mlx_delete_texture(window->menu.buttons[i++].texture);
+	empty_clear_list();
+	free(window->scene.player.weapon.fire);
+	free(window->scene.player.weapon.reload);
 	ft_arrclear((void **)window->scene.grid.tilemap);
+	free(window->scene.grid.doors.list);
 	free((void *)window->hud.minimap.circle_overlay);
 }
 

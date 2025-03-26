@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/04 22:26:03 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/16 20:11:27 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/26 21:03:18 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ int
 	bigmap->y_offset -= bigmap->player->height / 2;
 	bigmap->walls->enabled = false;
 	bigmap->player->enabled = false;
-	image_iteration(bigmap->walls, sample_bigmap, bigmap);
+	image_iter(bigmap->walls, sample_bigmap, bigmap);
 	return (RETURN_SUCCESS);
 }

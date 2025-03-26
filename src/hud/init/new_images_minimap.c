@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/04 22:26:03 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/05 23:15:05 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/26 21:03:18 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int
 	if (init_minimap_player_icon(mlx, &minimap->player_icon, minimap)
 		!= RETURN_SUCCESS)
 		return (RETURN_FAILURE);
-	image_iteration(minimap->walls, sample_overlay, &minimap->radius);
+	image_iter(minimap->walls, sample_overlay, &minimap->radius);
 	ft_memcpy(minimap->circle_overlay, minimap->walls->pixels,
 		minimap->walls->width * minimap->walls->height * sizeof(uint32_t));
 	return (RETURN_SUCCESS);

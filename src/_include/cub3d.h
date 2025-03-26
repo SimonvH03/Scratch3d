@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/20 02:26:15 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/26 22:24:31 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@
 # define G1_FRAME_RATE		16
 # define G1_TEXTURES_PATH	"./data/textures/g1_fri/"
 
+extern	t_list				*g_texture_allocations;
+
 typedef struct s_window
 {
 	mlx_t				*mlx;
@@ -73,11 +75,13 @@ typedef	int	(imgiter_func)(
 				mlx_image_t *image, void *param,
 				uint32_t x, uint32_t y);
 
-int			image_iteration(
+int			image_iter(
 				mlx_image_t *image,
 				imgiter_func function,
 				void *param);
 
+void		add_to_clear_list(mlx_texture_t *texture_ptr);
+void		empty_clear_list();
 void		error_exit(mlx_errno_t mlx_errno, int custom_errno, char *message);
 
 //// PHASE 0: initialising mlx window, game, hud and menu

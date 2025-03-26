@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/16 05:12:21 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/26 21:03:18 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ void
 		update_fire_animation(weapon);
 	if (weapon->state == ws_reloading)
 		update_reload_animation(weapon);
-	image_iteration(weapon->scalable.image,
+	image_iter(weapon->scalable.image,
 		sample_scalable, &weapon->scalable);
 }

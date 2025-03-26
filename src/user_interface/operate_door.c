@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/17 22:44:57 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/26 18:45:28 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void
 	{
 		door->position = 0.0f;
 		door->state = ds_open;
-		*door->cell &= ~SOLID_MASK;
+		*door->r_cell &= ~SOLID_MASK;
 	}
 }
 
@@ -77,6 +77,6 @@ void
 			&& door->pos_x == (unsigned int)camera->pos_x)
 			return ;
 		door->state = ds_closing;
-		*door->cell |= SOLID_MASK;
+		*door->r_cell |= SOLID_MASK;
 	}
 }

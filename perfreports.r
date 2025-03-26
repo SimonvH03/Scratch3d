@@ -1,3 +1,6 @@
+> perf record -g ./cub3d scenes/cub/test.cub
+> perf report --no-children
+
 ##################### STILL 1Minute test.cub[E] ###########26.02.2025##########
 - 43.80%	cub3d							[.] __memmove_avx_unaligned_erms
 	- 43.58% __memmove_avx_unaligned_erms

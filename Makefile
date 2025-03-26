@@ -48,9 +48,10 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/user_interface/view_manager.c \
 			$(SRCDIR)/user_interface/wasd_move.c \
 			$(SRCDIR)/user_interface/weapon_animation.c \
+			$(SRCDIR)/utils/allocation_list.c \
 			$(SRCDIR)/utils/arithmetic_float.c \
 			$(SRCDIR)/utils/arithmetic_int.c \
-			$(SRCDIR)/utils/image_iteration.c \
+			$(SRCDIR)/utils/image_iter.c \
 			$(SRCDIR)/utils/modlx.c \
 			$(SRCDIR)/utils/test.c \
 			$(SRCDIR)/utils/tilemap_cell.c

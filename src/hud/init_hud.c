@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/22 19:48:30 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/05 00:04:37 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/26 22:18:07 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,22 @@ int
 	hud->player_icon = &mlx_load_xpm42(PLAYER_ICON_PATH)->texture;
 	if (hud->player_icon == NULL)
 		return (RETURN_FAILURE);
-	if (init_bigmap_struct(hud, &hud->bigmap, mlx, scene) != RETURN_SUCCESS)
+	add_to_clear_list(hud->player_icon);
+	if (init_bigmap_struct(hud, &hud->bigmap, mlx, scene)
+		!= RETURN_SUCCESS)
 		return (RETURN_FAILURE);
-	if (init_minimap_struct(hud, &hud->minimap, mlx, scene) != RETURN_SUCCESS)
+	if (init_minimap_struct(hud, &hud->minimap, mlx, scene)
+		!= RETURN_SUCCESS)
 		return (RETURN_FAILURE);
-	if (new_images_bigmap(mlx, &hud->bigmap, scene) != RETURN_SUCCESS)
+	if (new_images_bigmap(mlx, &hud->bigmap, scene)
+		!= RETURN_SUCCESS)
 		return (RETURN_FAILURE);
-	if (new_images_minimap(mlx,	&hud->minimap) != RETURN_SUCCESS)
+	if (new_images_minimap(mlx,	&hud->minimap)
+		!= RETURN_SUCCESS)
 		return (RETURN_FAILURE);
 	ft_bzero(&hud->fps, sizeof(t_fps));
 	hud->fps.image = mlx_put_string(mlx, "00000",
-		(mlx->width / 2) - (MLX_FONT_WIDTH * 1.5), mlx->height / 42);
+		(mlx->width / 2) - (MLX_FONT_WIDTH * 1.5),
+		mlx->height / 42);
 	return (RETURN_SUCCESS);
 }

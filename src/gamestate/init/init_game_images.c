@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/04 22:26:03 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/24 02:11:18 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/26 21:04:06 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int
 		uint32_t y)
 {
 	const t_scene	*scene = param;
-	
+
 	if (y <= background->height / 2)
 		mlx_put_pixel(background, x, y, scene->ceiling_clr);
 	else
@@ -43,6 +43,6 @@ int
 		return (RETURN_FAILURE);
 	if (mlx_image_to_window(mlx, scene->walls.image, 0, 0) < 0)
 		return (RETURN_FAILURE);
-	image_iteration(scene->background, draw_scene_background, scene);
+	image_iter(scene->background, draw_scene_background, scene);
 	return (RETURN_SUCCESS);
 }

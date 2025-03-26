@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/17 00:52:56 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/26 18:45:28 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void
 		unsigned int pos_y,
 		unsigned int pos_x)
 {
-	dest->cell = &grid->tilemap[pos_y][pos_x];
+	dest->r_cell = &grid->tilemap[pos_y][pos_x];
 	dest->position = 1.0f;
 	dest->state = ds_closed;
 	dest->pos_y = pos_y;

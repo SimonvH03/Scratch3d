@@ -6,14 +6,14 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/13 16:50:25 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/26 22:29:43 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static void
-	load_texture(
+	load_tile_texture(
 		mlx_texture_t **dest,
 		const char *line)
 {
@@ -36,6 +36,7 @@ static void
 	}
 	else
 		error_exit(0, EINVAL, "Only .png or .xpm42 textures in scene svp");
+	add_to_clear_list(*dest);
 }
 
 static void
@@ -67,13 +68,13 @@ void
 	while (**content && element_count++ < 6)
 	{
 		if (ft_strncmp(**content, "NO ", 3) == 0)
-			load_texture(&scene->walls.north_texture, &((**content)[3]));
+			load_tile_texture(&scene->walls.north_texture, &((**content)[3]));
 		else if (ft_strncmp(**content, "EA ", 3) == 0)
-			load_texture(&scene->walls.east_texture, &((**content)[3]));
+			load_tile_texture(&scene->walls.east_texture, &((**content)[3]));
 		else if (ft_strncmp(**content, "SO ", 3) == 0)
-			load_texture(&scene->walls.south_texture, &((**content)[3]));
+			load_tile_texture(&scene->walls.south_texture, &((**content)[3]));
 		else if (ft_strncmp(**content, "WE ", 3) == 0)
-			load_texture(&scene->walls.west_texture, &((**content)[3]));
+			load_tile_texture(&scene->walls.west_texture, &((**content)[3]));
 		else if (ft_strncmp(**content, "F ", 2) == 0)
 			load_colour(&scene->floor_clr, &((**content)[2]));
 		else if (ft_strncmp(**content, "C ", 2) == 0)
@@ -84,5 +85,5 @@ void
 			element_count--;
 		(*content)++;
 	}
-	load_texture(&scene->walls.door_texture, DOOR_TEXTURE_PATH);
+	load_tile_texture(&scene->walls.door_texture, DOOR_TEXTURE_PATH);
 }

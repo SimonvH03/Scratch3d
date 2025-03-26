@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/04 22:26:03 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/04 21:59:16 by svan-hoo      ########   odam.nl         */
+/*   Updated: 2025/03/26 21:03:18 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int
 			dest->texture->height * dest->scale);
 	if (dest->image == NULL)
 		return (RETURN_FAILURE);
-	image_iteration(dest->image, sample_scalable, dest);
+	image_iter(dest->image, sample_scalable, dest);
 	return (RETURN_SUCCESS);
 }
 

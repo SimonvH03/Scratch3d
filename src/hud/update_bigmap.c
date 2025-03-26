@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/27 01:36:33 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/01 02:05:24 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/26 21:03:18 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void
 	update_bigmap(
 		t_bigmap *bigmap)
 {
-	image_iteration(bigmap->player, sample_player, bigmap);
+	image_iter(bigmap->player, sample_player, bigmap);
 	bigmap->player->instances[0].x = bigmap->x_offset
 		+ bigmap->r_camera->pos_x * bigmap->block_size;
 	bigmap->player->instances[0].y = bigmap->y_offset

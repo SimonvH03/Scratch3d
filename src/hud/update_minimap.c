@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/22 19:48:15 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/16 20:08:55 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/26 21:03:18 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ void
 	update_minimap(
 		t_minimap	*minimap)
 {
-	image_iteration(minimap->walls, sample_wall, minimap);
+	image_iter(minimap->walls, sample_wall, minimap);
 	overlay_border(minimap);
 }

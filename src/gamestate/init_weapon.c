@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/18 00:07:11 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/26 22:17:48 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,14 @@ static int
 		const char *filename)
 {
 	char	*texture_path;
-	char	*temp_free;
+	char	*extended_filename;
 	xpm_t	*temp_xpm;
 
-	texture_path = ft_strjoin(directory, filename);
-	if (texture_path == NULL)
+	extended_filename = ft_strjoin(filename, ".xpm42");
+	if (extended_filename == NULL)
 		return (RETURN_ERROR);
-	temp_free = texture_path;
-	texture_path = ft_strjoin(texture_path, ".xpm42");
-	free(temp_free);
+	texture_path = ft_strjoin(directory, extended_filename);
+	free(extended_filename);
 	if (texture_path == NULL)
 		return (RETURN_ERROR);
 	temp_xpm = mlx_load_xpm42(texture_path);
@@ -35,7 +34,10 @@ static int
 	if (temp_xpm == NULL)
 		*dest = NULL;
 	else
+	{
 		*dest = &temp_xpm->texture;
+		add_to_clear_list(*dest);
+	}
 	return (RETURN_SUCCESS);
 }
 
@@ -45,27 +47,26 @@ static int
 		const char *animation_id)
 {
 	char			*filename;
-	char			*temp_free;
-	mlx_texture_t	*temp_dest;
+	char			*number;
+	mlx_texture_t	*texture;
 	unsigned int	i;
 	int				return_value;
 
 	i = 0;
 	while (true)
 	{
-		filename = ft_itoa(i++);
-		if (filename == NULL)
+		number = ft_itoa(i++);
+		if (number == NULL)
 			return (RETURN_ERROR);
-		temp_free = filename;
-		filename = ft_strjoin(animation_id, filename);
-		free(temp_free);
-		return_value = load_texture(&temp_dest, G1_TEXTURES_PATH, filename);
+		filename = ft_strjoin(animation_id, number);
+		free(number);
+		return_value = load_texture(&texture, G1_TEXTURES_PATH, filename);
 		free(filename);
 		if (return_value != RETURN_SUCCESS)
 			return (RETURN_ERROR);
-		if (temp_dest == NULL)
+		if (texture == NULL)
 			return (RETURN_SUCCESS);
-		*dest = (mlx_texture_t **)ft_arrcat((char **)*dest, (char *)temp_dest);
+		*dest = (mlx_texture_t **)ft_arrcat((char **)*dest, (char *)texture);
 		if (dest == NULL)
 			return (RETURN_ERROR);
 	}
@@ -75,9 +76,11 @@ static int
 	load_weapon_textures(
 		t_weapon *weapon)
 {
-	if (load_texture(&weapon->rest, G1_TEXTURES_PATH, "0") != RETURN_SUCCESS)
+	if (load_texture(&weapon->rest, G1_TEXTURES_PATH, "0")
+		!= RETURN_SUCCESS)
 		return (RETURN_ERROR);
-	if (load_animation_textures(&weapon->fire, "f") != RETURN_SUCCESS)
+	if (load_animation_textures(&weapon->fire, "f")
+		!= RETURN_SUCCESS)
 		return (RETURN_ERROR);
 	if (load_animation_textures(&weapon->reload, "r")
 		!= RETURN_SUCCESS)
@@ -108,7 +111,6 @@ int
 	if (mlx_image_to_window(mlx, weapon->scalable.image,
 		0, mlx->height - weapon->scalable.image->height) < 0)
 		return (EXIT_FAILURE);
-	weapon->scalable.image->enabled = false;//BAD
-	image_iteration(weapon->scalable.image, sample_scalable, &weapon->scalable);
+	image_iter(weapon->scalable.image, sample_scalable, &weapon->scalable);
 	return (RETURN_SUCCESS);
 }

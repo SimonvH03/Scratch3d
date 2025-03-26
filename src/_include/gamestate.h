@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/17 00:51:20 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/26 18:45:28 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef struct s_walls
 
 typedef struct s_door
 {
-	int16_t				*cell;
+	int16_t				*r_cell;
 	float				position;
 	unsigned int		pos_y;
 	unsigned int		pos_x;

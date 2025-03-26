@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/22 19:48:30 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/05 22:36:31 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/26 22:28:48 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static int
 	background->texture = mlx_load_png(MENU_BACKGROUND_PATH);
 	if (background->texture == NULL)
 		return (RETURN_FAILURE);
+	add_to_clear_list(background->texture);
 	background->scale = 1;
 	background->scale = ft_max_float(
 			1.0 * mlx->width / background->texture->width,
@@ -36,6 +37,7 @@ static int
 	button->texture = &mlx_load_xpm42(path)->texture;
 	if (button->texture == NULL)
 		return (RETURN_FAILURE);
+	add_to_clear_list(button->texture);
 	button->scale = 1;
 	button->scale = ft_min_float(
 			1.0 * (mlx->width / 3) / button->texture->width,
@@ -77,6 +79,8 @@ int
 		mlx_t *mlx,
 		t_menu *menu)
 {
+	size_t	i;
+
 	if (init_menu_structs(mlx, menu) != RETURN_SUCCESS)
 		return (RETURN_FAILURE);
 	if (new_images_menu(mlx, menu) != RETURN_SUCCESS)

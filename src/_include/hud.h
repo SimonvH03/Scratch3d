@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/16 17:43:34 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/26 19:01:52 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define HUD_H
 # include "MLX42/MLX42_Int.h"
 # include "gamestate.h"
+# include "paths.h"
 
 enum	e_window_view
 {
@@ -25,7 +26,7 @@ typedef struct s_menu
 {
 	t_scalable		background;
 	t_scalable		highlight;
-	t_scalable		buttons[2];
+	t_scalable		buttons[MENU_B_COUNT];
 	size_t			selection;
 	uint32_t		buttons_x_offset;
 	uint32_t		buttons_y_offset;
