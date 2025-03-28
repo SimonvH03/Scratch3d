@@ -11,6 +11,7 @@
 		"bit": "c",
 		"unordered_map": "c",
 		"algorithm": "c",
-		"limits": "c"
+		"limits": "c",
+		"math.h": "c"
 	}
 }

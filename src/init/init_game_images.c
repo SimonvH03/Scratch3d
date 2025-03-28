@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/04 22:26:03 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/26 21:04:06 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/28 00:49:10 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static int
 	draw_scene_background(
 		mlx_image_t *background,
-		void *param,
 		uint32_t x,
-		uint32_t y)
+		uint32_t y,
+		void *param)
 {
 	const t_scene	*scene = param;
 
@@ -33,10 +33,10 @@ int
 		mlx_t *mlx,
 		t_scene	*scene)
 {
-	scene->background = mlx_new_image(mlx, WIDTH, HEIGHT);
+	scene->background = mlx_new_image(mlx, mlx->width, mlx->height);
 	if (scene->background == NULL)
 		return (RETURN_FAILURE);
-	scene->walls.image = mlx_new_image(mlx, WIDTH, HEIGHT);
+	scene->walls.image = mlx_new_image(mlx, mlx->width, mlx->height);
 	if (scene->walls.image == NULL)
 		return (RETURN_FAILURE);
 	if (mlx_image_to_window(mlx, scene->background, 0, 0) < 0)

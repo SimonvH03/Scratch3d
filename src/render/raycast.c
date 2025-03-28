@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/24 02:16:25 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/20 02:07:47 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/27 20:51:00 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static void
 {
 	ray->pos_x = (int)camera->pos_x;
 	ray->pos_y = (int)camera->pos_y;
-	ray->dir_x = camera->dir_x + camera->plane_x * 0.5 * ray->camera_x;
-	ray->dir_y = camera->dir_y + camera->plane_y * 0.5 * ray->camera_x;
+	ray->dir_x = camera->dir_x + camera->plane_x * ray->camera_x;
+	ray->dir_y = camera->dir_y + camera->plane_y * ray->camera_x;
 	ray->step_x = ft_abs_float(1 / ray->dir_x);
 	if (ray->step_x == INFINITY)
 		ray->step_x = (float)UINT32_MAX;
@@ -54,7 +54,7 @@ void
 	x = 0;
 	while (x < scene->walls.image->width)
 	{
-		ray.camera_x = 2 * x / (float)scene->walls.image->width - 1;
+		ray.camera_x = x / (float)scene->walls.image->width - 0.5;
 		init_ray(&ray, &scene->player.camera);
 		cast_ray(&ray, &scene->grid);
 		draw_texture_column(&ray, &scene->walls, x);

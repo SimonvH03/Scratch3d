@@ -6,64 +6,38 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/17 00:54:27 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/28 01:38:17 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void
-	update_fps_image(
-		double delta_time,
-		t_fps *fps)
-{
-	char		buffer[12];
-	uint32_t	output_fps;
-
-	ft_bzero(buffer, 12);
-	fps->cum_time += delta_time;
-	++fps->no_frames;
-	if (fps->cum_time < 0.01)
-		return ;
-	output_fps = fps->no_frames / fps->cum_time;
-	fps->cum_time = 0;
-	fps->no_frames = 0;
-	if (output_fps > 99999)
-		output_fps = 99999;
-	ft_putnbr_ptr(buffer, output_fps);
-	reset_image(fps->image);
-	modlx_put_string(fps->image, buffer);
-}
 
 void
 	view_manager(
 		void *param)
 {
 	t_window	*window;
+	mlx_t		*mlx;
 
 	window = param;
-	update_fps_image(window->mlx->loop_time, &window->hud.fps);
+	mlx = window->mlx;
 	if (window->view == wv_game)
 	{
-		wasd_move(window->mlx, &window->scene, &window->scene.player.camera);
-		arrowkey_turn(window->mlx, &window->scene, &window->scene.player.camera);
-		weapon_animation(window->mlx, &window->scene.player.weapon);
-		update_doors(&window->scene.grid.doors);
-		if (window->scene.walls.recast == true || 1)// 1 for consistent frametime
-		{
-			raycast(&window->scene);
-			if (window->hud.minimap.enabled == true)
-				update_minimap(&window->hud.minimap);
-			if (window->hud.bigmap.enabled == true)
-				update_bigmap(&window->hud.bigmap);
-			window->scene.walls.recast = false;
-		}
+		wasd_move(mlx, &window->scene.grid, &window->scene.player.camera);
+		arrowkey_turn(mlx, &window->scene.player.camera);
+		mouse_pan(mlx, &window->scene.player.camera);
+		weapon_animation(mlx, &window->scene.player.weapon);
+		update_doors(&window->scene.grid, mlx->delta_time);
+		raycast(&window->scene);
+		if (window->hud.minimap.enabled == true)
+			update_minimap(&window->hud.minimap);
+		if (window->hud.bigmap.enabled == true)
+			update_bigmap(&window->hud.bigmap);
 	}
 }
 
 void
 	toggle_maps(
-		t_window *window,
 		t_minimap *minimap,
 		t_bigmap *bigmap)
 {
@@ -73,7 +47,6 @@ void
 	bigmap->player->enabled = !bigmap->player->enabled;
 	bigmap->walls->enabled = !bigmap->walls->enabled;
 	bigmap->enabled = !bigmap->enabled;
-	window->scene.walls.recast = true;
 }
 
 void

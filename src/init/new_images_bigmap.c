@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/04 22:26:03 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/26 21:03:18 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/27 22:16:50 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static int
 	sample_bigmap(
 		mlx_image_t *dest,
-		void *param,
 		uint32_t img_x,
-		uint32_t img_y)
+		uint32_t img_y,
+		void *param)
 {
 	const t_bigmap	*bigmap = (t_bigmap *)param;
 	const t_grid	*grid = bigmap->r_grid;

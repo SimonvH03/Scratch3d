@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/28 22:07:27 by simon         #+#    #+#                 */
-/*   Updated: 2025/02/27 19:14:30 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/28 01:45:01 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ xpm_t	*
 	return (xpm);
 }
 
-// copieid from mlx library, modified for norm
+// copied from mlx library, modified for norm
 static void mlx_draw_char(mlx_image_t* image, int32_t texoffset, int32_t imgoffset)
 {
 	char*		pixelx;

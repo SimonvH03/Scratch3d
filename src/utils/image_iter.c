@@ -35,7 +35,7 @@ int
 		x = 0;
 		while (x < image->width)
 		{
-			return_value = function(image, param, x, y);
+			return_value = function(image, x, y, param);
 			if (return_value != RETURN_SUCCESS)
 				break ;
 			x++;

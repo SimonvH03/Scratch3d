@@ -21,38 +21,40 @@ HEADERS =	$(INCLUDE)/cub3d.h \
 
 SRCDIR	=	./src
 SRC		=	$(SRCDIR)/main.c \
-			$(SRCDIR)/gamestate/init_game.c \
-			$(SRCDIR)/gamestate/init/init_game_images.c \
-			$(SRCDIR)/gamestate/init/read_elements.c \
-			$(SRCDIR)/gamestate/init/read_map.c \
-			$(SRCDIR)/gamestate/init_doors.c \
-			$(SRCDIR)/gamestate/init_player.c \
-			$(SRCDIR)/gamestate/init_weapon.c \
-			$(SRCDIR)/gamestate/init_window.c \
-			$(SRCDIR)/hud/init_hud.c \
-			$(SRCDIR)/hud/init_menu.c \
-			$(SRCDIR)/hud/init/new_images_bigmap.c \
-			$(SRCDIR)/hud/init/new_images_menu.c \
-			$(SRCDIR)/hud/init/new_images_minimap.c \
+			$(SRCDIR)/gamestate/update_doors.c \
+			$(SRCDIR)/gamestate/update_frametime.c \
 			$(SRCDIR)/hud/update_bigmap.c \
 			$(SRCDIR)/hud/update_minimap.c \
+			$(SRCDIR)/init/init_doors.c \
+			$(SRCDIR)/init/init_game.c \
+			$(SRCDIR)/init/init_game_images.c \
+			$(SRCDIR)/init/init_hud.c \
+			$(SRCDIR)/init/init_menu.c \
+			$(SRCDIR)/init/init_player.c \
+			$(SRCDIR)/init/init_weapon.c \
+			$(SRCDIR)/init/init_window.c \
+			$(SRCDIR)/init/new_images_bigmap.c \
+			$(SRCDIR)/init/new_images_menu.c \
+			$(SRCDIR)/init/new_images_minimap.c \
+			$(SRCDIR)/init/read_elements.c \
+			$(SRCDIR)/init/read_map.c \
 			$(SRCDIR)/render/cast_ray.c \
 			$(SRCDIR)/render/draw_texture_column.c \
 			$(SRCDIR)/render/raycast.c \
-			$(SRCDIR)/user_interface/arrowkey_turn.c \
-			$(SRCDIR)/user_interface/frametime_variables.c \
 			$(SRCDIR)/user_interface/generic_interaction.c \
+			$(SRCDIR)/user_interface/keyboard_controls.c \
 			$(SRCDIR)/user_interface/keyhooks.c \
+			$(SRCDIR)/user_interface/mouse_controls.c \
 			$(SRCDIR)/user_interface/operate_door.c \
 			$(SRCDIR)/user_interface/select_button.c \
 			$(SRCDIR)/user_interface/view_manager.c \
-			$(SRCDIR)/user_interface/wasd_move.c \
 			$(SRCDIR)/user_interface/weapon_animation.c \
 			$(SRCDIR)/utils/allocation_list.c \
 			$(SRCDIR)/utils/arithmetic_float.c \
 			$(SRCDIR)/utils/arithmetic_int.c \
 			$(SRCDIR)/utils/image_iter.c \
 			$(SRCDIR)/utils/modlx.c \
+			$(SRCDIR)/utils/normalize_vector2.c \
 			$(SRCDIR)/utils/test.c \
 			$(SRCDIR)/utils/tilemap_cell.c
 

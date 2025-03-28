@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/26 18:45:28 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/27 22:12:17 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ int
 	init_doors(
 		t_grid *grid)
 {
-	if (!grid->doors.count)
+	if (!grid->door_count)
 		return (RETURN_SUCCESS);
-	grid->doors.list = (t_door *)malloc(grid->doors.count * sizeof(t_door));
-	if (grid->doors.list == NULL)
+	grid->door_list = (t_door *)malloc(grid->door_count * sizeof(t_door));
+	if (grid->door_list == NULL)
 		return (RETURN_ERROR);
-	fill_door_list(grid, grid->doors.list);
+	fill_door_list(grid, grid->door_list);
 	return (RETURN_SUCCESS);
 }

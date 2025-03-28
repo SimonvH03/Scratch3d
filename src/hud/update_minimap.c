@@ -6,7 +6,7 @@
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/22 19:48:15 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/26 21:03:18 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/27 22:16:45 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static void
 static int
 	sample_wall(
 		mlx_image_t *walls,
-		void *param,
 		uint32_t img_x,
-		uint32_t img_y)
+		uint32_t img_y,
+		void *param)
 {
 	const t_minimap		*minimap = param;
 	const t_camera		*camera = minimap->r_camera;

@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 16:58:42 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/17 00:11:09 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/27 22:12:00 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void
 	else
 	{
 		if (is_door(token))
-			*dest = set_cell(true, grid->doors.count++, token);
+			*dest = set_cell(true, grid->door_count++, token);
 		else
 			*dest = set_cell(true, 0, token);
 	}

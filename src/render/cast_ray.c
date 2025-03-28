@@ -6,11 +6,78 @@
 /*   By: simon <simon@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/24 02:16:25 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/20 02:24:00 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/28 01:46:11 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int16_t
+	see_through(
+		int16_t	cell,
+		t_grid *grid,
+		t_ray *ray,
+		float cell_shift)
+{
+	int			steps;
+	int			i;
+
+	steps = ft_abs((int)cell_shift) + (cell_shift < 0);
+	i = 1;
+	if (ray->hit_type == ha_horizontal)
+	{
+		while (i <= steps)
+			if (ray->pos_y + i * ray->sign_x >= grid->x_max
+				|| ray->pos_y + i * ray->sign_x < 0
+				|| !is_door(get_type(grid->tilemap
+				[ray->pos_y][ray->pos_x + i++ * ray->sign_x])))
+				return (RETURN_FAILURE);
+		return (grid->tilemap[ray->pos_y][ray->pos_x + ray->sign_x * steps]);
+	}
+	else
+	{
+		while (i <= steps)
+			if (ray->pos_x + i * ray->sign_y >= grid->y_max
+				|| ray->pos_x + i * ray->sign_y < 0
+				|| !is_door(get_type(grid->tilemap
+				[ray->pos_y + i++ * ray->sign_y][ray->pos_x])))
+				return (RETURN_FAILURE);
+		return (grid->tilemap[ray->pos_y + ray->sign_y * steps][ray->pos_x]);
+	}
+}
+
+static void
+	door_half_step(
+		t_ray *ray,
+		t_grid *grid,
+		int16_t	cell)
+{
+	float		cell_shift;
+	int16_t		shifted_cell;
+	int			steps;
+
+	if (ray->hit_type == ha_horizontal)
+		cell_shift = ray->partial + (ray->step_y * 0.5) * ray->dir_x;
+	else
+		cell_shift = ray->partial + (ray->step_x * 0.5) * ray->dir_y;
+	if (cell_shift < 0 || cell_shift > 1)
+	{
+		cell = see_through(cell, grid, ray, cell_shift);
+		if (cell == RETURN_FAILURE)
+			return ;
+	}
+	ray->partial = (cell_shift - (int)cell_shift) + (cell_shift < 0);
+	ray->door_position = grid->door_list[get_id(cell)].position;
+	if (get_type(cell) == 'd')
+		ray->partial = 1 - ray->partial;
+	ray->hits_door = (ray->partial < ray->door_position);
+	if (ray->hits_door)
+	{
+		ray->partial += 1 - ray->door_position;
+		ray->total_y += ray->step_y * 0.5;
+		ray->total_x += ray->step_x * 0.5;
+	}
+}
 
 static void
 	calculate_partial(
@@ -23,57 +90,6 @@ static void
 		ray->partial = ray->start_x
 			+ (ray->total_y - ray->step_y) * ray->dir_x;
 	ray->partial -= (int)ray->partial;
-}
-
-static void
-	door_half_step(
-		t_ray *ray,
-		t_grid *grid,
-		int16_t	cell)
-{
-	float		new_partial;
-	int			steps;
-	uint16_t	next_cell;
-
-	if (ray->hit_type == ha_horizontal)
-	{
-		new_partial = ray->partial + (ray->step_y * 0.5) * ray->dir_x;
-		if (new_partial < 0 || new_partial > 1)
-		{
-			steps = ft_abs((int)new_partial) + (new_partial < 0);
-			if (ray->pos_x + ray->sign_x * steps < 0 || ray->pos_x + ray->sign_x * steps >= grid->x_max)
-				return ;
-			next_cell = grid->tilemap[ray->pos_y][ray->pos_x + ray->sign_x * steps];
-			if (!is_door(get_type(next_cell)))
-				return ;
-			cell = next_cell;
-		}
-	}
-	else
-	{
-		new_partial = ray->partial + (ray->step_x * 0.5) * ray->dir_y;
-		if (new_partial < 0 || new_partial > 1)
-		{
-			steps = ft_abs((int)new_partial) + (new_partial < 0);
-			if (ray->pos_y + ray->sign_y * steps < 0 || ray->pos_y + ray->sign_y * steps >= grid->y_max)
-				return ;
-			next_cell = grid->tilemap[ray->pos_y + ray->sign_y * steps][ray->pos_x];
-			if (!is_door(get_type(next_cell)))
-				return ;
-			cell = next_cell;
-		}
-	}
-	ray->partial = (new_partial - (int)new_partial) + (new_partial < 0);
-	ray->door_position = grid->doors.list[get_id(cell)].position;
-	if (get_type(cell) == 'd')
-		ray->partial = 1 - ray->partial;
-	ray->hits_door = (ray->partial < ray->door_position);
-	if (ray->hits_door)
-	{
-		ray->partial += 1 - ray->door_position;
-		ray->total_y += ray->step_y * 0.5;
-		ray->total_x += ray->step_x * 0.5;
-	}
 }
 
 static bool
@@ -91,13 +107,13 @@ static bool
 	calculate_partial(ray);
 	if (ft_isdigit(get_type(cell)))
 		return (true);
-	if (is_transparent(get_type(cell)))
+	if (is_door(get_type(cell)))
 	{
 		if (ray->hit_type == ha_horizontal)
 			facing_cell = grid->tilemap[pos_y - ray->sign_y][pos_x];
 		else
 			facing_cell = grid->tilemap[pos_y][pos_x - ray->sign_x];
-		if (is_transparent(get_type(facing_cell)))
+		if (is_door(get_type(facing_cell)))
 			return (false);
 	}
 	if (is_door(get_type(cell)))

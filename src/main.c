@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 18:33:20 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/26 22:32:55 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/28 00:44:05 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	cub3d_terminate(t_window *window)
 	free(window->scene.player.weapon.fire);
 	free(window->scene.player.weapon.reload);
 	ft_arrclear((void **)window->scene.grid.tilemap);
-	free(window->scene.grid.doors.list);
+	free(window->scene.grid.door_list);
 	free((void *)window->hud.minimap.circle_overlay);
 }
 
@@ -49,6 +49,7 @@ static void
 	mlx_key_hook(window->mlx, window_keyhook, window);
 	mlx_loop_hook(window->mlx, frametime_dependant_variables, window);
 	mlx_loop_hook(window->mlx, view_manager, window);
+	mlx_mouse_hook(window->mlx, mouse_buttons, window);
 }
 
 int main(int argc, char **argv)

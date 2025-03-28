@@ -6,13 +6,13 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/26 21:03:18 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/28 01:41:08 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	start_fire_animation(t_weapon *weapon)
+void	start_fire_animation(t_weapon *weapon)
 {
 	if (weapon->state != ws_idle || weapon->ammo == 0)
 		return ;

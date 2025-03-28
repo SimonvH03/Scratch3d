@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/26 22:24:31 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/28 01:50:35 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 
 // mlx window
 # define WINDOW_TITLE		"cub3d"
+# define FULLSCREEN			true
+# define MONITOR_ID			1
 # define WIDTH				1280
 # define HEIGHT				720
 
@@ -46,10 +48,11 @@
 
 // player defaults
 # define STARTING_HEALTH	100
-# define MOVEMENT_SPEED		6
-# define ROTATION_SPEED		3
+# define MOVEMENT_SPEED		4
+# define ROTATION_SPEED		2
+# define CURSOR_ROT_SPEED	50
 # define DOOR_SHIFT_SPEED	1
-# define INTERACTION_RANGE	2
+# define INTERACTION_RANGE	1.5
 # define COLLISION_HITBOX	0.2
 
 // weapons? this should obviously go in the .cub file but I don't like parsing
@@ -72,13 +75,10 @@ typedef struct s_window
 
 // gotta love a strict norm to make things more readable
 typedef	int	(imgiter_func)(
-				mlx_image_t *image, void *param,
-				uint32_t x, uint32_t y);
+				mlx_image_t *image, uint32_t x, uint32_t y, void *param);
 
 int			image_iter(
-				mlx_image_t *image,
-				imgiter_func function,
-				void *param);
+				mlx_image_t *image, imgiter_func function, void *param);
 
 void		add_to_clear_list(mlx_texture_t *texture_ptr);
 void		empty_clear_list();
@@ -102,27 +102,29 @@ int			new_images_bigmap(mlx_t *mlx, t_bigmap *map, t_scene *scene);
 int			init_menu(mlx_t *mlx, t_menu *menu);
 int			new_images_menu(mlx_t *mlx, t_menu *menu);
 int			new_scaled_image(mlx_t *mlx, t_scalable *dest);
-int			sample_scalable(mlx_image_t *dest, void *param, uint32_t img_x, uint32_t img_y);
+int			sample_scalable(mlx_image_t *dest,
+				uint32_t img_x, uint32_t img_y, void *param);
 
 // MLX_HOOKS
 void		frametime_dependant_variables(void *param);
 void		view_manager(void *param);
 void		window_keyhook(mlx_key_data_t key_data, void *param);
+void		mouse_buttons(mouse_key_t button, action_t action,
+				modifier_key_t mods, void* param);
 
 // user inputs
-void		wasd_move(mlx_t *mlx, t_scene *scene, t_camera *camera);
-void		arrowkey_turn(mlx_t *mlx, t_scene *scene, t_camera *camera);
+void		wasd_move(mlx_t *mlx, t_grid *grid, t_camera *camera);
+void		arrowkey_turn(mlx_t *mlx, t_camera *camera);
+void		mouse_pan(mlx_t *mlx, t_camera *camera);
+void		start_fire_animation(t_weapon *weapon);
 void		weapon_animation(mlx_t *mlx, t_weapon *weapon);
 void		generic_interaction(t_grid *grid, t_camera *camera);
-void		operate_door(t_doors *doors, t_camera *camera, unsigned int index);
-void		update_doors(t_doors *doors);
+void		operate_door(t_door *door, t_camera *camera);
+void		update_doors(t_grid *grid, float delta_time);
 void		select_button(t_menu *menu);
 void		confirm_selection(t_menu *menu, t_window *window);
-void		toggle_maps(t_window *window, t_minimap *minimap, t_bigmap *map);
+void		toggle_maps(t_minimap *minimap, t_bigmap *map);
 void		toggle_view(t_window *window);
-
-// tilemap
-t_door		*get_door_at(t_doors *doors, unsigned int y, unsigned int x);
 
 // render
 void		raycast(t_scene *scene);
@@ -151,13 +153,16 @@ int			ft_min_int(int a, int b);
 int			ft_abs_int(int value);
 short		ft_sign_int(int value);
 
+// math
+void		normalize_vector2(float *x_component, float *y_component);
+
 // tilemap_cell
 int16_t		set_cell(const bool solid, const int id, const char type);
 char		get_type(const int16_t cell);
 int			get_id(const int16_t cell);
 bool		is_solid(const int16_t cell);
 bool		is_door(const char type);
-bool		is_transparent(const char type);
+bool		is_door(const char type);
 
 // TEST
 // void		print_camera(t_camera *camera);

@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 18:49:26 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/16 23:52:54 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/27 23:54:14 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void
 	camera->rotation_cosin[0] = cos(ROTATION_SPEED);
 	camera->rotation_cosin[1] = sin(ROTATION_SPEED);
 	camera->sign_rotate = 0;
+	camera->pix_rotate = 0;
 }
 
 static void

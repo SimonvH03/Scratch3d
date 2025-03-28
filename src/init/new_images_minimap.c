@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/04 22:26:03 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/26 21:03:18 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/27 22:16:03 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 static int
 	sample_overlay(
 		mlx_image_t *dest,
-		void *param,
 		uint32_t x,
-		uint32_t y)
+		uint32_t y,
+		void *param)
 {
 	const uint32_t	radius = *(uint32_t *)param;
 	const int		xcoord = (int)(x - radius);

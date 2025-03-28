@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/26 23:06:35 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/13 16:40:01 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/28 01:22:30 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 
 // Door texture
 # define DOOR_TEXTURE_PATH		"./scenes/textures/door.xpm42"
-# define DOOR_TEXTURE_PATH2		"./scenes/textures/door1.xpm42"
 
 // minimap / map
 # define PLAYER_ICON_PATH		"./data/textures/arrow_32.xpm42"

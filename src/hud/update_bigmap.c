@@ -6,7 +6,7 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/08/27 01:36:33 by simon         #+#    #+#                 */
-/*   Updated: 2025/03/26 21:03:18 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/27 22:16:38 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static int
 	sample_player(
 		mlx_image_t *player_icon,
-		void *param,
 		uint32_t img_x,
-		uint32_t img_y)
+		uint32_t img_y,
+		void *param)
 {
 	const t_camera		*camera = ((t_bigmap *)param)->r_camera;
 	const mlx_image_t	*image = ((t_bigmap *)param)->player_icon_src.image;

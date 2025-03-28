@@ -6,26 +6,11 @@
 /*   By: svan-hoo <svan-hoo@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/09 19:05:56 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2025/03/17 00:26:54 by simon         ########   odam.nl         */
+/*   Updated: 2025/03/28 01:31:59 by simon         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-typedef struct s_interaction_ray
-{
-	unsigned int	pos_x;
-	unsigned int	pos_y;
-	float			dir_x;
-	float			dir_y;
-	float			step_x;
-	float			step_y;
-	float			total_x;
-	float			total_y;
-	float			distance;
-	short			sign_x;
-	short			sign_y;
-}	t_interaction_ray;
 
 static void
 	init_interaction_ray(
@@ -95,9 +80,6 @@ void
 	cell = cast_interaction_ray(&ray, grid);
 	if (is_door(get_type(cell)))
 	{
-		// printf("Operating %coor %d at (%d, %d) <%f> %d\n",
-		// 	get_type(cell), get_id(cell), ray.pos_y, ray.pos_x, ray.distance,
-		// 	get_door_at(&grid->doors, ray.pos_y, ray.pos_x)->state);
-		operate_door(&grid->doors, camera, get_id(cell));
+		operate_door(&grid->door_list[get_id(cell)], camera);
 	}
 }
